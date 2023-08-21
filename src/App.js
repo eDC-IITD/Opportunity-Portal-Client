@@ -24,7 +24,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import AlertSnackbar from "../src/components/snackbar";
 
 // const BASE_URL = 'http://localhost:3000';
-const BASE_URL = 'https://opportunity-portal.edciitd.com';
+const BASE_URL = 'https://edc-opportunity-portal-backend.onrender.com';
+// const BASE_URL = 'https://opportunity-portal.edciitd.com';
 
 const timer = 3000;
 
