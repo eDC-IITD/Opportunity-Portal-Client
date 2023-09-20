@@ -39,7 +39,7 @@ export default function App() {
     const [alertMessage, setAlertMessage] = useState("Showing alert!");
     const [alertSeverity, setAlertSeverity] = useState("info");
 
-    const darkTheme = createTheme({
+    const colorTheme = createTheme({
         components: {
             MuiCssBaseline: {
                 styleOverrides: (themeParam) => ({
@@ -59,9 +59,7 @@ export default function App() {
         setLoading(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
+            headers: {"Content-Type": "application/json"}
         }
         const url = `${BASE_URL}/api/student/register/${localStorage.getItem('localStorageStudentId')}`;
         try {
@@ -86,9 +84,7 @@ export default function App() {
         setLoading(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
+            headers: {"Content-Type": "application/json"}
         }
         const url = `${BASE_URL}/api/startUp/register/${localStorage.getItem('localStorageStartUpId')}`;
         try {
@@ -105,6 +101,8 @@ export default function App() {
                 })
         }
         catch (error) {
+            // TODO :: if there is an error, the loading screen should stop and user should recieve a error dialog box like ("please check your internet connection and try again")
+            // I guess using setShowAlert, and setAlertMessage and setAlertSeverity
             console.log(error);
         }
     }
@@ -134,35 +132,38 @@ export default function App() {
         }
     }, [])
 
+
+    const setAlertProps = {setShowAlert, setAlertMessage, setAlertSeverity}
+
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={colorTheme}>
             <CssBaseline />
             {
                 loading ? <Box sx={{ height: "100vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}><CircularProgress /></Box> :
                     <>
                         <BrowserRouter>
                             <Routes>
-                                <Route path="/" element={<JobPortalIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} studentDetails={studentDetails} />}>
-                                    <Route path="/" element={<StudentOrStartUp BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
-                                    <Route path="signIn" element={<SignIn BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="signUp" element={<SignUp BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="otpVerify" element={<OTPVerify BASE_URL={BASE_URL} setStartUpDetails={setStartUpDetails} setStudentDetails={setStudentDetails} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
+                                <Route path="/" element={<JobPortalIndex mode setMode startUpDetails studentDetails />}>
+                                    <Route path="/" element={<StudentOrStartUp BASE_URL {...setAlertProps} />} />
+                                    <Route path="details" element={<JobDetails BASE_URL startUpDetails={null} />} /> {/* TODO check if the alertProps required here, shouldn't there be an alert property here also? */}
+                                    <Route path="signIn" element={<SignIn BASE_URL {...setAlertProps}/>} />
+                                    <Route path="signUp" element={<SignUp BASE_URL {...setAlertProps}/>} />
+                                    <Route path="otpVerify" element={<OTPVerify BASE_URL setStartUpDetails setStudentDetails {...setAlertProps}/>} />
                                 </Route>
 
-                                <Route path="student" element={<StudentIndex mode={mode} setMode={setMode} studentDetails={studentDetails} setStudentDetails={setStudentDetails} />}>
-                                    <Route path="internship" element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails}  setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="account" element={<StudentAccount BASE_URL={BASE_URL} studentDetails={studentDetails} setStudentDetails={setStudentDetails}  setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
-                                    <Route path="apply" element={<StudentApply BASE_URL={BASE_URL} studentDetails={studentDetails} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
+                                <Route path="student" element={<StudentIndex mode setMode studentDetails setStudentDetails />}>
+                                    <Route path="internship" element={<StudentInternship BASE_URL studentDetails  {...setAlertProps}/>} />
+                                    <Route path="account" element={<StudentAccount BASE_URL studentDetails setStudentDetails  {...setAlertProps}/>} />
+                                    <Route path="details" element={<JobDetails BASE_URL startUpDetails={null} />} /> {/* TODO check if the alertProps required here, shouldn't there be an alert property here also? */}
+                                    <Route path="apply" element={<StudentApply BASE_URL studentDetails {...setAlertProps}/>} />
                                 </Route>
 
-                                <Route path="startUp" element={<StartUpIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} />}>
-                                    <Route path="internship" element={<StartUpInternship BASE_URL={BASE_URL} startUpDetails={startUpDetails} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="account" element={<StartUpAccount BASE_URL={BASE_URL} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="addNew" element={<StartUpAddNew BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="studentsApplied" element={<StudentsApplied BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
-                                    <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={startUpDetails} />} />
+                                <Route path="startUp" element={<StartUpIndex mode setMode startUpDetails setStartUpDetails />}>
+                                    <Route path="internship" element={<StartUpInternship BASE_URL startUpDetails {...setAlertProps}/>} />
+                                    <Route path="account" element={<StartUpAccount BASE_URL startUpDetails setStartUpDetails {...setAlertProps}/>} />
+                                    <Route path="addNew" element={<StartUpAddNew BASE_URL {...setAlertProps}/>} /> 
+                                    <Route path="studentsApplied" element={<StudentsApplied BASE_URL {...setAlertProps}/>} />
+                                    <Route path="details" element={<JobDetails BASE_URL startUpDetails />} /> {/* TODO check if the alertProps required here, shouldn't there be an alert property here also? */}
                                 </Route>
 
                                 <Route path="*" element={<Error404 />} />
