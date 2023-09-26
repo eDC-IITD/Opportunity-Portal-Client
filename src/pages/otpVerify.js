@@ -65,7 +65,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
             localStorage.setItem('localStorageStartUpId', data.startUpDetails._id);
             setStartUpDetails(data.startUpDetails);
             setLoading(false);
-            setAlertMessage("Sign in successfully.");
+            setAlertMessage("Signed in successfully.");
             setAlertSeverity("success");
             setShowAlert(true);
             navigate('../startUp/internship', { state: { type: 'Internship' } });
@@ -153,7 +153,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
             localStorage.setItem('localStorageStudentId', data.studentDetails._id);
             setStudentDetails(data.studentDetails);
             setLoading(false);
-            setAlertMessage("Sign in successfully.");
+            setAlertMessage("Signed in successfully.");
             setAlertSeverity("success");
             setShowAlert(true);
             navigate('../student/internship', { state: { type: 'Internship' } });

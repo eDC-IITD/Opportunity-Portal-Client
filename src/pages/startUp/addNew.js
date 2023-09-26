@@ -11,7 +11,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
     const [stipend, setStipend] = useState('');
     const [noOfOffers, setNoOfOffers] = useState('');
     const [skillsRequired, setSkillsRequired] = useState('');
-    const [responsibilities, setResponsibilities] = useState('');
+    const [description, setDescription] = useState('');
     const [assignment, setAssignment] = useState('');
     const [deadline, setDeadline] = useState(moment().format('YYYY-MM-DDThh:mm'));
     const [selectionProcess, setSelectionProcess] = useState('');
@@ -30,7 +30,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             stipend: stipend,
             noOfOffers: noOfOffers,
             skillsRequired: skillsRequired,
-            responsibilities: responsibilities,
+            description: description,
             assignment: assignment,
             deadline: deadline,
             selectionProcess: selectionProcess,
@@ -75,7 +75,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             stipend: stipend,
             noOfOffers: noOfOffers,
             skillsRequired: skillsRequired,
-            responsibilities: responsibilities,
+            description: description,
             assignment: assignment,
             deadline: deadline,
             selectionProcess: selectionProcess,
@@ -130,7 +130,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                         setDeadline(data.jobDetails.deadline);
                         setDuration(data.jobDetails.duration);
                         setNoOfOffers(data.jobDetails.noOfOffers);
-                        setResponsibilities(data.jobDetails.responsibilities);
+                        setDescription(data.jobDetails.description);
                         setSelectionProcess(data.jobDetails.selectionProcess);
                         setSkillsRequired(data.jobDetails.skillsRequired);
                         setStipend(data.jobDetails.stipend);
@@ -195,7 +195,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                         <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
+                                        <TextField variant="standard" label="description" multiline fullWidth minRows={3} value={description} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setDescription(e.target.value) }} required />
                                     </Grid>
                                 </Grid>
                         }

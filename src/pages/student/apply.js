@@ -207,7 +207,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                                     <TextField variant="standard" label="Skills Required" multiline fullWidth value={jobDetails.skillsRequired} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
                                 <Grid item xs={12} md={6}>
-                                    <TextField variant="standard" label="Responsibilities" multiline fullWidth value={jobDetails.responsibilities} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    <TextField variant="standard" label="Description" multiline fullWidth value={jobDetails.description} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
                             </Grid>
                     }

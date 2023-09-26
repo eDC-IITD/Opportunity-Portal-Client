@@ -1,6 +1,8 @@
+import { ReportGmailerrorred } from '@mui/icons-material';
 import { Card, CardContent, CardHeader, Container, Typography, TextField, CardActions, Button, CircularProgress } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 
 export default function SignUp({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { user } = useLocation().state;
@@ -57,18 +59,29 @@ export default function SignUp({ BASE_URL, setShowAlert, setAlertMessage, setAle
     }
   }
 
+
+  const isValidStartupEmail = (startupEmail) => {
+    if (startupEmail.includes("gmail.com")){
+      setAlertMessage("Please use a valid company email id.")
+      setAlertSeverity("warning")
+      setShowAlert(true)
+      setLoading(false)
+      console.log(startupEmail, "isn't a valid startup email")
+      return false
+    }
+    console.log("is a valid startup email")
+    return true
+  }
+
   const registerStartUp = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const formData = {
-      companyName: name,
-      email: email,
-    }
+    console.log(email)
+    if(!isValidStartupEmail(email)) return;
+    const formData = { companyName: name, email: email,}
     const requestOptions = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: {"Content-Type": "application/json",},
       body: JSON.stringify(formData)
     }
     const url = `${BASE_URL}/api/startUp/register`;
