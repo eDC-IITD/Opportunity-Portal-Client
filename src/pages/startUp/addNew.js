@@ -199,13 +199,13 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    { type === 'Internship' && <Grid item xs={12} md={6}>
                                         <Typography variant="button" display="block" gutterBottom>Part/Full time</Typography>
                                         <ToggleButtonGroup color="primary" value={hoursType} exclusive onChange={handleChange} aria-label="Platform">
                                             <ToggleButton value="parttime">FULL-TIME</ToggleButton>
                                             <ToggleButton value="fulltime">PART-TIME</ToggleButton>
                                         </ToggleButtonGroup>
-                                    </Grid>
+                                    </Grid>}
                                 </Grid>
                         }
                     </CardContent>
