@@ -1,4 +1,4 @@
-import { Card, CardContent, Container, Grid, Typography, TextField, Button, CircularProgress,Box } from '@mui/material'
+import { Card, CardContent, Container, Grid, Typography, TextField, Button, CircularProgress,Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -15,9 +15,14 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
     const [assignment, setAssignment] = useState('');
     const [deadline, setDeadline] = useState(moment().format('YYYY-MM-DDThh:mm'));
     const [selectionProcess, setSelectionProcess] = useState('');
+    const [hoursType, setHoursType] = useState("fulltime"); // either parttime or fulltime
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(true);
     const updateOrAdd = (jobId !== "" && jobId !== undefined) ? "Update" : "Add";
+
+    const handleChange = (event, newHoursType) => {
+        setHoursType(newHoursType);
+    }
 
     const addNewOpportunity = async (e) => {
         e.preventDefault();
@@ -34,14 +39,13 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             assignment: assignment,
             deadline: deadline,
             selectionProcess: selectionProcess,
+            hoursType : hoursType,
             startUpId: startUpId,
             createdAt:moment().format('YYYY-MM'),
         }
         const requestOptions = {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: {"Content-Type": "application/json",},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs`;
@@ -79,13 +83,12 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             assignment: assignment,
             deadline: deadline,
             selectionProcess: selectionProcess,
+            hoursType: hoursType,
             createdAt:moment().format('YYYY-MM'),
         }
         const requestOptions = {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: {"Content-Type": "application/json",},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs/update/${jobId}`;
@@ -114,9 +117,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
         setLoading2(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
+            headers: {"Content-Type": "application/json",}
         }
         const url = `${BASE_URL}/api/startUp/jobs/${jobId}`;
         try {
@@ -134,6 +135,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                         setSelectionProcess(data.jobDetails.selectionProcess);
                         setSkillsRequired(data.jobDetails.skillsRequired);
                         setStipend(data.jobDetails.stipend);
+                        setHoursType(data.jobDetails.hoursType || "fulltime");
                     }
                     else {
                         console.log(data);
@@ -197,6 +199,13 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
                                     </Grid>
+                                    { type === 'Internship' && <Grid item xs={12} md={6}>
+                                        <Typography variant="button" display="block" gutterBottom>Part/Full time</Typography>
+                                        <ToggleButtonGroup color="primary" value={hoursType} exclusive onChange={handleChange} aria-label="Platform">
+                                            <ToggleButton value="parttime">FULL-TIME</ToggleButton>
+                                            <ToggleButton value="fulltime">PART-TIME</ToggleButton>
+                                        </ToggleButtonGroup>
+                                    </Grid>}
                                 </Grid>
                         }
                     </CardContent>
