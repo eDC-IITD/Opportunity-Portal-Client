@@ -188,21 +188,17 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                                 <TextField variant="standard" label="Type" fullWidth value={type} required InputProps={{ disableUnderline: true, readOnly: true }} />
                                             </Grid>
                                     }
-                                    {type !== "Cofounder" &&
+                                    {type !== "Cofounder" && <>
                                         <Grid item xs={12} md={6}>
                                             <TextField variant="standard" label="Stipend" placeholder='Flexible' fullWidth value={stipend} onChange={(e) => { setStipend(e.target.value) }} required />
                                         </Grid>
-                                    }
-                                    {type !== "Cofounder" &&
                                         <Grid item xs={12} md={6}>
                                             <TextField variant="standard" label="No of Offers" placeholder='5' fullWidth value={noOfOffers} onChange={(e) => { setNoOfOffers(e.target.value) }} required />
                                         </Grid>
-                                    }
-                                    {type !== "Cofounder" &&
                                         <Grid item xs={12} md={6}>
                                             <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
                                         </Grid>
-                                    }
+                                    </>}
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
                                     </Grid>

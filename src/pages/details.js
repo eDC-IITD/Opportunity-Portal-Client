@@ -116,12 +116,21 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                 {
                                     jobStartUpDetails.founder.map((value, key) => {
                                         return (
-                                            (value.name!==""&&value.name!==undefined)?<Card variant="outlined" sx={{ mt: 2 }} key={key}>
+                                            (value.name!==""&&value.name!==undefined)&&<Card variant="outlined" sx={{ mt: 2 }} key={key}>
                                                 <CardContent sx={{ display: { xs: 'block', md: 'flex' }, gap: 2 }}>
-                                                    <TextField variant="standard" label="Founder Name" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} InputProps={{ disableUnderline: true, readOnly: true }}/>
-                                                    <TextField variant="standard" label="Founder Bio" fullWidth multiline value={value.bio} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                                                    <Grid container spacing={2}>
+                                                        <Grid item xs={12} md={6}>
+                                                            <TextField variant="standard" label="Founder Name" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                                                        </Grid>
+                                                        <Grid item xs={12} md={6}>
+                                                            <TextField variant="standard" label="Founder Bio" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.bio} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                                                        </Grid>
+                                                        <Grid item xs={12} md={6}>
+                                                            <TextField variant="standard" label="Founder LinkedIn" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.linkedIn || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                                                        </Grid>                                                
+                                                    </Grid>
                                                 </CardContent>
-                                            </Card>:<></>
+                                            </Card>
                                         )
                                     }
                                     )

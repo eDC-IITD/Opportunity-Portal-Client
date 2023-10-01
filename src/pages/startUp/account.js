@@ -30,9 +30,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         }
         const requestOptions = {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: {"Content-Type": "application/json",},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/register/${startUpDetails._id}`;
@@ -89,6 +87,18 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         });
         setFounder(newState);
     }
+    const updateFounderLinkedIn = (value, id) => {
+        const newState = founder.map(obj => {
+            if (obj.id === id) {
+                return { ...obj, linkedIn: value };
+            }
+            else {
+                return obj;
+            }
+        });
+        setFounder(newState);
+    }
+
 
     useEffect(() => {
         if (founder.length === 0) {
@@ -161,8 +171,17 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                                 return (
                                     <Card variant="outlined" sx={{ mt: 2 }}>
                                         <CardContent sx={{ display: { xs: 'block', md: 'flex' }, gap: 2, alignItems: "end" }}>
-                                            <TextField variant="standard" label="Founder Name" placeholder="Steve Jobs" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} onChange={(e) => { updateFounderName(e.target.value, value.id) }} required />
-                                            <TextField variant="standard" label="Founder Bio" placeholder="Explain founder's professional and educational background." fullWidth multiline value={value.bio} onChange={(e) => { updateFounderBio(e.target.value, value.id) }} required />
+                                            <Grid container spacing={2}>
+                                                <Grid item xs={12} md={6}>
+                                                    <TextField variant="standard" label="Founder Name" placeholder="Steve Jobs" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} onChange={(e) => { updateFounderName(e.target.value, value.id) }} required />
+                                                </Grid>
+                                                <Grid item xs={12} md={6}>
+                                                    <TextField variant="standard" label="Founder Bio" placeholder="Explain founder's professional and educational background." fullWidth multiline value={value.bio} onChange={(e) => { updateFounderBio(e.target.value, value.id) }} required />
+                                                </Grid>
+                                                <Grid item xs={12} md={6}>
+                                                    <TextField variant="standard" label="Founder LinkedIn" placeholder="linkedin.com/in/steve-jobs/" fullWidth multiline value={value.linkedIn} onChange={(e) => { updateFounderLinkedIn(e.target.value, value.id) }} required />
+                                                </Grid>
+                                            </Grid>
                                         </CardContent>
                                     </Card>
                                 )
