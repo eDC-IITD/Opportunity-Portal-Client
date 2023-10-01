@@ -148,15 +148,17 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                             <TextField variant="standard" label="Type" fullWidth value={jobDetails.type} InputProps={{ disableUnderline: true, readOnly: true }} />
                                         </Grid>
                                 }
-                                <Grid item xs={12} md={6}>
-                                    <TextField variant="standard" label="Stipend" fullWidth value={jobDetails.stipend} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField variant="standard" label="No of Offers" fullWidth value={jobDetails.noOfOffers} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField variant="standard" label="Skills Required" multiline fullWidth value={jobDetails.skillsRequired} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                </Grid>
+                                {(jobDetails.type !== "Cofounder")&&<>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField variant="standard" label="Stipend" fullWidth value={jobDetails.stipend} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField variant="standard" label="No of Offers" fullWidth value={jobDetails.noOfOffers} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField variant="standard" label="Skills Required" multiline fullWidth value={jobDetails.skillsRequired} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    </Grid>
+                                </>}
                                 <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="Responsibilities" multiline fullWidth value={jobDetails.responsibilities} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
@@ -164,23 +166,27 @@ export default function Details({ BASE_URL, startUpDetails }) {
                     }
                 </CardContent>
             </Card>
-            <Card sx={{ mt: 2 }}>
-                <CardContent>
-                    <Typography variant="h5" sx={{ mb: 2 }}>Deadline and Selection Process</Typography>
-                    {
-                        (loading || loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
-                            <Box>
-                                {
-                                    (jobDetails.assignment!=="" && jobDetails.assignment!==undefined)?
-                                    <TextField variant="standard" sx={{ mb: 2 }} label="Assignment" fullWidth value={jobDetails.assignment} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                    :<></>
-                                }
-                                <TextField variant="standard" sx={{ mb: 2 }} label="Deadline" fullWidth value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                <TextField variant="standard" label="Selection Process" multiline fullWidth value={jobDetails.selectionProcess} InputProps={{ disableUnderline: true, readOnly: true }} />
-                            </Box>
-                    }
-                </CardContent>
-            </Card>
+            {
+                (jobDetails.type !== "Cofounder") &&
+                <Card sx={{ mt: 2 }}>
+                    <CardContent>
+                        <Typography variant="h5" sx={{ mb: 2 }}>Deadline and Selection Process</Typography>
+                        {
+                            (loading || loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
+                                <Box>
+                                    {
+                                        (jobDetails.assignment!=="" && jobDetails.assignment!==undefined)?
+                                        <TextField variant="standard" sx={{ mb: 2 }} label="Assignment" fullWidth value={jobDetails.assignment} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                        :<></>
+                                    }
+                                    <TextField variant="standard" sx={{ mb: 2 }} label="Deadline" fullWidth value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    <TextField variant="standard" label="Selection Process" multiline fullWidth value={jobDetails.selectionProcess} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                </Box>
+                        }
+                    </CardContent>
+                </Card>
+            }
+
         </Container>
     )
 }
