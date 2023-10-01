@@ -14,9 +14,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
         setLoading2(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
+            headers: {"Content-Type": "application/json",}
         }
         const url = `${BASE_URL}/api/startUp/register/${startUpId}`;
         try {
