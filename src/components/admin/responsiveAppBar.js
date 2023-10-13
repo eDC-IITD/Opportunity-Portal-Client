@@ -15,20 +15,20 @@ import Brightness2Icon from '@mui/icons-material/Brightness2';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const pages = [
-  {
-    page: "Internship",
-    route: "internship"
-  },
-  {
-    page: "Job",
-    route: "internship"
-  },
-  {
-    page: "Cofounder",
-    route: "internship"
-  }
-]
+// const pages = [
+//   {
+//     page: "Internship",
+//     route: "internship"
+//   },
+//   {
+//     page: "Job",
+//     route: "internship"
+//   },
+//   {
+//     page: "Cofounder",
+//     route: "internship"
+//   }
+// ]
 
 function ResponsiveAppBar({ mode, setMode }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -91,11 +91,11 @@ function ResponsiveAppBar({ mode, setMode }) {
             <img src={eDCLogo} alt="eDCLogo" loading="lazy" width={60} height={60} style={{ cursor: "pointer" }} />
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((value, key) => (
+            {/* {pages.map((value, key) => (
               <Button onClick={() => moveToNavPage(value)} sx={{ my: 2, color: "white", display: 'block' }} key={key}>
                 {value.page}
               </Button>
-            ))}
+            ))} */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
