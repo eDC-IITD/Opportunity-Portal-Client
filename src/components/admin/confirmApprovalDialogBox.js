@@ -40,12 +40,12 @@ const putApprovalStatus = async (id, approval) => {
 }
 
 export default function ConfirmApprovalDialogBox({row, setShowAlert, setAlertMessage, setAlertSeverity, internshipTableRow, setInternshipTableRow}) {
-  console.log(row)
 
   const jobDbId = row.update
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false);
   const [approval, setApproval] = useState(row.approval);
+  const [fixedApproval, setFixedApproval] = useState(row.approval)
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => {
@@ -62,13 +62,7 @@ export default function ConfirmApprovalDialogBox({row, setShowAlert, setAlertMes
     setOpen(false);
     putApprovalStatus(jobDbId, approval)
     .then((isSuccessful) => {
-      console.log("isSuccessful", isSuccessful)
-      if (isSuccessful){
-        // row.approvalStatus = approval
-        const updatedInternshipTableRow = {...internshipTableRow}
-        updatedInternshipTableRow[row.index - 1] = {...updatedInternshipTableRow[row.index - 1], approval : approval}
-        setInternshipTableRow(updatedInternshipTableRow)
-      }
+      if (isSuccessful) setFixedApproval(approval)
       else console.log("error")
     })
     .catch((err) => {console.log("error1", err)})
@@ -80,7 +74,7 @@ export default function ConfirmApprovalDialogBox({row, setShowAlert, setAlertMes
   return (
     <>
     <LoadingButton size="small" onClick={handleClickOpen} loading={loading} variant="outlined">
-      <span>{row.approval}</span> {/* removing the span tag causes problems in google translate */}
+      <span>{fixedApproval}</span> {/* removing the span tag causes problems in google translate */}
     </LoadingButton>
 
     {/* <Button variant="contained" size="small" onClick={handleClickOpen}>

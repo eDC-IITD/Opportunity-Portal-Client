@@ -30,8 +30,6 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
       }
       jsonDataArray.push(convertedJsonData);
     }
-    console.log("json data array")
-    console.table(jsonDataArray)
     setInternshipTableRow(jsonDataArray);
   }
 
@@ -51,7 +49,6 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
         return response.json();
     })
     .then(data => {
-        console.log(data)
         convertToTableRows(data)
         setLoading(false)
     })
@@ -85,9 +82,7 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
       field: 'approval',
       headerName: 'Approval Status',
       flex: 1,
-      renderCell: (row ) => {
-        console.log("here", row)
-        row = row.row
+      renderCell: ({row }) => {
         return <ConfirmApprovalDialogBox 
             row={row}
             setShowAlert = {setShowAlert}

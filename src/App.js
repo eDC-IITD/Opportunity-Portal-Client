@@ -148,9 +148,7 @@ export default function App() {
                                     <Route path="otpVerify" element={<OTPVerify BASE_URL={BASE_URL} setStartUpDetails={setStartUpDetails} setStudentDetails={setStudentDetails} {...setAlertProps}/>} />
                                 </Route>
 
-                                <Route path="student" 
-                                // element={<StudentIndex mode={mode} setMode={setMode} studentDetails={studentDetails} setStudentDetails = {setStudentDetails} />}
-                                >
+                                <Route path="student" element={<StudentIndex mode={mode} setMode={setMode} studentDetails={studentDetails} setStudentDetails = {setStudentDetails} />}>
                                     <Route path="internship" element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails}  {...setAlertProps}/>} />
                                     <Route path="account" element={<StudentAccount BASE_URL={BASE_URL} studentDetails={studentDetails} setStudentDetails = {setStudentDetails}  {...setAlertProps}/>} />
                                     <Route path="details" element={<JobDetails BASE_URL={BASE_URL}  startUpDetails={null} />} /> {/* TODO check if  shouldn't there be an alert property here also? */}
