@@ -98,7 +98,7 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
       headerName: 'Details',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" onClick={() => { navigate('../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
+        return <Button size="small" onClick={() => { navigate('../../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
       }
     },
   ];
