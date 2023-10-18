@@ -26,8 +26,8 @@ import AdminSignInRedirect from "./pages/admin/AdminSignInRedirect";
 import AdminDashboard from "./pages/admin/dashboard";
 import AdminIndex from "./pages/admin/index"
 
-// const BASE_URL = 'http://localhost:3000';
-const BASE_URL = 'https://edc-opportunity-portal-backend.onrender.com';
+const BASE_URL = 'http://localhost:3002';
+// const BASE_URL = 'https://edc-opportunity-portal-backend.onrender.com';
 // const BASE_URL = 'https://opportunity-portal.edciitd.com';
 
 

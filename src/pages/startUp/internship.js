@@ -33,11 +33,28 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
         details: oneJsonData._id,
         update: oneJsonData._id,
         studentsApplied: oneJsonData._id,
+        approval : oneJsonData.approval || "pending"
       }
       jsonDataArray.push(convertedJsonData);
     }
     setInternshipTableRow(jsonDataArray);
   }
+
+  const approvalStatusTypoColor = (approvalStatus) => {
+    if (approvalStatus === "approved") {
+      return "#2e7d32"
+    }
+    else if (approvalStatus === "disapproved") {
+      return "#d32f2f"
+    }
+    else if (approvalStatus === "pending") {
+      return "primary"
+    }
+    else {
+      return "none"
+    }
+  }
+
 
   const getInternship = async () => {
     setLoading(true);
@@ -106,6 +123,15 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       flex: 1,
       renderCell: ({ value }) => {
         return (value < moment().format('YYYY-MM-DDThh:mm') ? "Deadline passed" : moment(value).format('MMMM Do, h:mm a'))
+      }
+    },
+    {
+      field: 'approval',
+      headerName: 'Approval Status',
+      flex: 1,
+      renderCell: ({ value }) => {
+        console.log(value)
+        return <Typography color={approvalStatusTypoColor(value)}>{value}</Typography>
       }
     },
     {
