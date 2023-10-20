@@ -22,9 +22,12 @@ import { useEffect, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AlertSnackbar from "../src/components/snackbar";
+import AdminSignInRedirect from "./pages/admin/AdminSignInRedirect";
+import AdminDashboard from "./pages/admin/dashboard";
+import AdminIndex from "./pages/admin/index"
 
-// const BASE_URL = 'http://localhost:3000';
-const BASE_URL = 'https://edc-opportunity-portal-backend.onrender.com';
+const BASE_URL = 'http://localhost:3002';
+// const BASE_URL = 'https://edc-opportunity-portal-backend.onrender.com';
 // const BASE_URL = 'https://opportunity-portal.edciitd.com';
 
 
@@ -158,6 +161,10 @@ export default function App() {
                                     <Route path="addNew" element={<StartUpAddNew BASE_URL={BASE_URL} {...setAlertProps}/>} />
                                     <Route path="studentsApplied" element={<StudentsApplied BASE_URL={BASE_URL} {...setAlertProps}/>} />
                                     <Route path="details" element={<JobDetails BASE_URL={BASE_URL}  startUpDetails={startUpDetails} />} /> {/* TODO check if  shouldn't there be an alert property here also? */}
+                                </Route>
+                                <Route path="admin" element={<AdminIndex mode={mode} setMode={setMode}/>}>
+                                    <Route path="" element = {<AdminSignInRedirect/>}/>
+                                    <Route path="dashboard" element = {<AdminDashboard/>}/>
                                 </Route>
 
                                 <Route path="*" element={<Error404/>} />

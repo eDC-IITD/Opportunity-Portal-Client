@@ -36,9 +36,7 @@ export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessa
     setLoading(true);
     const requestOptions = {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: {"Content-Type": "application/json",},
     }
     const url = `${BASE_URL}/api/student/jobs`;
     try {

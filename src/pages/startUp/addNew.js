@@ -1,4 +1,4 @@
-import { Card, CardContent, Container, Grid, Typography, TextField, Button, CircularProgress,Box } from '@mui/material'
+import { Card, CardContent, Container, Grid, Typography, TextField, Button, CircularProgress,Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -15,9 +15,14 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
     const [assignment, setAssignment] = useState('');
     const [deadline, setDeadline] = useState(moment().format('YYYY-MM-DDThh:mm'));
     const [selectionProcess, setSelectionProcess] = useState('');
+    const [hoursType, setHoursType] = useState("fulltime"); // either parttime or fulltime
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(true);
     const updateOrAdd = (jobId !== "" && jobId !== undefined) ? "Update" : "Add";
+
+    const handleChange = (event, newHoursType) => {
+        setHoursType(newHoursType);
+    }
 
     const addNewOpportunity = async (e) => {
         e.preventDefault();
@@ -34,14 +39,13 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             assignment: assignment,
             deadline: deadline,
             selectionProcess: selectionProcess,
+            hoursType : hoursType,
             startUpId: startUpId,
             createdAt:moment().format('YYYY-MM'),
         }
         const requestOptions = {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: {"Content-Type": "application/json",},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs`;
@@ -79,13 +83,12 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             assignment: assignment,
             deadline: deadline,
             selectionProcess: selectionProcess,
+            hoursType: hoursType,
             createdAt:moment().format('YYYY-MM'),
         }
         const requestOptions = {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: {"Content-Type": "application/json",},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs/update/${jobId}`;
@@ -114,9 +117,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
         setLoading2(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
+            headers: {"Content-Type": "application/json",}
         }
         const url = `${BASE_URL}/api/startUp/jobs/${jobId}`;
         try {
@@ -134,6 +135,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                         setSelectionProcess(data.jobDetails.selectionProcess);
                         setSkillsRequired(data.jobDetails.skillsRequired);
                         setStipend(data.jobDetails.stipend);
+                        setHoursType(data.jobDetails.hoursType || "fulltime");
                     }
                     else {
                         console.log(data);
@@ -163,6 +165,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
         }
     }, [])
 
+
     return (
         <Container sx={{ py: 2, mt: 9 }}>
             <Typography variant="h5" sx={{ mb: 2 }}>{updateOrAdd} {type} Opportunity</Typography>
@@ -185,43 +188,54 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                                 <TextField variant="standard" label="Type" fullWidth value={type} required InputProps={{ disableUnderline: true, readOnly: true }} />
                                             </Grid>
                                     }
-                                    <Grid item xs={12} md={6}>
-                                        <TextField variant="standard" label="Stipend" placeholder='Flexible' fullWidth value={stipend} onChange={(e) => { setStipend(e.target.value) }} required />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <TextField variant="standard" label="No of Offers" placeholder='5' fullWidth value={noOfOffers} onChange={(e) => { setNoOfOffers(e.target.value) }} required />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
-                                    </Grid>
+                                    {type !== "Cofounder" && <>
+                                        <Grid item xs={12} md={6}>
+                                            <TextField variant="standard" label="Stipend" placeholder='Flexible' fullWidth value={stipend} onChange={(e) => { setStipend(e.target.value) }} required />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <TextField variant="standard" label="No of Offers" placeholder='5' fullWidth value={noOfOffers} onChange={(e) => { setNoOfOffers(e.target.value) }} required />
+                                        </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
+                                        </Grid>
+                                    </>}
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
                                     </Grid>
+                                    { type === 'Internship' && <Grid item xs={12} md={6}>
+                                        <Typography variant="button" display="block" gutterBottom>Part/Full time</Typography>
+                                        <ToggleButtonGroup color="primary" value={hoursType} exclusive onChange={handleChange} aria-label="Platform">
+                                            <ToggleButton value="parttime">FULL-TIME</ToggleButton>
+                                            <ToggleButton value="fulltime">PART-TIME</ToggleButton>
+                                        </ToggleButtonGroup>
+                                    </Grid>}
                                 </Grid>
                         }
                     </CardContent>
                 </Card>
-                <Card sx={{ my: 2 }}>
-                    <CardContent>
-                        <Typography variant="h5" sx={{ mb: 2 }}>Deadline and Selection Process</Typography>
-                        {
-                            (loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} md={6} sx={{ mb: 2 }}>
-                                        <TextField variant="standard" label="Assignment" fullWidth value={assignment} placeholder="Add assignment link ( Optional )" onChange={(e) => { setAssignment(e.target.value) }} />
+                {(type !== 'Cofounder') && 
+                    <Card sx={{ my: 2 }}>
+                        <CardContent>
+                            <Typography variant="h5" sx={{ mb: 2 }}>Deadline and Selection Process</Typography>
+                            {
+                                (loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} md={6} sx={{ mb: 2 }}>
+                                            <TextField variant="standard" label="Assignment" fullWidth value={assignment} placeholder="Add assignment link ( Optional )" onChange={(e) => { setAssignment(e.target.value) }} />
+                                        </Grid>
+                                        <Grid item xs={12} md={6} sx={{ mb: 2 }}>
+                                            <TextField type="datetime-local" variant="standard" label="Deadline" fullWidth value={deadline} onChange={(e) => { setDeadline(e.target.value) }} required />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField variant="standard" label="Selection Process" multiline fullWidth minRows={3} value={selectionProcess} placeholder="1. Resume Shortlist&#10;2. Online Test&#10;3. Interview" onChange={(e) => { setSelectionProcess(e.target.value) }} required />
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12} md={6} sx={{ mb: 2 }}>
-                                        <TextField type="datetime-local" variant="standard" label="Deadline" fullWidth value={deadline} onChange={(e) => { setDeadline(e.target.value) }} required />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField variant="standard" label="Selection Process" multiline fullWidth minRows={3} value={selectionProcess} placeholder="1. Resume Shortlist&#10;2. Online Test&#10;3. Interview" onChange={(e) => { setSelectionProcess(e.target.value) }} required />
-                                    </Grid>
-                                </Grid>
-                        }
-                    </CardContent>
-                </Card>
+                            }
+                        </CardContent>
+                    </Card>
+                }
                 <Card>
-                    <CardContent>
+                    <CardContent >
                         <Typography variant="h5" sx={{ mb: 2 }}>{updateOrAdd} Opportunity</Typography>
                         <Button type="submit" variant="contained" sx={{ width: 120, height: 40 }}>
                             {
