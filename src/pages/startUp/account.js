@@ -8,8 +8,10 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
-    const [website, setWebsite] = useState(startUpDetails.website);//TODO: Add website field in database
-    const [tracxn, setTracxn] = useState(startUpDetails.tracxn);//TODO: Add tracxn field in database
+    const [website, setWebsite] = useState(startUpDetails.website);
+    const [tracxn, setTracxn] = useState(startUpDetails.tracxn);
+    const [social, setSocial] = useState(startUpDetails.social);
+    const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
     const [location, setLocation] = useState(startUpDetails.location);
     const [sector, setSector] = useState(startUpDetails.sector);
     const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
@@ -31,6 +33,8 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
             noOfEmployees: noOfEmployees,
             companyVision: companyVision,
             founder: founder,
+            social: social,
+            cruchbase: cruchbase
         }
         const requestOptions = {
             method: "PUT",
@@ -142,6 +146,12 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard" label="Tracxn" placeholder='https://tracxn.com/' fullWidth value={tracxn} onChange={(e) => { setTracxn(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Social" placeholder='' fullWidth value={social} onChange={(e) => { setSocial(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Cruchbase" placeholder='https://www.crunchbase.com/' fullWidth value={cruchbase} onChange={(e) => { setCruchbase(e.target.value) }} />
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard"
