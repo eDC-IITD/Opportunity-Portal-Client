@@ -21,7 +21,8 @@ const putApprovalStatus = async (id, approval) => {
   }
   const requestOptions = {
     method : "PUT", 
-    headers : {"Content-Type": "application/json",},
+    headers : {"Content-Type": "application/json",
+    "Authorization" : localStorage.adminCode},
     body : JSON.stringify(formData),
   }
   const url = `http://localhost:3000/job/${id}/approval`;
