@@ -6,8 +6,46 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   const { user } = useLocation().state;
   const [email, setEmail] = useState('');
   const [adminCode, setAdminCode] = useState('')
+  const [adminUsername, setAdminUsername] = useState('')
+  const [adminPassword, setAdminPassword] = useState('')
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const loginAdminJWT = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    const formData = { username: adminUsername, password: adminPassword }
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify(formData),
+    }
+    const url = `http://localhost:3000/auth/login`
+    try {
+      const data = await fetch(url, requestOptions)
+      const data1 = await data.json()
+      if (data.status === 200) {
+        setAlertMessage("Approved")
+        setAlertSeverity("success")
+        setShowAlert(true)
+        setAdminCode(data1.token)
+        localStorage.adminCode = data1.token
+        navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn" } })
+      }
+      else if (data.status === 401) {
+        setAlertMessage("Wrong code, please try again");
+        setAlertSeverity("info");
+        setShowAlert(true);
+      }
+      else console.log(data);
+    }
+  catch (error) {
+    console.log("nkxnkdx")
+    console.log(error)
+  }
+}
+
+  
 
   const loginAdmin = async (e) => {
     e.preventDefault()
@@ -137,11 +175,14 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   if (user === "Admin") 
     return (
       <Container maxWidth="sm" sx={{ py: 2, mt: 9 }}>
-      <form onSubmit={loginAdmin}>
+      <form onSubmit={loginAdminJWT}>
         <Card>
           <CardHeader title={user + " Sign In"} subheader="Kindly enter the code" />
           <CardContent>
-            <TextField type="code" label={"Code"} variant="outlined" value={adminCode} onChange={(e) => setAdminCode(e.target.value)} fullWidth required />
+            <TextField type="text" label={"Username"} variant="outlined" value={adminUsername} onChange={(e) => setAdminUsername(e.target.value)} fullWidth required />
+          </CardContent>
+          <CardContent>
+            <TextField type="text" label={"Password"} variant="outlined" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} fullWidth required />
           </CardContent>
           <CardActions sx={{ ml: 1 }}>
             <Button type="submit" variant="contained" sx={{ width: 120, height: 40 }}>

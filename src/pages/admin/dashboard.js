@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, CardContent, Card, Box, Button, CircularProgress } from '@mui/material';
+import { Container, Typography, CardContent, Card, Box, Button, CircularProgress } from '@mui/material';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import React, { useState, useEffect } from 'react';
 import InternshipTable from '../../components/table';
@@ -37,7 +37,9 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
     const formData = {code : localStorage.adminCode}
     const requestOptions = {
       method : "POST", 
-      headers : {"Content-Type": "application/json",},
+      headers : {"Content-Type": "application/json",
+      "Authorization" : localStorage.adminCode
+    },
       body : JSON.stringify(formData),
     }
     const url = `http://localhost:3000/job`;
