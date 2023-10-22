@@ -20,9 +20,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
         setLoading(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: {"Content-Type": "application/json"},
         }
         const url = `${BASE_URL}/api/startUp/jobs/${jobId}`;
         try {
@@ -41,6 +39,12 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
             console.log(error);
         }
     }
+
+    const openLink = (link) => {
+        if (!link.startsWith("http")) link = `http://${link}`
+        window.open(link, '_blank');
+      };
+    
 
     const convertToTableRows = (studentsApplied) => {
         const jsonDataArray = []
@@ -114,7 +118,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
             headerName: 'Resume',
             flex: 1,
             renderCell: ({ value }) => {
-                return <Button size="small" href={value} target="_blank" rel="noopener noreferrer"><LibraryBooksRoundedIcon/></Button>
+                return <Button size="small" onClick = {() => openLink(value)} rel="noopener noreferrer"><LibraryBooksRoundedIcon/></Button>
             }
         },
         {
