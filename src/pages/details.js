@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 
 export default function Details({ BASE_URL, startUpDetails }) {
-    const { jobId } = useLocation().state;
+    const { jobId,  } = useLocation().state;
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(false);
     const [jobDetails, setJobDetails] = useState([]);
@@ -108,9 +108,11 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                 <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="Company Name" fullWidth value={jobStartUpDetails.companyName} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField variant="standard" label="Email" fullWidth value={jobStartUpDetails.email} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                </Grid>
+                                {
+                                    (!isadmin) && <Grid item xs={12} md={6}>
+                                        <TextField variant="standard" label="Email" fullWidth value={jobStartUpDetails.email} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    </Grid>
+                                }
                                 {
                                     (isadmin&&jobStartUpDetails.linkedIn !== "" && jobStartUpDetails.linkedIn!==undefined) ? <Grid item xs={12} md={6}>
                                         <a href={jobStartUpDetails.linkedIn} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
@@ -155,7 +157,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                 <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="No Of Employees" fullWidth value={jobStartUpDetails.noOfEmployees} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="Company Vision" multiline fullWidth value={jobStartUpDetails.companyVision} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
                             </Grid>
