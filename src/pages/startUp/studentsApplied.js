@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PopOver from '../../components/startUp/popOver';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { openLink } from '../../utils';
 
 export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
     const { jobId } = useLocation().state;
@@ -40,10 +41,6 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
         }
     }
 
-    const openLink = (link) => {
-        if (!link.startsWith("http")) link = `http://${link}`
-        window.open(link, '_blank');
-      };
     
 
     const convertToTableRows = (studentsApplied) => {
