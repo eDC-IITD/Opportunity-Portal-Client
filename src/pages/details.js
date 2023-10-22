@@ -252,7 +252,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                         (jobDetails.assignment!=="" && jobDetails.assignment!==undefined)&&
                                         <TextField variant="standard" sx={{ mb: 2 }} label="Assignment" fullWidth value={jobDetails.assignment} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     }
-                                    <TextField variant="standard" sx={{ mb: 2 }} label="Deadline" fullWidth value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    <TextField variant="standard" sx={{ mb: 2 }} label="Application Deadline" fullWidth value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     <TextField variant="standard" label="Selection Process" multiline fullWidth value={jobDetails.selectionProcess} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Box>
                         }
