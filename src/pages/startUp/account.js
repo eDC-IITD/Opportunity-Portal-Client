@@ -8,7 +8,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
-    const [location, setLocation] = useState(startUpDetails.location);
+    // const [location, setLocation] = useState(startUpDetails.location);
     const [sector, setSector] = useState(startUpDetails.sector);
     const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
     const companyName = startUpDetails.companyName;
@@ -21,7 +21,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         e.preventDefault();
         setLoading(true);
         const formData = {
-            location: location,
+            // location: location,
             linkedIn: linkedIn,
             sector: sector,
             noOfEmployees: noOfEmployees,
@@ -141,9 +141,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                                     <MenuItem value={"Other"}>Other</MenuItem>
                                 </TextField>
                             </Grid>
-                            <Grid item xs={12} md={6}>
-                                <TextField variant="standard" label="Location" placeholder='Delhi' fullWidth value={location} onChange={(e) => { setLocation(e.target.value) }} required />
-                            </Grid>
+                            {/* <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Company Location" placeholder='Delhi' fullWidth value={location} onChange={(e) => { setLocation(e.target.value) }} required />
+                            </Grid> */}
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard" label="No Of Employees" placeholder='10' fullWidth value={noOfEmployees} onChange={(e) => { setNoOfEmployees(e.target.value) }} required />
                             </Grid>
