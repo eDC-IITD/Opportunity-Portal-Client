@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PopOver from '../../components/startUp/popOver';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { openLink } from '../../utils';
 
 export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
     const { jobId } = useLocation().state;
@@ -20,9 +21,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
         setLoading(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: {"Content-Type": "application/json"},
         }
         const url = `${BASE_URL}/api/startUp/jobs/${jobId}`;
         try {
@@ -41,6 +40,8 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
             console.log(error);
         }
     }
+
+    
 
     const convertToTableRows = (studentsApplied) => {
         const jsonDataArray = []
@@ -114,7 +115,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
             headerName: 'Resume',
             flex: 1,
             renderCell: ({ value }) => {
-                return <Button size="small" href={value} target="_blank" rel="noopener noreferrer"><LibraryBooksRoundedIcon/></Button>
+                return <Button size="small" onClick = {() => openLink(value)} rel="noopener noreferrer"><LibraryBooksRoundedIcon/></Button>
             }
         },
         {
