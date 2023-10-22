@@ -9,6 +9,11 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
     // const [location, setLocation] = useState(startUpDetails.location);
+    const [website, setWebsite] = useState(startUpDetails.website);
+    const [tracxn, setTracxn] = useState(startUpDetails.tracxn);
+    const [social, setSocial] = useState(startUpDetails.social);
+    const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
+    const [location, setLocation] = useState(startUpDetails.location);
     const [sector, setSector] = useState(startUpDetails.sector);
     const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
     const companyName = startUpDetails.companyName;
@@ -23,10 +28,14 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         const formData = {
             // location: location,
             linkedIn: linkedIn,
+            website: website,
+            tracxn: tracxn,
             sector: sector,
             noOfEmployees: noOfEmployees,
             companyVision: companyVision,
             founder: founder,
+            social: social,
+            cruchbase: cruchbase
         }
         const requestOptions = {
             method: "PUT",
@@ -98,7 +107,17 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         });
         setFounder(newState);
     }
-
+    const updateFounderWebsite = (value, id) => {
+        const newState = founder.map(obj => {
+            if (obj.id === id) {
+                return { ...obj, website: value };
+            }
+            else {
+                return obj;
+            }
+        });
+        setFounder(newState);
+    }
 
     useEffect(() => {
         if (founder.length === 0) {
@@ -122,6 +141,18 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard" label="LinkedIn" placeholder='https://www.linkedin.com/in/xyz/' fullWidth value={linkedIn} onChange={(e) => { setLinkedIn(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Website" placeholder='https://www.startup.com/in' fullWidth value={website} onChange={(e) => { setWebsite(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Tracxn" placeholder='https://tracxn.com/' fullWidth value={tracxn} onChange={(e) => { setTracxn(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Social" placeholder='' fullWidth value={social} onChange={(e) => { setSocial(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Cruchbase" placeholder='https://www.crunchbase.com/' fullWidth value={cruchbase} onChange={(e) => { setCruchbase(e.target.value) }} />
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard"
@@ -180,6 +211,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                                                 </Grid>
                                                 <Grid item xs={12} md={6}>
                                                     <TextField variant="standard" label="Founder LinkedIn" placeholder="linkedin.com/in/steve-jobs/" fullWidth multiline value={value.linkedIn} onChange={(e) => { updateFounderLinkedIn(e.target.value, value.id) }} required />
+                                                </Grid>
+                                                <Grid item xs={12} md={6}>
+                                                    <TextField variant="standard" label="Founder Website" placeholder="stevejobs.com" fullWidth multiline value={value.website} onChange={(e) => { updateFounderWebsite(e.target.value, value.id) }} required />
                                                 </Grid>
                                             </Grid>
                                         </CardContent>
