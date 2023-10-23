@@ -2,6 +2,7 @@ import { Card, CardContent, Container, Grid, Typography, TextField, Box, Circula
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
+import {openLink} from '../utils.js';
 
 export default function Details({ BASE_URL, startUpDetails }) {
     const { jobId,  } = useLocation().state;
@@ -115,37 +116,37 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                 }
                                 {
                                     (isadmin&&jobStartUpDetails.linkedIn !== "" && jobStartUpDetails.linkedIn!==undefined) ? <Grid item xs={12} md={6}>
-                                        <a href={jobStartUpDetails.linkedIn} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
+                                        <div onClick={()=>{openLink(jobStartUpDetails.linkedIn)}} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
                                             <TextField color='primary' variant="standard" label="LinkedIn" fullWidth value={jobStartUpDetails.linkedIn} InputProps={{ disableUnderline: true, readOnly: true }} sx={{ input: { cursor: "pointer", color: "#1976d2" } }} />
-                                        </a>
+                                        </div>
                                     </Grid> : <></>
                                 }
                                 {
                                     (isadmin&&jobStartUpDetails.website !== "" && jobStartUpDetails.website!==undefined) ? <Grid item xs={12} md={6}>
-                                        <a href={jobStartUpDetails.website} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
+                                        <div onClick={()=>{openLink(jobStartUpDetails.website)}} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
                                             <TextField color='primary' variant="standard" label="Website" fullWidth value={jobStartUpDetails.website} InputProps={{ disableUnderline: true, readOnly: true }} sx={{ input: { cursor: "pointer", color: "#1976d2" } }} />
-                                        </a>
+                                        </div>
                                     </Grid> : <></>
                                 }
                                 {
                                     (isadmin&&jobStartUpDetails.tracxn !== "" && jobStartUpDetails.tracxn!==undefined) ? <Grid item xs={12} md={6}>
-                                        <a href={jobStartUpDetails.tracxn} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
+                                        <div onClick={()=>{openLink(jobStartUpDetails.tracxn)}} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
                                             <TextField color='primary' variant="standard" label="Tracxn" fullWidth value={jobStartUpDetails.tracxn} InputProps={{ disableUnderline: true, readOnly: true }} sx={{ input: { cursor: "pointer", color: "#1976d2" } }} />
-                                        </a>
+                                        </div>
                                     </Grid> : <></>
                                 }
                                 {
                                     (isadmin&&jobStartUpDetails.social !== "" && jobStartUpDetails.social!==undefined) ? <Grid item xs={12} md={6}>
-                                        <a href={jobStartUpDetails.social} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
+                                        <div onClick={()=>{openLink(jobStartUpDetails.social)}} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
                                             <TextField color='primary' variant="standard" label="Social" fullWidth value={jobStartUpDetails.social} InputProps={{ disableUnderline: true, readOnly: true }} sx={{ input: { cursor: "pointer", color: "#1976d2" } }} />
-                                        </a>
+                                        </div>
                                     </Grid> : <></>
                                 }
                                 {
                                     (isadmin&&jobStartUpDetails.cruchbase !== "" && jobStartUpDetails.cruchbase!==undefined) ? <Grid item xs={12} md={6}>
-                                        <a href={jobStartUpDetails.cruchbase} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
+                                        <div onClick={()=>{openLink(jobStartUpDetails.cruchbase)}} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
                                             <TextField color='primary' variant="standard" label="Crunchbase" fullWidth value={jobStartUpDetails.cruchbase} InputProps={{ disableUnderline: true, readOnly: true }} sx={{ input: { cursor: "pointer", color: "#1976d2" } }} />
-                                        </a>
+                                        </div>
                                     </Grid> : <></>
                                 }
                                 <Grid item xs={12} md={6}>
