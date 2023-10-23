@@ -63,6 +63,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((data) => {
           if (data.status === 200) {
             localStorage.setItem('localStorageStartUpId', data.startUpDetails._id);
+            localStorage.setItem('localStorageStartUpToken', data.token);
             setStartUpDetails(data.startUpDetails);
             setLoading(false);
             setAlertMessage("Sign in successfully.");
@@ -107,6 +108,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((data) => {
           if (data.status === 200) {
             localStorage.setItem('localStorageStartUpId', data.startUpDetails._id);
+            localStorage.setItem('localStorageStartUpToken', data.token);
             setStartUpDetails(data.startUpDetails);
             setLoading(false);
             setAlertMessage("Sign Up successfully.");
@@ -151,6 +153,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((data) => {
           if (data.status === 200) {
             localStorage.setItem('localStorageStudentId', data.studentDetails._id);
+            localStorage.setItem('localStorageStudentToken', data.token);
             setStudentDetails(data.studentDetails);
             setLoading(false);
             setAlertMessage("Sign in successfully.");
@@ -195,6 +198,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((data) => {
           if (data.status === 200) {
             localStorage.setItem('localStorageStudentId', data.studentDetails._id);
+            localStorage.setItem('localStorageStudentToken', data.token);
             setStudentDetails(data.studentDetails);
             setLoading(false);
             setAlertMessage("Sign Up successfully.");

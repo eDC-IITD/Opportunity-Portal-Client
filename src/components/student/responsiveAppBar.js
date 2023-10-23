@@ -65,6 +65,7 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
     handleCloseUserMenu();
     setStudentDetails(null);
     localStorage.removeItem("localStorageStudentId");
+    localStorage.removeItem("localStorageStudentToken");
     navigate("/");
   };
 

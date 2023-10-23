@@ -39,7 +39,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         }
         const requestOptions = {
             method: "PUT",
-            headers: {"Content-Type": "application/json",},
+            headers: {"Content-Type": "application/json",
+            "Authorization": localStorage.localStorageStartUpToken,
+        },
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/register/${startUpDetails._id}`;
