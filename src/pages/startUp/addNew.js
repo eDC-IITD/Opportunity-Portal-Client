@@ -16,6 +16,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
     const [deadline, setDeadline] = useState(moment().format('YYYY-MM-DDThh:mm'));
     const [selectionProcess, setSelectionProcess] = useState('');
     const [hoursType, setHoursType] = useState("fulltime"); // either parttime or fulltime
+    const [jobLocation, setJobLocation] = useState('');
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(true);
     const updateOrAdd = (jobId !== "" && jobId !== undefined) ? "Update" : "Add";
@@ -35,6 +36,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             stipend: stipend,
             noOfOffers: noOfOffers,
             skillsRequired: skillsRequired,
+            jobLocation: jobLocation,
             responsibilities: responsibilities,
             assignment: assignment,
             deadline: deadline,
@@ -85,6 +87,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
             deadline: deadline,
             selectionProcess: selectionProcess,
             hoursType: hoursType,
+            jobLocation: jobLocation,
             createdAt:moment().format('YYYY-MM'),
         }
         const requestOptions = {
@@ -138,6 +141,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                         setSkillsRequired(data.jobDetails.skillsRequired);
                         setStipend(data.jobDetails.stipend);
                         setHoursType(data.jobDetails.hoursType || "fulltime");
+                        setJobLocation(data.jobDetails.jobLocation);
                     }
                     else {
                         console.log(data);
@@ -179,7 +183,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                             (loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} md={6}>
-                                        <TextField variant="standard" label="Designation" placeholder='SDE' fullWidth value={designation} onChange={(e) => { setDesignation(e.target.value) }} required />
+                                        <TextField variant="standard" label="Designation" placeholder={(type === "Cofounder")?"CEO, CTO, CFO, etc.":'SDE'} fullWidth value={designation} onChange={(e) => { setDesignation(e.target.value) }} required />
                                     </Grid>
                                     {
                                         type === 'Internship' ?
@@ -200,13 +204,17 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                         <Grid item xs={12} md={6}>
                                             <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
                                         </Grid>
+                                        <Grid item xs={12} md={6}>
+                                            <TextField variant="standard" label="Job Location" placeholder='Delhi/Remote' fullWidth value={jobLocation} onChange={(e) => { setJobLocation(e.target.value) }} required />
+                                        </Grid>
+                                        
                                     </>}
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
                                     </Grid>
                                     { type === 'Internship' && <Grid item xs={12} md={6}>
-                                        <Typography variant="button" display="block" gutterBottom>Part/Full time</Typography>
-                                        <ToggleButtonGroup color="primary" value={hoursType} exclusive onChange={handleChange} aria-label="Platform">
+                                        <Typography variant="button" display="block" gutterBottom style={{ marginLeft: '5px' }}>Part/Full time</Typography>
+                                        <ToggleButtonGroup color="primary" value={hoursType} exclusive onChange={handleChange} aria-label="Platform" style={{ marginLeft: '5px' }}>
                                             <ToggleButton value="parttime">FULL-TIME</ToggleButton>
                                             <ToggleButton value="fulltime">PART-TIME</ToggleButton>
                                         </ToggleButtonGroup>
@@ -226,7 +234,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                             <TextField variant="standard" label="Assignment" fullWidth value={assignment} placeholder="Add assignment link ( Optional )" onChange={(e) => { setAssignment(e.target.value) }} />
                                         </Grid>
                                         <Grid item xs={12} md={6} sx={{ mb: 2 }}>
-                                            <TextField type="datetime-local" variant="standard" label="Deadline" fullWidth value={deadline} onChange={(e) => { setDeadline(e.target.value) }} required />
+                                            <TextField type="datetime-local" variant="standard" label="Application Deadline" fullWidth value={deadline} onChange={(e) => { setDeadline(e.target.value) }} required />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <TextField variant="standard" label="Selection Process" multiline fullWidth minRows={3} value={selectionProcess} placeholder="1. Resume Shortlist&#10;2. Online Test&#10;3. Interview" onChange={(e) => { setSelectionProcess(e.target.value) }} required />

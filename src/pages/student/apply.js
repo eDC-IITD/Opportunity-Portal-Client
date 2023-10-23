@@ -220,6 +220,9 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                                 <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="Responsibilities" multiline fullWidth value={jobDetails.responsibilities} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField variant="standard" label="Job Location" fullWidth value={jobDetails.jobLocation} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                </Grid>
                             </Grid>
                     }
                 </CardContent>
