@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
@@ -31,34 +30,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 // ]
 
 function ResponsiveAppBar({ mode, setMode }) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  const moveToNavPage = (value) => {
-    handleCloseNavMenu();
-    navigate(value.route, { state: { type: value.page } });
-  }
-
-  const moveToAccountPage = () => {
-    handleCloseUserMenu();
-    navigate("account");
-  }
 
 
   const logOut = () => {

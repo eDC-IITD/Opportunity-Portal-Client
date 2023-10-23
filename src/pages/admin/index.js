@@ -6,7 +6,6 @@ import { Box, CircularProgress } from "@mui/material";
 export default function Index({ mode, setMode}) {
   const adminCode = localStorage.adminCode
   const navigate = useNavigate();
-  const [companyName, setCompanyName] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

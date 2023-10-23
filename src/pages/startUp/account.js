@@ -13,7 +13,6 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
     const [tracxn, setTracxn] = useState(startUpDetails.tracxn);
     const [social, setSocial] = useState(startUpDetails.social);
     const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
-    const [location, setLocation] = useState(startUpDetails.location);
     const [sector, setSector] = useState(startUpDetails.sector);
     const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
     const companyName = startUpDetails.companyName;

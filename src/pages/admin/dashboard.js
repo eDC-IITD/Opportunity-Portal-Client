@@ -42,7 +42,7 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
     },
       body : JSON.stringify(formData),
     }
-    const url = `http://localhost:3000/job`;
+    const url = `${process.env.REACT_APP_ADMIN_URL}/job`;
     fetch(url, requestOptions)
     .then(response => {
         if (!response.ok) {
