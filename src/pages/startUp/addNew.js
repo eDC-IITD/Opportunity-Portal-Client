@@ -203,7 +203,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                             <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
                                         </Grid>
                                         <Grid item xs={12} md={6}>
-                                            <TextField variant="standard" label="Job Location" placeholder='Delhi/Remote' fullWidth value={jobLocation} onChange={(e) => { setJobLocation(e.target.value) }} required />
+                                            <TextField variant="standard" label="Job Location" placeholder='Remote, Delhi, Banglore, etc.' fullWidth value={jobLocation} onChange={(e) => { setJobLocation(e.target.value) }} required />
                                         </Grid>
                                         
                                     </>}

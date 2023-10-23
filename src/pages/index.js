@@ -7,8 +7,9 @@ import { Box, CircularProgress } from "@mui/material";
 export default function Index({ mode, setMode, startUpDetails, studentDetails }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
+    console.log("yo")
     if (studentDetails !== null) {
       navigate('../student/internship', { state: { type: 'Internship' } })
     }

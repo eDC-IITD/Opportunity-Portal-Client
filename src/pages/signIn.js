@@ -1,11 +1,10 @@
 import { Card, CardContent, CardHeader, Container, Typography, TextField, CardActions, Button, CircularProgress } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { user } = useLocation().state;
   const [email, setEmail] = useState('');
-  const [adminCode, setAdminCode] = useState('')
   const [adminUsername, setAdminUsername] = useState('')
   const [adminPassword, setAdminPassword] = useState('')
   const [loading, setLoading] = useState(false);
@@ -28,7 +27,6 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
         setAlertMessage("Approved")
         setAlertSeverity("success")
         setShowAlert(true)
-        setAdminCode(data1.token)
         localStorage.adminCode = data1.token
         navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn" } })
       }
@@ -46,48 +44,6 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
 }
 
   
-
-  const loginAdmin = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    // check admin code
-    const formData = {code : adminCode}
-    const requestOptions = {
-      method : "POST", 
-      headers : {"Content-Type": "application/json",},
-      body : JSON.stringify(formData),
-    }
-    const url = `http://localhost:3000/auth`
-    try{
-      await fetch(url, requestOptions)
-        .then((data) => {
-          setLoading(false)
-          if (data.status === 200) {
-            setAlertMessage("Approved")
-            setAlertSeverity("success")
-            setShowAlert(true)
-            localStorage.adminCode = adminCode
-
-            navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn"}})
-          }
-          
-          else if (data.status === 403) {
-            setAlertMessage("Wrong code, please try again");
-            setAlertSeverity("info");
-            setShowAlert(true);
-          }
-
-          else console.log(data);
-
-        })
-    }
-    catch (error) {
-      console.log(error)
-    }
-
-    // if correct save the admin code in the localstorage
-    // and than navigate to homepage containing the table
-  }
 
   const loginStudent = async (e) => {
     e.preventDefault();
