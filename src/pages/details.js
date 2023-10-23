@@ -199,6 +199,25 @@ export default function Details({ BASE_URL, startUpDetails }) {
                     </CardContent>
                 </Card>
             }
+            <Card sx={{my : 2}}>
+                <CardContent>
+                    <Typography variant="h5" sx={{ mb: 2 }}>HR Details</Typography>
+                    {
+                        (loading || loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} md={6}>
+                                    <TextField variant="standard" label="Name" fullWidth value={jobStartUpDetails.hrName} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField variant="standard" label="Personal Email" fullWidth value={jobStartUpDetails.hrEmail} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <TextField variant="standard" label="Designation" fullWidth value={jobStartUpDetails.hrDesignation} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                </Grid>
+                            </Grid>
+                    }
+                </CardContent>
+            </Card>
 
         </Container>
     )

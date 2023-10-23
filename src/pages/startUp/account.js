@@ -15,6 +15,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
     const companyEmail = startUpDetails.email;
     const [companyVision, setCompanyVision] = useState(startUpDetails.companyVision);
     const [founder, setFounder] = useState(startUpDetails.founder);
+    const [hrName, setHrName] = useState(startUpDetails.hrName);
+    const [hrEmail, setHrEmail] = useState(startUpDetails.hrEmail);
+    const [hrDesignation, setHrDesignation] = useState(startUpDetails.hrDesignation);
     const updateOrSave = (startUpDetails.location === "" || startUpDetails.location === undefined) ? "Save" : "Update";
 
     const updateAccountDetails = async (e) => {
@@ -27,6 +30,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
             noOfEmployees: noOfEmployees,
             companyVision: companyVision,
             founder: founder,
+            hrName: hrName,
+            hrEmail: hrEmail,
+            hrDesignation: hrDesignation,
         }
         const requestOptions = {
             method: "PUT",
@@ -190,6 +196,23 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                             }
                             )
                         }
+                    </CardContent>
+                </Card>
+                <Card sx={{my : 2}}>
+                    <CardContent>
+                        <Typography variant="h5" sx={{ mb: 2 }}>HR Details</Typography>
+                        <Grid container spacing={2}>
+                            
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Name" placeholder='' fullWidth value={hrName} onChange={(e) => { setHrName(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Personal Email" placeholder='' fullWidth value={hrEmail} onChange={(e) => { setHrEmail(e.target.value) }}/>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Designation" placeholder='' fullWidth value={hrDesignation} onChange={(e) => { setHrDesignation(e.target.value) }}/>
+                            </Grid>
+                        </Grid>
                     </CardContent>
                 </Card>
                 <Card>
