@@ -47,6 +47,7 @@ function ResponsiveAppBar({ mode, setMode }) {
     handleCloseUserMenu();
     // setStartUpDetails(null);
     localStorage.removeItem("adminCode");
+    localStorage.removeItem("userID");
     navigate("/");
   };
 

@@ -15,7 +15,8 @@ import { useState } from 'react';
 const putApprovalStatus = async (id, approval) => {
   const formData = {
     code : localStorage.adminCode,
-    approval : approval
+    approval : approval,
+    userID : localStorage.userID
   }
   const requestOptions = {
     method : "PUT", 

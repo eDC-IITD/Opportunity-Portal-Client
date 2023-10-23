@@ -28,6 +28,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
         setAlertSeverity("success")
         setShowAlert(true)
         localStorage.adminCode = data1.token
+        localStorage.userID = data1.userID
         navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn" } })
       }
       else if (data.status === 401) {
@@ -138,7 +139,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
             <TextField type="text" label={"Username"} variant="outlined" value={adminUsername} onChange={(e) => setAdminUsername(e.target.value)} fullWidth required />
           </CardContent>
           <CardContent>
-            <TextField type="text" label={"Password"} variant="outlined" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} fullWidth required />
+            <TextField type="password" label={"Password"} variant="outlined" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} fullWidth required />
           </CardContent>
           <CardActions sx={{ ml: 1 }}>
             <Button type="submit" variant="contained" sx={{ width: 120, height: 40 }}>

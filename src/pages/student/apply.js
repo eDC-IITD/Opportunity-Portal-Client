@@ -89,6 +89,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": localStorage.localStorageStudentToken,
             },
             body: JSON.stringify(formData)
         }

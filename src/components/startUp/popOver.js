@@ -58,6 +58,7 @@ export default function BasicPopover({ BASE_URL, status, studentId, jobId, setSh
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": localStorage.localStorageStartUpToken,
             },
             body: JSON.stringify(formData)
         }
