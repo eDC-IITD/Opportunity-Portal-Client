@@ -74,6 +74,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": localStorage.localStorageStartUpToken
       },
     }
     const url = `${BASE_URL}/api/startUp/jobs?startUpId=${startUpDetails._id}&type=${type}`;

@@ -45,7 +45,8 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
         }
         const requestOptions = {
             method: "POST",
-            headers: {"Content-Type": "application/json",},
+            headers: {"Content-Type": "application/json",
+            "Authorization": localStorage.localStorageStartUpToken,},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs`;
@@ -88,7 +89,8 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
         }
         const requestOptions = {
             method: "PUT",
-            headers: {"Content-Type": "application/json",},
+            headers: {"Content-Type": "application/json",
+            "Authorization": localStorage.localStorageStartUpToken,},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs/update/${jobId}`;

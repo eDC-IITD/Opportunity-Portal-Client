@@ -34,7 +34,7 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
   }
 
   const getInternship = async () => {
-    const formData = {code : localStorage.adminCode}
+    const formData = {code : localStorage.adminCode, userID : localStorage.userID}
     const requestOptions = {
       method : "POST", 
       headers : {"Content-Type": "application/json",

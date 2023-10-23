@@ -31,6 +31,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": localStorage.localStorageStudentToken,
       },
       body: JSON.stringify(formData)
     }
