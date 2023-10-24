@@ -191,8 +191,19 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                             <Grid item xs={12} md={6}>
                                                 <TextField variant="standard" label="Type" fullWidth value={type} required InputProps={{ disableUnderline: true, readOnly: true }} />
                                             </Grid>
+                                            
                                     }
-                                    {type !== "Cofounder" && <>
+                                    {
+                                        type === 'Projects' && <>
+                                            <Grid item xs={12}>
+                                                <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField variant="standard" label="Project Description" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
+                                            </Grid>
+                                            </>
+                                    }
+                                    {type !== "Cofounder" && type !== "Projects" && <>
                                         <Grid item xs={12} md={6}>
                                             <TextField variant="standard" label="Stipend" placeholder='Flexible' fullWidth value={stipend} onChange={(e) => { setStipend(e.target.value) }} required />
                                         </Grid>
@@ -207,9 +218,10 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                         </Grid>
                                         
                                     </>}
-                                    <Grid item xs={12} md={6}>
-                                        <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
-                                    </Grid>
+                                    {type !== "Projects" && 
+                                        <Grid item xs={12} md={6}>
+                                            <TextField variant="standard" label="Responsibilities" multiline fullWidth minRows={3} value={responsibilities} placeholder="1. Execute full software development life cycle (SDLC)&#10;2. Write well-designed, testable code&#10;3. Troubleshoot, debug and upgrade existing systems" onChange={(e) => { setResponsibilities(e.target.value) }} required />
+                                        </Grid>}
                                     { type === 'Internship' && <Grid item xs={12} md={6}>
                                         <Typography variant="button" display="block" gutterBottom style={{ marginLeft: '5px' }}>Part/Full time</Typography>
                                         <ToggleButtonGroup color="primary" value={hoursType} exclusive onChange={handleChange} aria-label="Platform" style={{ marginLeft: '5px' }}>
@@ -232,7 +244,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                             <TextField variant="standard" label="Assignment" fullWidth value={assignment} placeholder="Add assignment link ( Optional )" onChange={(e) => { setAssignment(e.target.value) }} />
                                         </Grid>
                                         <Grid item xs={12} md={6} sx={{ mb: 2 }}>
-                                            <TextField type="datetime-local" variant="standard" label="Deadline" fullWidth value={deadline} onChange={(e) => { setDeadline(e.target.value) }} required />
+                                            <TextField type="datetime-local" variant="standard" label="Application Deadline" fullWidth value={deadline} onChange={(e) => { setDeadline(e.target.value) }} required />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <TextField variant="standard" label="Selection Process" multiline fullWidth minRows={3} value={selectionProcess} placeholder="1. Resume Shortlist&#10;2. Online Test&#10;3. Interview" onChange={(e) => { setSelectionProcess(e.target.value) }} required />

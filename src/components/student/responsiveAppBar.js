@@ -30,6 +30,10 @@ const pages = [
   {
     page: "Cofounder",
     route: "internship"
+  },
+  {
+    page: "Projects",
+    route: "internship"
   }
 ]
 

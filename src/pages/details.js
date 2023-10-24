@@ -157,7 +157,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                             <TextField variant="standard" label="Type" fullWidth value={jobDetails.type} InputProps={{ disableUnderline: true, readOnly: true }} />
                                         </Grid>
                                 }
-                                {(jobDetails.type !== "Cofounder")&&<>
+                                {(jobDetails.type !== "Cofounder")&&(jobDetails.type !== "Projects")&&<>
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Stipend" fullWidth value={jobDetails.stipend} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
@@ -171,13 +171,23 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                         <TextField variant="standard" label="Job Location" multiline fullWidth value={jobDetails.jobLocation} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
                                 </>}
+                                {(jobDetails.type !== "Projects") &&
                                 <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="Responsibilities" multiline fullWidth value={jobDetails.responsibilities} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                </Grid>
+                                </Grid>}
                                 {(jobDetails.type === "Internship") &&
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Part/FullTime" multiline fullWidth value={jobDetails.hoursType || "PartTime"} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
+                                }
+                                {(jobDetails.type === "Projects") && <>
+                                    <Grid item xs={12} md={6}>
+                                        <TextField variant="standard" label="Skills Required" multiline fullWidth value={jobDetails.skillsRequired} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField variant="standard" label="Project Description" multiline fullWidth value={jobDetails.responsibilities} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    </Grid>
+                                    </>
                                 }
                                 
                             </Grid>
@@ -196,7 +206,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                         (jobDetails.assignment!=="" && jobDetails.assignment!==undefined)&&
                                         <TextField variant="standard" sx={{ mb: 2 }} label="Assignment" fullWidth value={jobDetails.assignment} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     }
-                                    <TextField variant="standard" sx={{ mb: 2 }} label="Deadline" fullWidth value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')} InputProps={{ disableUnderline: true, readOnly: true }} />
+                                    <TextField variant="standard" sx={{ mb: 2 }} label="Application Deadline" fullWidth value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     <TextField variant="standard" label="Selection Process" multiline fullWidth value={jobDetails.selectionProcess} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Box>
                         }
