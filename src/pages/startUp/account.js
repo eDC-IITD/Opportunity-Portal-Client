@@ -9,12 +9,19 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
     // const [location, setLocation] = useState(startUpDetails.location);
+    const [website, setWebsite] = useState(startUpDetails.website);
+    const [tracxn, setTracxn] = useState(startUpDetails.tracxn);
+    const [social, setSocial] = useState(startUpDetails.social);
+    const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
     const [sector, setSector] = useState(startUpDetails.sector);
     const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
     const companyName = startUpDetails.companyName;
     const companyEmail = startUpDetails.email;
     const [companyVision, setCompanyVision] = useState(startUpDetails.companyVision);
     const [founder, setFounder] = useState(startUpDetails.founder);
+    const [hrName, setHrName] = useState(startUpDetails.hrName);
+    const [hrEmail, setHrEmail] = useState(startUpDetails.hrEmail);
+    const [hrDesignation, setHrDesignation] = useState(startUpDetails.hrDesignation);
     const updateOrSave = (startUpDetails.location === "" || startUpDetails.location === undefined) ? "Save" : "Update";
 
     const updateAccountDetails = async (e) => {
@@ -23,14 +30,23 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         const formData = {
             // location: location,
             linkedIn: linkedIn,
+            website: website,
+            tracxn: tracxn,
             sector: sector,
             noOfEmployees: noOfEmployees,
             companyVision: companyVision,
             founder: founder,
+            hrName: hrName,
+            hrEmail: hrEmail,
+            hrDesignation: hrDesignation,
+            social: social,
+            cruchbase: cruchbase,
         }
         const requestOptions = {
             method: "PUT",
-            headers: {"Content-Type": "application/json",},
+            headers: {"Content-Type": "application/json",
+            "Authorization": localStorage.localStorageStartUpToken,
+        },
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/register/${startUpDetails._id}`;
@@ -98,7 +114,17 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         });
         setFounder(newState);
     }
-
+    const updateFounderWebsite = (value, id) => {
+        const newState = founder.map(obj => {
+            if (obj.id === id) {
+                return { ...obj, website: value };
+            }
+            else {
+                return obj;
+            }
+        });
+        setFounder(newState);
+    }
 
     useEffect(() => {
         if (founder.length === 0) {
@@ -122,6 +148,18 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard" label="LinkedIn" placeholder='https://www.linkedin.com/in/xyz/' fullWidth value={linkedIn} onChange={(e) => { setLinkedIn(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Website" placeholder='https://www.startup.com/in' fullWidth value={website} onChange={(e) => { setWebsite(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Tracxn" placeholder='https://tracxn.com/' fullWidth value={tracxn} onChange={(e) => { setTracxn(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Social" placeholder='' fullWidth value={social} onChange={(e) => { setSocial(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Cruchbase" placeholder='https://www.crunchbase.com/' fullWidth value={cruchbase} onChange={(e) => { setCruchbase(e.target.value) }} />
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard"
@@ -181,6 +219,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                                                 <Grid item xs={12} md={6}>
                                                     <TextField variant="standard" label="Founder LinkedIn" placeholder="linkedin.com/in/steve-jobs/" fullWidth multiline value={value.linkedIn} onChange={(e) => { updateFounderLinkedIn(e.target.value, value.id) }} required />
                                                 </Grid>
+                                                <Grid item xs={12} md={6}>
+                                                    <TextField variant="standard" label="Founder Website" placeholder="stevejobs.com" fullWidth multiline value={value.website} onChange={(e) => { updateFounderWebsite(e.target.value, value.id) }} required />
+                                                </Grid>
                                             </Grid>
                                         </CardContent>
                                     </Card>
@@ -188,6 +229,23 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                             }
                             )
                         }
+                    </CardContent>
+                </Card>
+                <Card sx={{my : 2}}>
+                    <CardContent>
+                        <Typography variant="h5" sx={{ mb: 2 }}>HR Details</Typography>
+                        <Grid container spacing={2}>
+                            
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Name" placeholder='' fullWidth value={hrName} onChange={(e) => { setHrName(e.target.value) }} />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Personal Email" placeholder='' fullWidth value={hrEmail} onChange={(e) => { setHrEmail(e.target.value) }}/>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Designation" placeholder='' fullWidth value={hrDesignation} onChange={(e) => { setHrDesignation(e.target.value) }}/>
+                            </Grid>
+                        </Grid>
                     </CardContent>
                 </Card>
                 <Card>

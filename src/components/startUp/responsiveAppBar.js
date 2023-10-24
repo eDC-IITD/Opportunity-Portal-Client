@@ -72,6 +72,7 @@ function ResponsiveAppBar({ companyName, mode, setMode, setStartUpDetails }) {
     handleCloseUserMenu();
     setStartUpDetails(null);
     localStorage.removeItem("localStorageStartUpId");
+    localStorage.removeItem("localStorageStartUpToken");
     navigate("/");
   };
 

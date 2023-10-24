@@ -1,55 +1,50 @@
 import { Card, CardContent, CardHeader, Container, Typography, TextField, CardActions, Button, CircularProgress } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { user } = useLocation().state;
   const [email, setEmail] = useState('');
-  const [adminCode, setAdminCode] = useState('')
+  const [adminUsername, setAdminUsername] = useState('')
+  const [adminPassword, setAdminPassword] = useState('')
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const loginAdmin = async (e) => {
+  const loginAdminJWT = async (e) => {
     e.preventDefault()
     setLoading(true)
-    // check admin code
-    const formData = {code : adminCode}
+    const formData = { username: adminUsername, password: adminPassword }
     const requestOptions = {
-      method : "POST", 
-      headers : {"Content-Type": "application/json",},
-      body : JSON.stringify(formData),
+      method: "POST",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify(formData),
     }
-    const url = `http://localhost:3000/auth`
-    try{
-      await fetch(url, requestOptions)
-        .then((data) => {
-          setLoading(false)
-          if (data.status === 200) {
-            setAlertMessage("Approved")
-            setAlertSeverity("success")
-            setShowAlert(true)
-            localStorage.adminCode = adminCode
-
-            navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn"}})
-          }
-          
-          else if (data.status === 403) {
-            setAlertMessage("Wrong code, please try again");
-            setAlertSeverity("info");
-            setShowAlert(true);
-          }
-
-          else console.log(data);
-
-        })
+    const url = `http://localhost:3000/auth/login`
+    try {
+      const data = await fetch(url, requestOptions)
+      const data1 = await data.json()
+      if (data.status === 200) {
+        setAlertMessage("Approved")
+        setAlertSeverity("success")
+        setShowAlert(true)
+        localStorage.adminCode = data1.token
+        localStorage.userID = data1.userID
+        navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn" } })
+      }
+      else if (data.status === 401) {
+        setAlertMessage("Wrong code, please try again");
+        setAlertSeverity("info");
+        setShowAlert(true);
+      }
+      else console.log(data);
     }
-    catch (error) {
-      console.log(error)
-    }
-
-    // if correct save the admin code in the localstorage
-    // and than navigate to homepage containing the table
+  catch (error) {
+    console.log("nkxnkdx")
+    console.log(error)
   }
+}
+
+  
 
   const loginStudent = async (e) => {
     e.preventDefault();
@@ -137,11 +132,14 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   if (user === "Admin") 
     return (
       <Container maxWidth="sm" sx={{ py: 2, mt: 9 }}>
-      <form onSubmit={loginAdmin}>
+      <form onSubmit={loginAdminJWT}>
         <Card>
           <CardHeader title={user + " Sign In"} subheader="Kindly enter the code" />
           <CardContent>
-            <TextField type="code" label={"Code"} variant="outlined" value={adminCode} onChange={(e) => setAdminCode(e.target.value)} fullWidth required />
+            <TextField type="text" label={"Username"} variant="outlined" value={adminUsername} onChange={(e) => setAdminUsername(e.target.value)} fullWidth required />
+          </CardContent>
+          <CardContent>
+            <TextField type="password" label={"Password"} variant="outlined" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} fullWidth required />
           </CardContent>
           <CardActions sx={{ ml: 1 }}>
             <Button type="submit" variant="contained" sx={{ width: 120, height: 40 }}>

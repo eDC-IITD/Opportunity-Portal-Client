@@ -47,7 +47,8 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
         }
         const requestOptions = {
             method: "POST",
-            headers: {"Content-Type": "application/json",},
+            headers: {"Content-Type": "application/json",
+            "Authorization": localStorage.localStorageStartUpToken,},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs`;
@@ -91,7 +92,8 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
         }
         const requestOptions = {
             method: "PUT",
-            headers: {"Content-Type": "application/json",},
+            headers: {"Content-Type": "application/json",
+            "Authorization": localStorage.localStorageStartUpToken,},
             body: JSON.stringify(formData)
         }
         const url = `${BASE_URL}/api/startUp/jobs/update/${jobId}`;
@@ -181,7 +183,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                             (loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} md={6}>
-                                        <TextField variant="standard" label="Designation" placeholder='SDE' fullWidth value={designation} onChange={(e) => { setDesignation(e.target.value) }} required />
+                                        <TextField variant="standard" label="Designation" placeholder={(type === "Cofounder")?"CEO, CTO, CFO, etc.":'SDE'} fullWidth value={designation} onChange={(e) => { setDesignation(e.target.value) }} required />
                                     </Grid>
                                     {
                                         type === 'Internship' ?
@@ -214,7 +216,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                                             <TextField variant="standard" label="Skills Required" multiline fullWidth minRows={3} value={skillsRequired} placeholder="1. C++&#10;2. Python&#10;3. Communication Skills" onChange={(e) => { setSkillsRequired(e.target.value) }} required />
                                         </Grid>
                                         <Grid item xs={12} md={6}>
-                                            <TextField variant="standard" label="Job Location" placeholder='Delhi/Remote' fullWidth value={jobLocation} onChange={(e) => { setJobLocation(e.target.value) }} required />
+                                            <TextField variant="standard" label="Job Location" placeholder='Remote, Delhi, Banglore, etc.' fullWidth value={jobLocation} onChange={(e) => { setJobLocation(e.target.value) }} required />
                                         </Grid>
                                         
                                     </>}

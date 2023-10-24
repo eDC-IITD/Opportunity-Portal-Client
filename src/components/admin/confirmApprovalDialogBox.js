@@ -1,4 +1,3 @@
-import { Rowing } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -7,7 +6,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -17,14 +15,16 @@ import { useState } from 'react';
 const putApprovalStatus = async (id, approval) => {
   const formData = {
     code : localStorage.adminCode,
-    approval : approval
+    approval : approval,
+    userID : localStorage.userID
   }
   const requestOptions = {
     method : "PUT", 
-    headers : {"Content-Type": "application/json",},
+    headers : {"Content-Type": "application/json",
+    "Authorization" : localStorage.adminCode},
     body : JSON.stringify(formData),
   }
-  const url = `http://localhost:3000/job/${id}/approval`;
+  const url = `${process.env.REACT_APP_ADMIN_URL}/job/${id}/approval`;
   return fetch(url, requestOptions)
   .then(response => {
     if (!response.ok) {

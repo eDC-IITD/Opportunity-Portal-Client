@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, CardContent, Card, Box, Button, CircularProgress } from '@mui/material';
+import { Container, Typography, CardContent, Card, Box, Button, CircularProgress } from '@mui/material';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import React, { useState, useEffect } from 'react';
 import InternshipTable from '../../components/table';
@@ -34,13 +34,15 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
   }
 
   const getInternship = async () => {
-    const formData = {code : localStorage.adminCode}
+    const formData = {code : localStorage.adminCode, userID : localStorage.userID}
     const requestOptions = {
       method : "POST", 
-      headers : {"Content-Type": "application/json",},
+      headers : {"Content-Type": "application/json",
+      "Authorization" : localStorage.adminCode
+    },
       body : JSON.stringify(formData),
     }
-    const url = `http://localhost:3000/job`;
+    const url = `${process.env.REACT_APP_ADMIN_URL}/job`;
     fetch(url, requestOptions)
     .then(response => {
         if (!response.ok) {
