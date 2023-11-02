@@ -31,18 +31,21 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
         localStorage.userID = data1.userID
         navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn" } })
       }
-      else if (data.status === 401) {
-        setAlertMessage("Wrong code, please try again");
-        setAlertSeverity("info");
+      else if (data.status === 401 || data.status == 404) {
+        setAlertMessage("Wrong login credentials, please try again");
+        setLoading(false)
+        setAlertSeverity("error");
         setShowAlert(true);
       }
       else console.log(data);
     }
-  catch (error) {
-    console.log("nkxnkdx")
-    console.log(error)
+    catch (error) {
+      setAlertMessage("Wrong login credentials, please try again");
+      setAlertSeverity("error");
+      setShowAlert(true);
+      setLoading(false)
+    }
   }
-}
 
   
 
