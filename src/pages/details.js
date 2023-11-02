@@ -19,7 +19,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                 headers: { "Content-Type": "application/json", },
                 body: JSON.stringify({ code: adminCode })
             }
-            const url=`http://localhost:3000/auth`
+            const url=`${process.env.REACT_APP_ADMIN_URL}/auth`
             try {
                 await fetch(url, requestOptions)
                     .then((response) => response.json())
@@ -218,7 +218,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                             <TextField variant="standard" label="Type" fullWidth value={jobDetails.type} InputProps={{ disableUnderline: true, readOnly: true }} />
                                         </Grid>
                                 }
-                                {(jobDetails.type !== "Cofounder")&&(jobDetails.type !== "Projects")&&<>
+                                {(jobDetails.type !== "Cofounder")&&(jobDetails.type !== "Project")&&<>
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Stipend" fullWidth value={jobDetails.stipend} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
@@ -232,7 +232,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                         <TextField variant="standard" label="Job Location" multiline fullWidth value={jobDetails.jobLocation} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
                                 </>}
-                                {(jobDetails.type !== "Projects") &&
+                                {(jobDetails.type !== "Project") &&
                                 <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="Responsibilities" multiline fullWidth value={jobDetails.responsibilities} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>}
@@ -241,7 +241,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                         <TextField variant="standard" label="Part/FullTime" multiline fullWidth value={jobDetails.hoursType || "PartTime"} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
                                 }
-                                {(jobDetails.type === "Projects") && <>
+                                {(jobDetails.type === "Project") && <>
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Skills Required" multiline fullWidth value={jobDetails.skillsRequired} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>

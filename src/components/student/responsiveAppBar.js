@@ -32,7 +32,7 @@ const pages = [
     route: "internship"
   },
   {
-    page: "Projects",
+    page: "Project",
     route: "internship"
   }
 ]

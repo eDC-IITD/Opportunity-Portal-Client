@@ -89,6 +89,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
                   onChange={(e) => { setCourse(e.target.value) }}
                 >
                   <MenuItem value={"BTech"}>BTech</MenuItem>
+                  <MenuItem value={"Dual"}>Dual</MenuItem>
                   <MenuItem value={"MTech"}>MTech</MenuItem>
                   <MenuItem value={"PhD"}>PhD</MenuItem>
                   <MenuItem value={"MBA"}>MBA</MenuItem>
@@ -168,6 +169,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
               </Grid>
               <Grid item xs={12}>
                 <TextField variant="standard" label="Link to resume" placeholder='Provide public access to link' fullWidth value={resumeLink} onChange={(e) => { setResumeLink(e.target.value) }} required />
+                <Typography variant='caption'>Please make sure that the link to your resume is set to public</Typography>
               </Grid>
             </Grid>
           </CardContent>

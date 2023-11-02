@@ -9,8 +9,10 @@ export default function Index({ mode, setMode, startUpDetails, studentDetails })
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    console.log("yo")
-    if (studentDetails !== null) {
+    if (localStorage.adminCode !== undefined){
+      navigate("../admin/dashboard", { state: { user: 'Admin' } })
+    }
+    else if (studentDetails !== null) {
       navigate('../student/internship', { state: { type: 'Internship' } })
     }
     else if (startUpDetails !== null) {

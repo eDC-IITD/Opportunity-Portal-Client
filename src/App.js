@@ -26,7 +26,7 @@ import AdminSignInRedirect from "./pages/admin/AdminSignInRedirect";
 import AdminDashboard from "./pages/admin/dashboard";
 import AdminIndex from "./pages/admin/index"
 
-const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+const BASE_URL = process.env.REACT_APP_BACKEND_URL_PRODUCTION || process.env.REACT_APP_BACKEND_URL;
 // const BASE_URL = 'https://edc-opportunity-portal-backend.onrender.com';
 // const BASE_URL = 'https://opportunity-portal.edciitd.com';
 
@@ -122,8 +122,6 @@ export default function App() {
     }, [])
 
     useEffect(() => {
-        console.log("I don't konw", process.env.NODE_ENV)
-        console.log("I don't konw", process.env.REACT_APP_ADMIN_URL)
         const colorMode = localStorage.getItem('colorMode')
         if (colorMode === 'dark') setMode('dark');
         else if (colorMode === 'light') setMode('light');

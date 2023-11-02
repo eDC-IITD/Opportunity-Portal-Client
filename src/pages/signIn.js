@@ -10,7 +10,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const loginAdminJWT = async (e) => {
+  const loginAdmin = async (e) => {
     e.preventDefault()
     setLoading(true)
     const formData = { username: adminUsername, password: adminPassword }
@@ -19,7 +19,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify(formData),
     }
-    const url = `http://localhost:3000/auth/login`
+    const url = `${process.env.REACT_APP_ADMIN_URL}/auth/login`
     try {
       const data = await fetch(url, requestOptions)
       const data1 = await data.json()
@@ -132,7 +132,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   if (user === "Admin") 
     return (
       <Container maxWidth="sm" sx={{ py: 2, mt: 9 }}>
-      <form onSubmit={loginAdminJWT}>
+      <form onSubmit={loginAdmin}>
         <Card>
           <CardHeader title={user + " Sign In"} subheader="Kindly enter the code" />
           <CardContent>

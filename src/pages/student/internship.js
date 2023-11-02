@@ -5,6 +5,7 @@ import InternshipTable from '../../components/table';
 import InternshipImage from '../../assets/internshipImage.svg';
 import CofounderImage from '../../assets/cofounderImage.svg';
 import JobImage from '../../assets/jobImage.svg';
+import ProjectImage from '../../assets/projectImage.svg'
 import { useNavigate, useLocation } from 'react-router-dom';
 import PopOver from '../../components/student/popOver';
 import moment from 'moment';
@@ -55,10 +56,15 @@ export default function Internship({ BASE_URL, studentDetails,setShowAlert,setAl
       setTypeImage(JobImage)
       setTypeDescription('Work in a fast paced enviourment and experience the thrill of a startup.')
     }
-    else {
+    else if (type === "Cofounder") {
       setTypeImage(CofounderImage)
       setTypeDescription('Wanted to be a cofounder meet the right people and kickstart your startup journey.')
     }
+    else {
+      setTypeImage(ProjectImage)
+      setTypeDescription('Learn your way up the ladder by appling to the right projects and finding right people on the way.')
+    }
+
     const requestOptions = {
       method: "GET",
       headers: {
