@@ -31,7 +31,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
         localStorage.userID = data1.userID
         navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn" } })
       }
-      else if (data.status === 401 || data.status == 404) {
+      else if (data.status === 401 || data.status === 404) {
         setAlertMessage("Wrong login credentials, please try again");
         setLoading(false)
         setAlertSeverity("error");
@@ -52,7 +52,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   const loginStudent = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (email.substring(email.length - 10, email.length) !== "iitd.ac.in") {
+    if (email.substring(email.length - 11, email.length) !== "@iitd.ac.in") {
       setAlertMessage("Please enter IIT Delhi email ID.");
       setAlertSeverity("info");
       setShowAlert(true);

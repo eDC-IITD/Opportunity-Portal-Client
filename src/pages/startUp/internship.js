@@ -67,7 +67,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       setTypeImage(JobImage)
       setTypeDescription('Need employee to work in a fast paced environment for your startup.')
     }
-    else if (type === 'Cofouonder') {
+    else if (type === 'Cofounder') {
       setTypeImage(CofounderImage)
       setTypeDescription('Need a right people as cofounder to kickstart your startup journey.')
     }
@@ -167,7 +167,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
   ];
 
   const addNew = () => {
-    if (startUpDetails.location === undefined) {
+    if (startUpDetails.sector === undefined) {
       setAlertMessage("Please complete account details before adding");
       setAlertSeverity("info");
       setShowAlert(true);

@@ -12,7 +12,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
     const [loading3, setLoading3] = useState(false);
     const [whyShouldWeHireYou, setWhyShouldWeHireYou] = useState("");
     const [jobDetails, setJobDetails] = useState([]);
-    const [jobStartUpDetails, setJobStartUpDetails] = useState(null);
+    const [jobStartUpDetails, setJobStartUpDetails] = useState({});
 
     const getStartUpDetails = async (startUpId) => {
         setLoading2(true);
@@ -45,9 +45,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
         setLoading(true);
         const requestOptions = {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
+            headers: {"Content-Type": "application/json",}
         }
         const url = `${BASE_URL}/api/student/jobs/${jobId}`;
         try {
@@ -157,6 +155,29 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                     }
                 </CardContent>
             </Card>
+            {((jobStartUpDetails.hrName !== undefined)||(jobStartUpDetails.hrEmail !== undefined)||(jobStartUpDetails.hrDesignation !== undefined))&&
+                <Card sx={{my : 2}}>
+                    <CardContent>
+                        <Typography variant="h5" sx={{ mb: 2 }}>HR/POC Details</Typography>
+
+                        <Grid container spacing={2}>
+                            
+                            {(jobStartUpDetails.hrName !== undefined)&&
+                                <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Name" placeholder='' fullWidth value={jobStartUpDetails.hrName} InputProps={{ disableUnderline: true, readOnly: true }} />
+                            </Grid>}
+                            {(jobStartUpDetails.hrEmail !== undefined) &&
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Personal Email" placeholder='' fullWidth value={jobStartUpDetails.hrEmail} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                            </Grid>}
+                            {(jobStartUpDetails.hrDesignation !== undefined) &&
+                            <Grid item xs={12} md={6}>
+                                <TextField variant="standard" label="Designation" placeholder='' fullWidth value={jobStartUpDetails.hrDesignation} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                            </Grid>}
+                        </Grid>
+                    </CardContent>
+                </Card>
+            }
             <Card sx={{ my: 2 }}>
                 <CardContent>
                     <Typography variant="h5" sx={{ mb: 2 }}>Founders</Typography>
@@ -173,11 +194,11 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                                                             <TextField variant="standard" label="Founder Name" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} InputProps={{ disableUnderline: true, readOnly: true }}/>
                                                         </Grid>
                                                         <Grid item xs={12} md={6}>
-                                                            <TextField variant="standard" label="Founder Bio" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.bio} InputProps={{ disableUnderline: true, readOnly: true }}/>
-                                                        </Grid>
-                                                        <Grid item xs={12} md={6}>
                                                             <TextField variant="standard" label="Founder LinkedIn" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.linkedIn || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
                                                         </Grid>                                                
+                                                        <Grid item xs={12}>
+                                                            <TextField variant="standard" label="Founder Bio" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.bio} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                                                        </Grid>
                                                     </Grid>
 
                                                 </CardContent>

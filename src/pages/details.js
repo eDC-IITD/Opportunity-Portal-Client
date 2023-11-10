@@ -181,14 +181,11 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                                             <TextField variant="standard" label="Founder Name" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} InputProps={{ disableUnderline: true, readOnly: true }}/>
                                                         </Grid>
                                                         <Grid item xs={12} md={6}>
+                                                            <TextField variant="standard" label="Founder LinkedIn" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.linkedIn || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                                                        </Grid>                                             
+                                                        <Grid item xs={12}>
                                                             <TextField variant="standard" label="Founder Bio" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.bio} InputProps={{ disableUnderline: true, readOnly: true }}/>
                                                         </Grid>
-                                                        <Grid item xs={12} md={6}>
-                                                            <TextField variant="standard" label="Founder LinkedIn" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.linkedIn || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
-                                                        </Grid>   
-                                                        <Grid item xs={12} md={6}>
-                                                            <TextField variant="standard" label="Founder Website" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.website || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
-                                                        </Grid>                                             
                                                     </Grid>
                                                 </CardContent>
                                             </Card>
@@ -276,7 +273,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
             }
             <Card sx={{my : 2}}>
                 <CardContent>
-                    <Typography variant="h5" sx={{ mb: 2 }}>HR Details</Typography>
+                    <Typography variant="h5" sx={{ mb: 2 }}>HR/POC Details</Typography>
                     {
                         (loading || loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
                             <Grid container spacing={2}>

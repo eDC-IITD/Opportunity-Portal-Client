@@ -12,7 +12,8 @@ export default function Index({ mode, setMode, startUpDetails, studentDetails })
     if (localStorage.adminCode !== undefined){
       navigate("../admin/dashboard", { state: { user: 'Admin' } })
     }
-    else if (studentDetails !== null) {
+    else 
+    if (studentDetails !== null) {
       navigate('../student/internship', { state: { type: 'Internship' } })
     }
     else if (startUpDetails !== null) {

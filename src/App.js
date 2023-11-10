@@ -165,6 +165,7 @@ export default function App() {
                                 <Route path="admin" element={<AdminIndex mode={mode} setMode={setMode}/>}>
                                     <Route path="" element = {<AdminSignInRedirect/>}/>
                                     <Route path="dashboard" element = {<AdminDashboard/>}/>
+                                    <Route path="details" element={<JobDetails BASE_URL={BASE_URL}  startUpDetails={null} />} />
                                 </Route>
 
                                 <Route path="*" element={<Error404/>} />
