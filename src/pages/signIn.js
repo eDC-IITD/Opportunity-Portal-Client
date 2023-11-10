@@ -10,7 +10,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const loginAdminJWT = async (e) => {
+  const loginAdmin = async (e) => {
     e.preventDefault()
     setLoading(true)
     const formData = { username: adminUsername, password: adminPassword }
@@ -19,7 +19,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify(formData),
     }
-    const url = `http://localhost:3000/auth/login`
+    const url = `${process.env.REACT_APP_ADMIN_URL}/auth/login`
     try {
       const data = await fetch(url, requestOptions)
       const data1 = await data.json()
@@ -31,25 +31,28 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
         localStorage.userID = data1.userID
         navigate("../admin/dashboard", { state: { user: "Admin", signInOrSignUp: "SignIn" } })
       }
-      else if (data.status === 401) {
-        setAlertMessage("Wrong code, please try again");
-        setAlertSeverity("info");
+      else if (data.status === 401 || data.status === 404) {
+        setAlertMessage("Wrong login credentials, please try again");
+        setLoading(false)
+        setAlertSeverity("error");
         setShowAlert(true);
       }
       else console.log(data);
     }
-  catch (error) {
-    console.log("nkxnkdx")
-    console.log(error)
+    catch (error) {
+      setAlertMessage("Wrong login credentials, please try again");
+      setAlertSeverity("error");
+      setShowAlert(true);
+      setLoading(false)
+    }
   }
-}
 
   
 
   const loginStudent = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (email.substring(email.length - 10, email.length) !== "iitd.ac.in") {
+    if (email.substring(email.length - 11, email.length) !== "@iitd.ac.in") {
       setAlertMessage("Please enter IIT Delhi email ID.");
       setAlertSeverity("info");
       setShowAlert(true);
@@ -132,7 +135,7 @@ export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAle
   if (user === "Admin") 
     return (
       <Container maxWidth="sm" sx={{ py: 2, mt: 9 }}>
-      <form onSubmit={loginAdminJWT}>
+      <form onSubmit={loginAdmin}>
         <Card>
           <CardHeader title={user + " Sign In"} subheader="Kindly enter the code" />
           <CardContent>

@@ -4,11 +4,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useNavigate } from 'react-router-dom';
 
+const sectorItems = ["SAAS", "Fin-Tech", "Ed-Tech", "Health-Tech", "E-Commerce", "Logistics", "Other"]
+
+
 export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
-    // const [location, setLocation] = useState(startUpDetails.location);
     const [website, setWebsite] = useState(startUpDetails.website);
     const [tracxn, setTracxn] = useState(startUpDetails.tracxn);
     const [social, setSocial] = useState(startUpDetails.social);
@@ -28,7 +30,6 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         e.preventDefault();
         setLoading(true);
         const formData = {
-            // location: location,
             linkedIn: linkedIn,
             website: website,
             tracxn: tracxn,
@@ -82,54 +83,26 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
 
     const updateFounderName = (value, id) => {
         const newState = founder.map(obj => {
-            if (obj.id === id) {
-                return { ...obj, name: value };
-            }
-            else {
-                return obj;
-            }
+            return (obj.id === id) ? { ...obj, name: value } : obj;
         });
         setFounder(newState);
     }
 
     const updateFounderBio = (value, id) => {
         const newState = founder.map(obj => {
-            if (obj.id === id) {
-                return { ...obj, bio: value };
-            }
-            else {
-                return obj;
-            }
+            return  (obj.id === id) ? { ...obj, bio: value } : obj;
         });
         setFounder(newState);
     }
     const updateFounderLinkedIn = (value, id) => {
         const newState = founder.map(obj => {
-            if (obj.id === id) {
-                return { ...obj, linkedIn: value };
-            }
-            else {
-                return obj;
-            }
+            return (obj.id === id) ? { ...obj, linkedIn: value } : obj
         });
         setFounder(newState);
     }
-    const updateFounderWebsite = (value, id) => {
-        const newState = founder.map(obj => {
-            if (obj.id === id) {
-                return { ...obj, website: value };
-            }
-            else {
-                return obj;
-            }
-        });
-        setFounder(newState);
-    }
-
+    
     useEffect(() => {
-        if (founder.length === 0) {
-            addFounder();
-        }
+        if (founder.length === 0) addFounder();
     }, [])
 
     return (
@@ -162,26 +135,10 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                                 <TextField variant="standard" label="Cruchbase" placeholder='https://www.crunchbase.com/' fullWidth value={cruchbase} onChange={(e) => { setCruchbase(e.target.value) }} />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <TextField variant="standard"
-                                    fullWidth
-                                    required
-                                    select
-                                    label="Sector"
-                                    value={sector}
-                                    onChange={(e) => { setSector(e.target.value) }}
-                                >
-                                    <MenuItem value={"SAAS"}>SAAS</MenuItem>
-                                    <MenuItem value={"Fin-Tech"}>Fin-Tech</MenuItem>
-                                    <MenuItem value={"Ed-Tech"}>Ed-Tech</MenuItem>
-                                    <MenuItem value={"Health-Tech"}>Health-Tech</MenuItem>
-                                    <MenuItem value={"E-Commerce"}>E-Commerce</MenuItem>
-                                    <MenuItem value={"Logistics"}>Logistics</MenuItem>
-                                    <MenuItem value={"Other"}>Other</MenuItem>
+                                <TextField variant="standard" fullWidth required select label="Sector" value={sector} onChange={(e) => { setSector(e.target.value) }}>
+                                    {sectorItems.map(item => <MenuItem value={item}>{item}</MenuItem>)}
                                 </TextField>
                             </Grid>
-                            {/* <Grid item xs={12} md={6}>
-                                <TextField variant="standard" label="Company Location" placeholder='Delhi' fullWidth value={location} onChange={(e) => { setLocation(e.target.value) }} required />
-                            </Grid> */}
                             <Grid item xs={12} md={6}>
                                 <TextField variant="standard" label="No Of Employees" placeholder='10' fullWidth value={noOfEmployees} onChange={(e) => { setNoOfEmployees(e.target.value) }} required />
                             </Grid>
@@ -211,16 +168,13 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                                         <CardContent sx={{ display: { xs: 'block', md: 'flex' }, gap: 2, alignItems: "end" }}>
                                             <Grid container spacing={2}>
                                                 <Grid item xs={12} md={6}>
-                                                    <TextField variant="standard" label="Founder Name" placeholder="Steve Jobs" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} onChange={(e) => { updateFounderName(e.target.value, value.id) }} required />
+                                                    <TextField variant="standard" label="Founder Name" placeholder="Steve Jobs" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} onChange={(e) => { updateFounderName(e.target.value, value.id) }} />
                                                 </Grid>
                                                 <Grid item xs={12} md={6}>
-                                                    <TextField variant="standard" label="Founder Bio" placeholder="Explain founder's professional and educational background." fullWidth multiline value={value.bio} onChange={(e) => { updateFounderBio(e.target.value, value.id) }} required />
+                                                    <TextField variant="standard" label="Founder LinkedIn" placeholder="linkedin.com/in/steve-jobs/" fullWidth multiline value={value.linkedIn} onChange={(e) => { updateFounderLinkedIn(e.target.value, value.id) }} />
                                                 </Grid>
-                                                <Grid item xs={12} md={6}>
-                                                    <TextField variant="standard" label="Founder LinkedIn" placeholder="linkedin.com/in/steve-jobs/" fullWidth multiline value={value.linkedIn} onChange={(e) => { updateFounderLinkedIn(e.target.value, value.id) }} required />
-                                                </Grid>
-                                                <Grid item xs={12} md={6}>
-                                                    <TextField variant="standard" label="Founder Website" placeholder="stevejobs.com" fullWidth multiline value={value.website} onChange={(e) => { updateFounderWebsite(e.target.value, value.id) }} required />
+                                                <Grid item xs={12}>
+                                                    <TextField variant="standard" label="Founder Bio" placeholder="Explain founder's professional and educational background." fullWidth multiline value={value.bio} onChange={(e) => { updateFounderBio(e.target.value, value.id) }} />
                                                 </Grid>
                                             </Grid>
                                         </CardContent>
@@ -233,7 +187,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                 </Card>
                 <Card sx={{my : 2}}>
                     <CardContent>
-                        <Typography variant="h5" sx={{ mb: 2 }}>HR Details</Typography>
+                        <Typography variant="h5" sx={{ mb: 2 }}>HR/POC Details</Typography>
                         <Grid container spacing={2}>
                             
                             <Grid item xs={12} md={6}>

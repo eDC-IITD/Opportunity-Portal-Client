@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import InternshipTable from '../../components/table';
 import InternshipImage from '../../assets/internshipImage.svg';
 import CofounderImage from '../../assets/cofounderImage.svg';
+import ProjectImgage from '../../assets/projectImage.svg'
 import JobImage from '../../assets/jobImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import moment from 'moment';
@@ -64,11 +65,15 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
     }
     else if (type === 'Job') {
       setTypeImage(JobImage)
-      setTypeDescription('Need employee to work in a fast paced enviourment for your startup.')
+      setTypeDescription('Need employee to work in a fast paced environment for your startup.')
     }
-    else {
+    else if (type === 'Cofounder') {
       setTypeImage(CofounderImage)
       setTypeDescription('Need a right people as cofounder to kickstart your startup journey.')
+    }
+    else {
+      setTypeImage(ProjectImgage)
+      setTypeDescription('Need the right freelancer for your work.')
     }
     const requestOptions = {
       method: "GET",
@@ -162,7 +167,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
   ];
 
   const addNew = () => {
-    if (startUpDetails.location === undefined) {
+    if (startUpDetails.sector === undefined) {
       setAlertMessage("Please complete account details before adding");
       setAlertSeverity("info");
       setShowAlert(true);

@@ -1,116 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, Container, Grid, Typography, Button, Box, CircularProgress } from '@mui/material';
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import React from 'react';
+import { Card, CardContent, Container, Grid, Typography, Box} from '@mui/material';
 import StartUpImage from '../assets/startUpImage.svg';
 import StudentImage from '../assets/studentImage.svg';
-import OpportunityTable from '../components/table';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
 
 export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
-  const [loading, setLoading] = useState(true);
-  const [opportunityTableRow, setOpportunityTableRow] = useState([]);
   const navigate = useNavigate();
-
-  const convertToTableRows = (jsonData) => {
-    const jsonDataArray = []
-    for (let i = 0; i < jsonData.length; i++) {
-      const oneJsonData = jsonData[i];
-      const convertedJsonData = {
-        id: i + 1,
-        company: oneJsonData.companyName,
-        designation: oneJsonData.designation,
-        type: oneJsonData.type,
-        stipend: oneJsonData.stipend,
-        deadline: oneJsonData.deadline,
-        details: oneJsonData._id,
-        apply: { jobId: oneJsonData._id, deadline: oneJsonData.deadline }
-      }
-      jsonDataArray.push(convertedJsonData);
-    }
-    setOpportunityTableRow(jsonDataArray);
-  }
-
-  const getJobs = async () => {
-    setLoading(true);
-    const requestOptions = {
-      method: "GET",
-      headers: {"Content-Type": "application/json",},
-    }
-    const url = `${BASE_URL}/api/student/jobs`;
-    try {
-      await fetch(url, requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === 200) {
-            convertToTableRows(data.jobs);
-            setLoading(false);
-          }
-          else {
-            console.log(data)
-          }
-        })
-    }
-    catch (error) {
-      console.log(error)
-    }
-  }
-
-  const opportunityTableColumn = [
-    {
-      field: "company",
-      headerName: "Company",
-      flex: 1
-    },
-    {
-      field: 'designation',
-      headerName: 'Designation',
-      flex: 1
-    },
-    {
-      field: 'type',
-      headerName: 'Type',
-      flex: 1
-    },
-    {
-      field: 'stipend',
-      headerName: 'Stipend',
-      flex: 1
-    },
-    {
-      field: 'deadline',
-      headerName: 'Deadline',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return (value < moment().format('YYYY-MM-DDThh:mm') ? "Deadline passed" : moment(value).format('MMMM Do, h:mm a'))
-      }
-    },
-    {
-      field: 'details',
-      headerName: 'Details',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return <Button size="small" onClick={() => { navigate('details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
-      }
-    },
-    {
-      field: 'apply',
-      headerName: 'Apply',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" disabled={value.deadline < moment().format('YYYY-MM-DDThh:mm') ? true : false} onClick={() => {
-          setAlertMessage("Please sign up to apply.");
-          setAlertSeverity("info");
-          setShowAlert(true);
-        }}>Apply</Button>
-      }
-    },
-  ];
-
-  useEffect(() => {
-    getJobs();
-  }, [])
 
   return (
     <Container sx={{ py: 2, mt: 9 }}>
@@ -126,7 +21,7 @@ export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessa
                   <Box sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", my: 2 }} >
                     <img src={StartUpImage} alt="StartUp" loading="lazy" width={120} height={120} />
                   </Box>
-                  <Typography>Are you a founder or a HR looking for Interns or Employee for your startup.</Typography>
+                  <Typography>Are you a founder or a HR looking for Interns, Employees or a Co-founder for your startup.</Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -144,25 +39,6 @@ export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessa
           </Grid>
         </CardContent>
       </Card>
-
-      <Card sx={{ mt: 2 }}>
-        <CardContent>
-          <Box sx={{ mb: 2, display: { xs: 'block', md: 'flex' }, alignItems: "center", justifyContent: "space-between" }}>
-            <Typography variant="h5" >Opportunities</Typography>
-            <Button variant="contained" sx={{ width: 120, height: 40, mt: { xs: 2, md: 0 } }} onClick={() => {
-              setAlertMessage("Please sign up to post opportunity.");
-              setAlertSeverity("info");
-              setShowAlert(true);
-            }}>
-              <AddRoundedIcon />
-            </Button>
-          </Box>
-          {
-            loading ? <Box sx={{ height: 370.5, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> : <OpportunityTable column={opportunityTableColumn} row={opportunityTableRow} />
-          }
-        </CardContent>
-      </Card>
-
     </Container>
   )
 }

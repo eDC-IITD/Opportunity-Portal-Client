@@ -78,7 +78,11 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
             setShowAlert(true);
           }
           else {
-            console.log(data)
+            setLoading(false)
+            setAlertMessage(data)
+            setAlertSeverity("error")
+            setShowAlert(true)
+            // console.log(data)
           }
         })
     }

@@ -12,7 +12,7 @@ export default function SignUp({ BASE_URL, setShowAlert, setAlertMessage, setAle
   const registerStudent = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (email.substring(email.length - 10, email.length) !== "iitd.ac.in") {
+    if (email.substring(email.length - 11, email.length) !== "@iitd.ac.in") {
       setAlertMessage("Please enter IIT Delhi email ID.");
       setAlertSeverity("info");
       setShowAlert(true);

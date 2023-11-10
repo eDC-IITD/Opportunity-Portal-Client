@@ -19,7 +19,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                 headers: { "Content-Type": "application/json", },
                 body: JSON.stringify({ code: adminCode })
             }
-            const url=`http://localhost:3000/auth`
+            const url=`${process.env.REACT_APP_ADMIN_URL}/auth`
             try {
                 await fetch(url, requestOptions)
                     .then((response) => response.json())
@@ -181,14 +181,11 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                                             <TextField variant="standard" label="Founder Name" sx={{ mb: { xs: 2, md: 0 } }} fullWidth value={value.name} InputProps={{ disableUnderline: true, readOnly: true }}/>
                                                         </Grid>
                                                         <Grid item xs={12} md={6}>
+                                                            <TextField variant="standard" label="Founder LinkedIn" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.linkedIn || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
+                                                        </Grid>                                             
+                                                        <Grid item xs={12}>
                                                             <TextField variant="standard" label="Founder Bio" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.bio} InputProps={{ disableUnderline: true, readOnly: true }}/>
                                                         </Grid>
-                                                        <Grid item xs={12} md={6}>
-                                                            <TextField variant="standard" label="Founder LinkedIn" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.linkedIn || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
-                                                        </Grid>   
-                                                        <Grid item xs={12} md={6}>
-                                                            <TextField variant="standard" label="Founder Website" sx={{ mb: { xs: 2, md: 0 } }} fullWidth multiline value={value.website || "-"} InputProps={{ disableUnderline: true, readOnly: true }}/>
-                                                        </Grid>                                             
                                                     </Grid>
                                                 </CardContent>
                                             </Card>
@@ -218,7 +215,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                             <TextField variant="standard" label="Type" fullWidth value={jobDetails.type} InputProps={{ disableUnderline: true, readOnly: true }} />
                                         </Grid>
                                 }
-                                {(jobDetails.type !== "Cofounder")&&(jobDetails.type !== "Projects")&&<>
+                                {(jobDetails.type !== "Cofounder")&&(jobDetails.type !== "Project")&&<>
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Stipend" fullWidth value={jobDetails.stipend} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
@@ -232,7 +229,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                         <TextField variant="standard" label="Job Location" multiline fullWidth value={jobDetails.jobLocation} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
                                 </>}
-                                {(jobDetails.type !== "Projects") &&
+                                {(jobDetails.type !== "Project") &&
                                 <Grid item xs={12} md={6}>
                                     <TextField variant="standard" label="Responsibilities" multiline fullWidth value={jobDetails.responsibilities} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>}
@@ -241,7 +238,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                         <TextField variant="standard" label="Part/FullTime" multiline fullWidth value={jobDetails.hoursType || "PartTime"} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
                                 }
-                                {(jobDetails.type === "Projects") && <>
+                                {(jobDetails.type === "Project") && <>
                                     <Grid item xs={12} md={6}>
                                         <TextField variant="standard" label="Skills Required" multiline fullWidth value={jobDetails.skillsRequired} InputProps={{ disableUnderline: true, readOnly: true }} />
                                     </Grid>
@@ -276,7 +273,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
             }
             <Card sx={{my : 2}}>
                 <CardContent>
-                    <Typography variant="h5" sx={{ mb: 2 }}>HR Details</Typography>
+                    <Typography variant="h5" sx={{ mb: 2 }}>HR/POC Details</Typography>
                     {
                         (loading || loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
                             <Grid container spacing={2}>
