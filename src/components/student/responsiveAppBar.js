@@ -20,22 +20,22 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const pages = [
   {
-    page: "Internship",
-    route: "internship"
+    page: 'Internship',
+    route: 'internship',
   },
   {
-    page: "Job",
-    route: "internship"
+    page: 'Job',
+    route: 'internship',
   },
   {
-    page: "Cofounder",
-    route: "internship"
+    page: 'Cofounder',
+    route: 'internship',
   },
   {
-    page: "Project",
-    route: "internship"
-  }
-]
+    page: 'Project',
+    route: 'internship',
+  },
+];
 
 function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -58,53 +58,62 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
   const moveToNavPage = (value) => {
     handleCloseNavMenu();
     navigate(value.route, { state: { type: value.page } });
-  }
+  };
 
   const moveToAccountPage = () => {
     handleCloseUserMenu();
-    navigate("account");
-  }
+    navigate('account');
+  };
 
   const logOut = () => {
     handleCloseUserMenu();
     setStudentDetails(null);
-    localStorage.removeItem("localStorageStudentId");
-    localStorage.removeItem("localStorageStudentToken");
-    navigate("/");
+    localStorage.removeItem('localStorageStudentId');
+    localStorage.removeItem('localStorageStudentToken');
+    navigate('/');
   };
 
   const changeMode = () => {
     if (mode === 'dark') {
       setMode('light');
       localStorage.setItem('colorMode', 'light');
-    }
-    else {
+    } else {
       setMode('dark');
       localStorage.setItem('colorMode', 'dark');
     }
-  }
+  };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position='fixed'>
       <Container>
         <Toolbar disableGutters>
-          <Box sx={{ height: "100%", alignItems: "center", display: { xs: 'none', md: 'flex' }, mr: 2 }} >
-            <img src={eDCLogo} alt="eDCLogo" loading="lazy" width={60} height={60} style={{ cursor: "pointer" }} onClick={() => { navigate('internship', { state: { type: 'Internship' } }) }} />
+          <Box sx={{ height: '100%', alignItems: 'center', display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+            <img
+              src={eDCLogo}
+              alt='eDCLogo'
+              loading='lazy'
+              width={60}
+              height={60}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                navigate('internship', { state: { type: 'Internship' } });
+              }}
+            />
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color='inherit'
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -123,31 +132,41 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
             >
               {pages.map((value, key) => (
                 <MenuItem onClick={() => moveToNavPage(value)} key={key}>
-                  <Typography textAlign="center">{value.page}</Typography>
+                  <Typography textAlign='center'>{value.page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Box sx={{ height: "100%", alignItems: "center", display: { xs: 'flex', md: 'none' }, flexGrow: 1 }} >
-            <img src={eDCLogo} alt="eDCLogo" loading="lazy" width={60} height={60} style={{ cursor: "pointer" }} onClick={() => { navigate('internship', { state: { type: 'Internship' } }) }} />
+          <Box sx={{ height: '100%', alignItems: 'center', display: { xs: 'flex', md: 'none' }, flexGrow: 1 }}>
+            <img
+              src={eDCLogo}
+              alt='eDCLogo'
+              loading='lazy'
+              width={60}
+              height={60}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                navigate('internship', { state: { type: 'Internship' } });
+              }}
+            />
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((value, key) => (
-              <Button onClick={() => moveToNavPage(value)} sx={{ my: 2, color: "white", display: 'block' }} key={key}>
+              <Button onClick={() => moveToNavPage(value)} sx={{ my: 2, color: 'white', display: 'block' }} key={key}>
                 {value.page}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={studentName} src="#" />
+                <Avatar alt={studentName} src='#' />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -162,15 +181,26 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
               onClose={handleCloseUserMenu}
             >
               <MenuItem onClick={moveToAccountPage}>
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><PersonIcon sx={{ mr: 1 }} /> {"Account"}</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <PersonIcon sx={{ mr: 1 }} /> {'Account'}
+                </Box>
               </MenuItem>
               <MenuItem onClick={logOut}>
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><LogoutIcon sx={{ mr: 1 }} /> {"Logout"}</Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <LogoutIcon sx={{ mr: 1 }} /> {'Logout'}
+                </Box>
               </MenuItem>
               <MenuItem onClick={changeMode}>
-                {
-                  mode === "dark" ? <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><WbSunnyIcon sx={{ mr: 1 }} /> {"Light"}</Box> : <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><Brightness2Icon sx={{ mr: 1 }} />{"Dark"}</Box>
-                }
+                {mode === 'dark' ? (
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <WbSunnyIcon sx={{ mr: 1 }} /> {'Light'}
+                  </Box>
+                ) : (
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Brightness2Icon sx={{ mr: 1 }} />
+                    {'Dark'}
+                  </Box>
+                )}
               </MenuItem>
             </Menu>
           </Box>
