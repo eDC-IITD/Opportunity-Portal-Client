@@ -71,7 +71,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
         e.preventDefault();
         setLoading3(true);
         const formData = {
-            studentId: studentDetails._id,
+            studentId: studentDetails.id,
             name: studentDetails.name,
             email: studentDetails.email,
             course: studentDetails.course,

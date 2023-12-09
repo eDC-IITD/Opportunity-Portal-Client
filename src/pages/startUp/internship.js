@@ -31,9 +31,9 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
         type: oneJsonData.type,
         stipend: oneJsonData.stipend,
         deadline: oneJsonData.deadline,
-        details: oneJsonData._id,
-        update: oneJsonData._id,
-        studentsApplied: oneJsonData._id,
+        details: oneJsonData.id,
+        update: oneJsonData.id,
+        studentsApplied: oneJsonData.id,
         approval : oneJsonData.approval || "pending"
       }
       jsonDataArray.push(convertedJsonData);
@@ -82,7 +82,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
         "Authorization": localStorage.localStorageStartUpToken
       },
     }
-    const url = `${BASE_URL}/api/startUp/jobs?startUpId=${startUpDetails._id}&type=${type}`;
+    const url = `${BASE_URL}/api/startUp/jobs?startUpId=${startUpDetails.id}&type=${type}`;
     try {
       await fetch(url, requestOptions)
         .then((response) => response.json())
@@ -161,7 +161,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       headerName: 'Update',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" onClick={() => { navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails._id, jobId: value } }) }}><BorderColorRoundedIcon /></Button>
+        return <Button size="small" onClick={() => { navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails.id, jobId: value } }) }}><BorderColorRoundedIcon /></Button>
       }
     },
   ];
@@ -173,7 +173,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       setShowAlert(true);
     }
     else {
-      navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails._id } })
+      navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails.id } })
     }
   }
 

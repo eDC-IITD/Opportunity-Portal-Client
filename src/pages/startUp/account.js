@@ -50,7 +50,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         },
             body: JSON.stringify(formData)
         }
-        const url = `${BASE_URL}/api/startUp/register/${startUpDetails._id}`;
+        const url = `${BASE_URL}/api/startUp/register/${startUpDetails.id}`;
         try {
             await fetch(url, requestOptions)
                 .then((response) => response.json())

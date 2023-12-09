@@ -34,6 +34,7 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL_PRODUCTION || process.env.REA
 const timer = 3000;
 
 export default function App() {
+    // localStorage.clear()
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
     const [mode, setMode] = useState('light');
     const [startUpDetails, setStartUpDetails] = useState(null);
