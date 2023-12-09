@@ -100,11 +100,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
         });
         setFounder(newState);
     }
-    
     useEffect(() => {
         if (founder.length === 0) addFounder();
     }, [])
-
     return (
         <Container sx={{ py: 2, mt: 9 }}>
             <Typography variant="h5" sx={{ mb: 2 }}>Account Details</Typography>
