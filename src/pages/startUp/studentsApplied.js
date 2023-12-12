@@ -59,7 +59,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
                 whyShouldWeHireYou: x.whyShouldWeHireYou,
                 resumeLink: oneJsonData.resumeLink,
                 linkedIn: oneJsonData.linkedIn,
-                statusUpdate: { status: oneJsonData.status, studentId: x.studentId },
+                statusUpdate: { status: x.status, studentId: x.studentId },
             }
             jsonDataArray.push(convertedJsonData);
         }
