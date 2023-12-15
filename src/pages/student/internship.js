@@ -29,7 +29,6 @@ export default function Internship({ BASE_URL, studentDetails,setShowAlert,setAl
 
   const convertToTableRows = (jsonData) => {
     const jsonDataArray = []
-    console.log(jsonData)
     for (let i = 0; i < jsonData.length; i++) {
       const oneJsonData = jsonData[i];
       const convertedJsonData = {

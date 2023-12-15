@@ -59,6 +59,12 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                         setShowAlert(true);
                         navigate(-1);
                     }
+                    else if(data.status===400){
+                        setLoading(false);
+                        setAlertMessage(data.message);
+                        setAlertSeverity("error");
+                        setShowAlert(true);
+                    }
                     else {
                         console.log(data);
                     }

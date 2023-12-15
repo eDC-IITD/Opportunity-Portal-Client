@@ -102,6 +102,12 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                         setAlertSeverity("success");
                         setShowAlert(true);
                         navigate(-1);
+                    }                    
+                    else if(data.status===401){
+                        setLoading3(false);
+                        setAlertMessage(data.message);
+                        setAlertSeverity("error");
+                        setShowAlert(true);
                     }
                     else {
                         console.log(data);

@@ -31,7 +31,7 @@ export default function BasicPopover({ BASE_URL, status, studentId, jobId, setSh
     const [loading, setLoading] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [statusStudent, setStatusStudent] = useState(status);
-
+    const [statu,setStatus]=useState(status);
     const handleChange = (event) => {
         setStatusStudent(event.target.value);
     };
@@ -72,6 +72,7 @@ export default function BasicPopover({ BASE_URL, status, studentId, jobId, setSh
                         setAlertMessage("Status updated successfully.");
                         setAlertSeverity("success");
                         setShowAlert(true);
+                        setStatus(statusStudent);
                         handleClose();
                     }
                     else {
@@ -98,8 +99,8 @@ export default function BasicPopover({ BASE_URL, status, studentId, jobId, setSh
 
     return (
         <div>
-            <Button aria-describedby={id} sx={{ width: 160, pl:3 }} variant="outlined" size="small" onClick={handleClick} color={statusButtonColor(statusStudent)}>
-                {statusStudent} <ArrowDropDownRoundedIcon/>
+            <Button aria-describedby={id} sx={{ width: 160, pl:3 }} variant="outlined" size="small" onClick={handleClick} color={statusButtonColor(statu)}>
+                {statu} <ArrowDropDownRoundedIcon/>
             </Button>
             <Popover
                 id={id}

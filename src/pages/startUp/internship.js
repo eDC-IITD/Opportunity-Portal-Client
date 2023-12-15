@@ -136,7 +136,6 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       headerName: 'Approval Status',
       flex: 1,
       renderCell: ({ value }) => {
-        console.log(value)
         return <Typography color={approvalStatusTypoColor(value)}>{value}</Typography>
       }
     },
