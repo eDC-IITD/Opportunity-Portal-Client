@@ -71,7 +71,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
         e.preventDefault();
         setLoading3(true);
         const formData = {
-            studentId: studentDetails._id,
+            studentId: studentDetails.id,
             name: studentDetails.name,
             email: studentDetails.email,
             course: studentDetails.course,
@@ -102,6 +102,12 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                         setAlertSeverity("success");
                         setShowAlert(true);
                         navigate(-1);
+                    }                    
+                    else if(data.status===401){
+                        setLoading3(false);
+                        setAlertMessage(data.message);
+                        setAlertSeverity("error");
+                        setShowAlert(true);
                     }
                     else {
                         console.log(data);

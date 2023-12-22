@@ -62,7 +62,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 200) {
-            localStorage.setItem('localStorageStartUpId', data.startUpDetails._id);
+            localStorage.setItem('localStorageStartUpId', data.startUpDetails.id);
             localStorage.setItem('localStorageStartUpToken', data.token);
             setStartUpDetails(data.startUpDetails);
             setLoading(false);
@@ -111,7 +111,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 200) {
-            localStorage.setItem('localStorageStartUpId', data.startUpDetails._id);
+            localStorage.setItem('localStorageStartUpId', data.startUpDetails.id);
             localStorage.setItem('localStorageStartUpToken', data.token);
             setStartUpDetails(data.startUpDetails);
             setLoading(false);
@@ -156,7 +156,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 200) {
-            localStorage.setItem('localStorageStudentId', data.studentDetails._id);
+            localStorage.setItem('localStorageStudentId', data.studentDetails.id);
             localStorage.setItem('localStorageStudentToken', data.token);
             setStudentDetails(data.studentDetails);
             setLoading(false);
@@ -201,7 +201,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 200) {
-            localStorage.setItem('localStorageStudentId', data.studentDetails._id);
+            localStorage.setItem('localStorageStudentId', data.studentDetails.id);
             localStorage.setItem('localStorageStudentToken', data.token);
             setStudentDetails(data.studentDetails);
             setLoading(false);

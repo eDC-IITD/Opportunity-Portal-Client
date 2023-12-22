@@ -46,7 +46,8 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
     const convertToTableRows = (studentsApplied) => {
         const jsonDataArray = []
         for (let i = 0; i < studentsApplied.length; i++) {
-            const oneJsonData = studentsApplied[i];
+            const oneJsonData = studentsApplied[i].student;
+            const x=studentsApplied[i];
             const convertedJsonData = {
                 id: i + 1,
                 name: oneJsonData.name,
@@ -55,10 +56,10 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
                 department: oneJsonData.department,
                 year: oneJsonData.year,
                 cgpa: oneJsonData.cgpa,
-                whyShouldWeHireYou: oneJsonData.whyShouldWeHireYou,
+                whyShouldWeHireYou: x.whyShouldWeHireYou,
                 resumeLink: oneJsonData.resumeLink,
                 linkedIn: oneJsonData.linkedIn,
-                statusUpdate: { status: oneJsonData.status, studentId: oneJsonData.studentId },
+                statusUpdate: { status: x.status, studentId: x.studentId },
             }
             jsonDataArray.push(convertedJsonData);
         }

@@ -35,7 +35,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
       },
       body: JSON.stringify(formData)
     }
-    const url = `${BASE_URL}/api/student/register/${studentDetails._id}`;
+    const url = `${BASE_URL}/api/student/register/${studentDetails.id}`;
     try {
       await fetch(url, requestOptions)
         .then((response) => response.json())

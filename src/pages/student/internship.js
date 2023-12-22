@@ -20,7 +20,7 @@ export default function Internship({ BASE_URL, studentDetails,setShowAlert,setAl
 
   const checkStatus = (studentsApplied) => {
     for (let i = 0; i < studentsApplied.length; i++) {
-      if (studentsApplied[i].studentId === studentDetails._id) {
+      if (studentsApplied[i].studentId === studentDetails.id) {
         return studentsApplied[i].status;
       }
     }
@@ -38,8 +38,8 @@ export default function Internship({ BASE_URL, studentDetails,setShowAlert,setAl
         stipend: oneJsonData.stipend,
         deadline:oneJsonData.deadline,
         status: checkStatus(oneJsonData.studentsApplied),
-        details: oneJsonData._id,
-        apply: { jobId: oneJsonData._id, status: checkStatus(oneJsonData.studentsApplied),deadline:oneJsonData.deadline },
+        details: oneJsonData.id,
+        apply: { jobId: oneJsonData.id, status: checkStatus(oneJsonData.studentsApplied),deadline:oneJsonData.deadline },
       }
       jsonDataArray.push(convertedJsonData);
     }
