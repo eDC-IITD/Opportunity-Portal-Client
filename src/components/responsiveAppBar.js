@@ -14,28 +14,51 @@ export default function ResponsiveAppBar({ mode, setMode }) {
     if (mode === 'dark') {
       setMode('light');
       localStorage.setItem('colorMode', 'light');
-    }
-    else {
+    } else {
       setMode('dark');
       localStorage.setItem('colorMode', 'dark');
     }
-  }
+  };
 
   return (
     <AppBar position="fixed">
       <Container>
         <Toolbar disableGutters>
-          <Box sx={{ height: "100%", display: "flex", justifyContent: "start", alignItems: "center", flexGrow: 1 }} >
-            <img src={eDCLogo} alt="eDCLogo" loading="lazy" width={60} height={60} style={{ cursor: "pointer" }} onClick={() => { navigate('/') }} />
+          <Box
+            sx={{
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'start',
+              alignItems: 'center',
+              flexGrow: 1,
+            }}
+          >
+            <img
+              src={eDCLogo}
+              alt="eDCLogo"
+              loading="lazy"
+              width={60}
+              height={60}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                navigate('/');
+              }}
+            />
           </Box>
           <Box color="inherit" onClick={() => changeMode()}>
-            {
-              mode === "dark" ? <Button sx={{ color: "white" }}><WbSunnyIcon sx={{ mr: 1 }} /> {"Light"}</Button> : <Button sx={{ color: "white" }}><Brightness2Icon sx={{ mr: 1 }} />{"Dark"}</Button>
-            }
+            {mode === 'dark' ? (
+              <Button sx={{ color: 'white' }}>
+                <WbSunnyIcon sx={{ mr: 1 }} /> {'Light'}
+              </Button>
+            ) : (
+              <Button sx={{ color: 'white' }}>
+                <Brightness2Icon sx={{ mr: 1 }} />
+                {'Dark'}
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-
