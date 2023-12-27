@@ -27,6 +27,7 @@ export default function AdminDashboard({ BASE_URL, studentDetails,setShowAlert,s
         update: oneJsonData.id,
         studentsApplied: oneJsonData.id,
         approval : oneJsonData.approval|| "pending",
+        notifiedStatus : oneJsonData.notifiedStatus,
       }
       jsonDataArray.push(convertedJsonData);
     }

@@ -12,11 +12,14 @@ import Select from '@mui/material/Select';
 import { LoadingButton } from '@mui/lab'
 import { useState } from 'react';
 
-const putApprovalStatus = async (id, approval) => {
-  const formData = {
+const putApprovalStatus = async (id, approval,notify=null) => {
+  var formData = {
     code : localStorage.adminCode,
     approval : approval,
     userID : localStorage.userID
+  }
+  if(notify!==null){
+    formData={...formData,notifiedStatus:notify}
   }
   const requestOptions = {
     method : "PUT", 
@@ -46,13 +49,15 @@ export default function ConfirmApprovalDialogBox({row, setShowAlert, setAlertMes
   const [open, setOpen] = useState(false);
   const [approval, setApproval] = useState(row.approval);
   const [fixedApproval, setFixedApproval] = useState(row.approval)
-
+  const [notify, setNotify] = useState("tobenotified")
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false)
     setApproval(row.approval)
   }
-
+  const handleNotify = (event)=>{
+    setNotify(event.target.value)
+  }
   const handleApprovalChange = (event) => {
     setApproval(event.target.value)
   };
@@ -60,7 +65,7 @@ export default function ConfirmApprovalDialogBox({row, setShowAlert, setAlertMes
 
   const handleConfirm = (event) => {
     setOpen(false);
-    putApprovalStatus(jobDbId, approval)
+    putApprovalStatus(jobDbId, approval,row.notifiedStatus==="tobedecided"||row.notifiedStatus==="tobenotified"?notify:null)
     .then((isSuccessful) => {
       if (isSuccessful) setFixedApproval(approval)
       else console.log("error")
@@ -101,7 +106,16 @@ export default function ConfirmApprovalDialogBox({row, setShowAlert, setAlertMes
                 <MenuItem value="approved">Approved</MenuItem>
                 <MenuItem value="disapproved">Disapproved</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl>{row.notifiedStatus==="tobedecided"||row.notifiedStatus==="tobenotified"?
+            <FormControl sx={{ mt: 2, minWidth: 120 }}>
+              <InputLabel htmlFor="notify">Notification</InputLabel>
+              <Select autoFocus value={notify} onChange={handleNotify} label="notify"
+                inputProps={{name: 'notify', id: 'notify',}}
+              >
+                <MenuItem value="tobenotified">Notify the user</MenuItem>
+                <MenuItem value="rejected">Do NOT Notify</MenuItem>
+              </Select>
+            </FormControl>:null}
           </Box>
         </DialogContent>
         <DialogActions>

@@ -1,4 +1,4 @@
-import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, MenuItem } from '@mui/material';
+import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, MenuItem, Checkbox, FormControlLabel } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +14,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
   const [cgpa, setCgpa] = useState(studentDetails.cgpa);
   const [resumeLink, setResumeLink] = useState(studentDetails.resumeLink);
   const [linkedIn, setLinkedIn] = useState(studentDetails.linkedIn);
+  const [applyForNotifications, setApplyForNotifications] = useState(true);
   const updateOrSave = (studentDetails.resumeLink === "" || studentDetails.resumeLink === undefined) ? "Save" : "Update";
 
   const updateStudentAccount = async (e) => {
@@ -25,7 +26,8 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
       year: year,
       cgpa: cgpa,
       resumeLink: resumeLink,
-      linkedIn: linkedIn
+      linkedIn: linkedIn,
+      notificationStatus: applyForNotifications
     }
     const requestOptions = {
       method: "PUT",
@@ -177,6 +179,18 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
         <Card>
           <CardContent>
             <Typography variant="h5" sx={{ mb: 2 }}>{updateOrSave} Account</Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={applyForNotifications}
+                  onChange={(e) => setApplyForNotifications(e.target.checked)}
+                  name="applyForNotifications"
+                  color="primary"
+                />
+              }
+              label="Receive notifications? Check here for new upcomings and can always be signed off using this page."
+            />
+            <br />
             <Button variant="contained" type="submit" sx={{ width: 120, height: 40 }}>
               {
                 loading ? <CircularProgress sx={{ color: "white" }} size={25} /> : <Typography>{updateOrSave}</Typography>
