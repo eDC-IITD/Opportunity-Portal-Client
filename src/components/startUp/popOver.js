@@ -27,15 +27,7 @@ const statusArray = [
   },
 ];
 
-export default function BasicPopover({
-  BASE_URL,
-  status,
-  studentId,
-  jobId,
-  setShowAlert,
-  setAlertMessage,
-  setAlertSeverity,
-}) {
+export default function BasicPopover({ BASE_URL, status, studentId, jobId, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const [loading, setLoading] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [statusStudent, setStatusStudent] = useState(status);
@@ -103,14 +95,7 @@ export default function BasicPopover({
 
   return (
     <div>
-      <Button
-        aria-describedby={id}
-        sx={{ width: 160, pl: 3 }}
-        variant="outlined"
-        size="small"
-        onClick={handleClick}
-        color={statusButtonColor(statu)}
-      >
+      <Button aria-describedby={id} sx={{ width: 160, pl: 3 }} variant="outlined" size="small" onClick={handleClick} color={statusButtonColor(statu)}>
         {statu} <ArrowDropDownRoundedIcon />
       </Button>
       <Popover

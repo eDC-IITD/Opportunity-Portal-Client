@@ -1,25 +1,8 @@
-import {
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  TextField,
-  Grid,
-  Button,
-  CircularProgress,
-  MenuItem,
-} from '@mui/material';
+import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Account({
-  BASE_URL,
-  studentDetails,
-  setStudentDetails,
-  setShowAlert,
-  setAlertMessage,
-  setAlertSeverity,
-}) {
+export default function Account({ BASE_URL, studentDetails, setStudentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const name = studentDetails.name;
@@ -83,22 +66,10 @@ export default function Account({
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Name"
-                  fullWidth
-                  value={name}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
+                <TextField variant="standard" label="Name" fullWidth value={name} InputProps={{ disableUnderline: true, readOnly: true }} />
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Email"
-                  fullWidth
-                  value={email}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
+                <TextField variant="standard" label="Email" fullWidth value={email} InputProps={{ disableUnderline: true, readOnly: true }} />
               </Grid>
             </Grid>
           </CardContent>
@@ -163,9 +134,7 @@ export default function Account({
                   }}
                 >
                   <MenuItem value={'Applied Mechanics'}>Applied Mechanics</MenuItem>
-                  <MenuItem value={'Biochemical Engineering and Biotechnology'}>
-                    Biochemical Engineering and Biotechnology
-                  </MenuItem>
+                  <MenuItem value={'Biochemical Engineering and Biotechnology'}>Biochemical Engineering and Biotechnology</MenuItem>
                   <MenuItem value={'Chemical Engineering'}>Chemical Engineering</MenuItem>
                   <MenuItem value={'Chemistry'}>Chemistry</MenuItem>
                   <MenuItem value={'Civil Engineering'}>Civil Engineering</MenuItem>
@@ -232,9 +201,7 @@ export default function Account({
                   }}
                   required
                 />
-                <Typography variant="caption">
-                  Please make sure that the link to your resume is set to public
-                </Typography>
+                <Typography variant="caption">Please make sure that the link to your resume is set to public</Typography>
               </Grid>
             </Grid>
           </CardContent>
@@ -245,11 +212,7 @@ export default function Account({
               {updateOrSave} Account
             </Typography>
             <Button variant="contained" type="submit" sx={{ width: 120, height: 40 }}>
-              {loading ? (
-                <CircularProgress sx={{ color: 'white' }} size={25} />
-              ) : (
-                <Typography>{updateOrSave}</Typography>
-              )}
+              {loading ? <CircularProgress sx={{ color: 'white' }} size={25} /> : <Typography>{updateOrSave}</Typography>}
             </Button>
           </CardContent>
         </Card>

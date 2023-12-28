@@ -4,7 +4,7 @@
   "quoteProps": "as-needed",
   "jsxSingleQuote": false,
   "trailingComma": "all",
-  "printWidth": 120,
+  "printWidth": 150,
   "tabWidth": 2,
   "useTabs": false,
   "avoidEscape": true

@@ -1,14 +1,4 @@
-import {
-  CardContent,
-  Container,
-  Typography,
-  Card,
-  Button,
-  Box,
-  CircularProgress,
-  Modal,
-  CardActions,
-} from '@mui/material';
+import { CardContent, Container, Typography, Card, Button, Box, CircularProgress, Modal, CardActions } from '@mui/material';
 import LibraryBooksRoundedIcon from '@mui/icons-material/LibraryBooksRounded';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import StudentAppliedTable from '../../components/table';

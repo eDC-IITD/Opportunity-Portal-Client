@@ -48,9 +48,7 @@ export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessa
                   >
                     <img src={StartUpImage} alt="StartUp" loading="lazy" width={120} height={120} />
                   </Box>
-                  <Typography>
-                    Are you a founder or a HR looking for Interns, Employees or a Co-founder for your startup.
-                  </Typography>
+                  <Typography>Are you a founder or a HR looking for Interns, Employees or a Co-founder for your startup.</Typography>
                 </CardContent>
               </Card>
             </Grid>

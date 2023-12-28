@@ -1,6 +1,6 @@
-import { Card, CardContent, Container, Grid, Typography, TextField, Box, CircularProgress } from '@mui/material';
+import { Card, CardContent, Container, Grid, Typography, TextField, Box, CircularProgress, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { openLink } from '../utils.js';
 
@@ -11,6 +11,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
   const [jobDetails, setJobDetails] = useState([]);
   const [jobStartUpDetails, setJobStartUpDetails] = useState(startUpDetails);
   const [isadmin, setisadmin] = useState(false);
+  const navigate = useNavigate();
   const checkadmin = async () => {
     const adminCode = localStorage.getItem('adminCode');
     if (adminCode) {
@@ -621,6 +622,32 @@ export default function Details({ BASE_URL, startUpDetails }) {
           )}
         </CardContent>
       </Card>
+      {startUpDetails !== null && (
+        <Card sx={{ my: 2 }}>
+          <CardContent>
+            <Typography variant="h5" sx={{ mb: 2 }}>
+              Edit Details
+            </Typography>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ width: 180, height: 60 }}
+              onClick={() => {
+                navigate('../addNew', {
+                  state: {
+                    jobId: jobId,
+                    type: jobDetails.type,
+                    companyName: startUpDetails.companyName,
+                    startUpId: startUpDetails.id,
+                  },
+                });
+              }}
+            >
+              {loading || loading2 ? <CircularProgress sx={{ color: 'white' }} size={25} /> : <Typography> Update Opportunity</Typography>}
+            </Button>
+          </CardContent>
+        </Card>
+      )}
     </Container>
   );
 }

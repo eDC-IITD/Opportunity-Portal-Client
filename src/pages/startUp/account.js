@@ -1,16 +1,4 @@
-import {
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  TextField,
-  Grid,
-  Button,
-  CircularProgress,
-  Box,
-  MenuItem,
-  IconButton,
-} from '@mui/material';
+import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, Box, MenuItem, IconButton } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
@@ -18,14 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const sectorItems = ['SAAS', 'Fin-Tech', 'Ed-Tech', 'Health-Tech', 'E-Commerce', 'Logistics', 'Other'];
 
-export default function Account({
-  BASE_URL,
-  startUpDetails,
-  setStartUpDetails,
-  setShowAlert,
-  setAlertMessage,
-  setAlertSeverity,
-}) {
+export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
@@ -387,11 +368,7 @@ export default function Account({
               {updateOrSave} Account
             </Typography>
             <Button type="submit" variant="contained" sx={{ width: 120, height: 40 }}>
-              {loading ? (
-                <CircularProgress sx={{ color: 'white' }} size={25} />
-              ) : (
-                <Typography>{updateOrSave}</Typography>
-              )}
+              {loading ? <CircularProgress sx={{ color: 'white' }} size={25} /> : <Typography>{updateOrSave}</Typography>}
             </Button>
           </CardContent>
         </Card>

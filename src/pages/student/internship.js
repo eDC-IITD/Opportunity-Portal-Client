@@ -63,9 +63,7 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
       setTypeDescription('Wanted to be a cofounder meet the right people and kickstart your startup journey.');
     } else {
       setTypeImage(ProjectImage);
-      setTypeDescription(
-        'Learn your way up the ladder by appling to the right projects and finding right people on the way.',
-      );
+      setTypeDescription('Learn your way up the ladder by appling to the right projects and finding right people on the way.');
     }
 
     const requestOptions = {
@@ -124,9 +122,7 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
       headerName: 'Deadline',
       flex: 1,
       renderCell: ({ value }) => {
-        return value < moment().format('YYYY-MM-DDThh:mm')
-          ? 'Deadline passed'
-          : moment(value).format('MMMM Do, h:mm a');
+        return value < moment().format('YYYY-MM-DDThh:mm') ? 'Deadline passed' : moment(value).format('MMMM Do, h:mm a');
       },
     },
     {

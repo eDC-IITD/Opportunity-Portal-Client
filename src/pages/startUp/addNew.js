@@ -446,11 +446,7 @@ export default function AddNew({ BASE_URL, setShowAlert, setAlertMessage, setAle
               {updateOrAdd} Opportunity
             </Typography>
             <Button type="submit" variant="contained" sx={{ width: 120, height: 40 }}>
-              {loading ? (
-                <CircularProgress sx={{ color: 'white' }} size={25} />
-              ) : (
-                <Typography>{updateOrAdd}</Typography>
-              )}
+              {loading ? <CircularProgress sx={{ color: 'white' }} size={25} /> : <Typography>{updateOrAdd}</Typography>}
             </Button>
           </CardContent>
         </Card>

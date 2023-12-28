@@ -2,7 +2,7 @@ import { Container, Typography, Grid, CardContent, Card, Box, Button, CircularPr
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+// import PendingIcon from '@mui/icons-material/Pending';
 import React, { useState, useEffect } from 'react';
 import InternshipTable from '../../components/table';
 import InternshipImage from '../../assets/internshipImage.svg';
@@ -57,9 +57,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
     setLoading(true);
     if (type === 'Internship') {
       setTypeImage(InternshipImage);
-      setTypeDescription(
-        'Need intern who can witness a 0-1 jouney of a startup and get first hand experience of working in a startup.',
-      );
+      setTypeDescription('Need intern who can witness a 0-1 jouney of a startup and get first hand experience of working in a startup.');
     } else if (type === 'Job') {
       setTypeImage(JobImage);
       setTypeDescription('Need employee to work in a fast paced environment for your startup.');
@@ -96,18 +94,8 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
 
   const internshipTableColumn = [
     {
-      field: 'company',
-      headerName: 'Company',
-      flex: 1,
-    },
-    {
       field: 'designation',
       headerName: 'Designation',
-      flex: 1,
-    },
-    {
-      field: 'type',
-      headerName: 'Type',
       flex: 1,
     },
     {
@@ -120,9 +108,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
       headerName: 'Deadline',
       flex: 1,
       renderCell: ({ value }) => {
-        return value < moment().format('YYYY-MM-DDThh:mm')
-          ? 'Deadline passed'
-          : moment(value).format('MMMM Do, h:mm a');
+        return value < moment().format('YYYY-MM-DDThh:mm') ? 'Deadline passed' : moment(value).format('MMMM Do, h:mm a');
       },
     },
     {
@@ -167,30 +153,6 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
         );
       },
     },
-    {
-      field: 'update',
-      headerName: 'Update',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return (
-          <Button
-            size="small"
-            onClick={() => {
-              navigate('../addNew', {
-                state: {
-                  type: type,
-                  companyName: startUpDetails.companyName,
-                  startUpId: startUpDetails.id,
-                  jobId: value,
-                },
-              });
-            }}
-          >
-            <BorderColorRoundedIcon />
-          </Button>
-        );
-      },
-    },
   ];
 
   const addNew = () => {
@@ -216,19 +178,33 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
   return (
     <div>
       <Container sx={{ py: 2, mt: 9 }}>
-        <Card sx={{ mb: 2 }}>
+        <Card sx={{ mb: 1 }}>
           <CardContent>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    justifyContent: 'end',
+                    alignItems: 'center',}}>
               <Grid item xs={12} sm={7} md={9}>
                 <Box
                   sx={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
+                    margin : 2
                   }}
                 >
                   <Typography variant="h5">{typeDescription}</Typography>
+                </Box>
+                <Box
+                  sx={{
+                    margin : 2,
+                    display: { xs: 'block', md: 'flex' },
+                  }}
+                >
+                  <Button variant="contained" sx={{ mt: { xs: 2, md: 0 } }} onClick={addNew}>
+                    {/* <AddRoundedIcon /> */}
+
+                    <Typography variant="body1"> Add another {type} </Typography>
+
+                  </Button>
                 </Box>
               </Grid>
               <Grid item xs={0} sm={5} md={3} display={{ xs: 'none', sm: 'grid' }}>
@@ -247,21 +223,8 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
             </Grid>
           </CardContent>
         </Card>
-        <Card>
+        <Card sx={{ mb: 1 }}>
           <CardContent>
-            <Box
-              sx={{
-                mb: 2,
-                display: { xs: 'block', md: 'flex' },
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Typography variant="h5">Post {type} Opportunities</Typography>
-              <Button variant="contained" sx={{ width: 120, height: 40, mt: { xs: 2, md: 0 } }} onClick={addNew}>
-                <AddRoundedIcon />
-              </Button>
-            </Box>
             {loading ? (
               <Box
                 sx={{
@@ -278,6 +241,28 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
             )}
           </CardContent>
         </Card>
+
+        {/* <Card sx={{ mb: 1 }}>
+          <CardContent>
+            {loading ? (
+              <Box
+                sx={{
+                  height: 370.5,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
+              <InternshipTable column={internshipTableColumn} row={internshipTableRow} />
+            )}
+          </CardContent>
+        </Card> */}
+
+
+
       </Container>
     </div>
   );

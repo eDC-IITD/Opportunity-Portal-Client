@@ -1,26 +1,9 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-  Typography,
-  TextField,
-  CardActions,
-  Button,
-  CircularProgress,
-} from '@mui/material';
+import { Card, CardContent, CardHeader, Container, Typography, TextField, CardActions, Button, CircularProgress } from '@mui/material';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useCountDown from 'react-countdown-hook';
 
-export default function OTPVerify({
-  BASE_URL,
-  setStartUpDetails,
-  setStudentDetails,
-  setShowAlert,
-  setAlertMessage,
-  setAlertSeverity,
-}) {
+export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { user, signInOrSignUp, email, name } = useLocation().state;
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
@@ -330,10 +313,7 @@ export default function OTPVerify({
     <Container maxWidth="sm" sx={{ py: 2, mt: 9 }}>
       <form onSubmit={submitOTP}>
         <Card>
-          <CardHeader
-            title={'Email Verification'}
-            subheader="Please enter the 6-digit OTP that was sent to the email"
-          />
+          <CardHeader title={'Email Verification'} subheader="Please enter the 6-digit OTP that was sent to the email" />
           <CardContent>
             <TextField
               type="email"
@@ -346,15 +326,7 @@ export default function OTPVerify({
               InputProps={{ readOnly: true }}
               disabled={true}
             />
-            <TextField
-              type="text"
-              label="OTP"
-              variant="outlined"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              fullWidth
-              required
-            />
+            <TextField type="text" label="OTP" variant="outlined" value={otp} onChange={(e) => setOtp(e.target.value)} fullWidth required />
           </CardContent>
           <CardActions sx={{ ml: 1 }}>
             <Button type="submit" variant="contained" sx={{ width: 120, height: 40 }}>
