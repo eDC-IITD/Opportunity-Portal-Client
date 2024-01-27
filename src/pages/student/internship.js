@@ -9,6 +9,8 @@ import ProjectImage from '../../assets/projectImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PopOver from '../../components/student/popOver';
 import moment from 'moment';
+import JobListing from '../../components/JobListing';
+import logo from "./logo.png"
 
 export default function Internship({ BASE_URL, studentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { type } = useLocation().state;
@@ -179,6 +181,7 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
   }, [type]);
 
   return (
+    <>
     <Container sx={{ py: 2, mt: 9 }}>
       <Card sx={{ mb: 2 }}>
         <CardContent>
@@ -228,10 +231,34 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
               <CircularProgress />
             </Box>
           ) : (
-            <InternshipTable column={internshipTableColumn} row={internshipTableRow} />
+            <>
+            
+            {internshipTableRow.map((internship) => (
+              <Grid item xs={12} key={internship.id}>
+                <JobListing
+                  logo={logo}
+                  companyName={internship.company}
+                  mission={internship.mission}
+                  role={internship.designation}
+                  salary={internship.stipend}
+                  deadline={internship.deadline}
+                  type={type}
+                  status={internship.status}
+                  detailsButtonClick={() => {
+                    navigate('../details', { state: { jobId: internship.details } });
+                  }}
+                  applyButtonClick={() => {
+                    // Handle the apply button click
+                  }}
+                />
+              </Grid>))}
+
+            </>
+
           )}
         </CardContent>
       </Card>
     </Container>
+    </>
   );
 }
