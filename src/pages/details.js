@@ -1,9 +1,15 @@
-import { Card, CardContent, Container, Grid, Typography, TextField, Box, CircularProgress } from '@mui/material';
+import { Card, CardContent, Container, Grid, Typography, TextField, Box, CircularProgress, Divider, InputAdornment, IconButton } from '@mui/material';
+import { People as PeopleIcon, LocationOn as LocationOnIcon, Business as BusinessIcon, Rocket as RocketIcon, LinkedIn as LinkedInIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { openLink } from '../utils.js';
+import internshipImage from '../assets/internshipImage.svg';
+import cofounderImage from '../assets/cofounderImage.svg';
 
+// Things to set : 
+// jobStartUpDetails.stage, jobStartUpDetails.companyPhoto, jobStartUpDetails.socials
+// jobStartUpDetails.founderImage
 export default function Details({ BASE_URL, startUpDetails }) {
   const { jobId } = useLocation().state;
   const [loading, setLoading] = useState(true);
@@ -92,15 +98,9 @@ export default function Details({ BASE_URL, startUpDetails }) {
   }, []);
 
   return (
-    <Container sx={{ py: 2, mt: 9 }}>
-      <Typography variant="h5" sx={{ mb: 2 }}>
-        Details
-      </Typography>
-      <Card>
+    <Container sx={{ py: 2, mt: 9, gap: 5 }}>
+      <Card sx={{ padding: [1, 5, 10] }}>
         <CardContent>
-          <Typography variant="h5" sx={{ mb: 2 }}>
-            Company Overview
-          </Typography>
           {loading || loading2 ? (
             <Box
               sx={{
@@ -113,202 +113,311 @@ export default function Details({ BASE_URL, startUpDetails }) {
               <CircularProgress />
             </Box>
           ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Company Name"
-                  fullWidth
-                  value={jobStartUpDetails.companyName}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Box
+                sx={{
+                  width: 200,
+                  display: { xs: 'none', sm: 'block' }
+                }}
+              >
+                <img
+                  src={
+                    jobStartUpDetails.companyPhoto ? jobStartUpDetails.companyPhoto : internshipImage
+                  }
+                  alt="Company Photo"
+                  style={{ width: '100%', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                 />
-              </Grid>
-              {!isadmin && (
-                <Grid item xs={12} md={6}>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: ['column', 'row'],
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Box
+                  sx={{ // Left one
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: 1,
+                    gap: 2,
+                    width: ["100%","60%"],
+                  }}
+                >
+                  <Grid item xs={12} md={6} sx={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'inline-flex'
+                  }}>
+                    <TextField
+                      variant="standard"
+                      fullWidth
+                      value={jobStartUpDetails.companyName}
+                      InputProps={{ disableUnderline: true, readOnly: true }}
+                      sx={{
+                        '& input': {
+                          fontSize: '32px', // Set the desired font size
+                          color: '#00ffd1', // Set the desired text color
+                          cursor: 'pointer',
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Box sx={{ display: 'flex', padding: 1, gap: 1, flexDirection: ['row', 'column', 'row'] }}>
+                    <Grid item xs={12} md={6} sx=
+                      {{ border: '1px solid #FFF', borderRadius: '10px', textAlign: 'center', flex: 1 }}>
+                      <TextField
+                        color="primary"
+                        variant="standard"
+                        // label="Sector"
+                        fullWidth
+                        value={
+                          jobStartUpDetails.sector ? jobStartUpDetails.sector : "Technology"
+                        }
+                        InputProps={{
+                          disableUnderline: true,
+                          readOnly: true,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <IconButton disabled>
+                                <BusinessIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                        sx={
+                          {
+                            '& input': { cursor: 'pointer', color: '#FFF', textAlign: 'center' },
+                            '& label': { textAlign: 'center' },
+                            'root': { textAlign: 'center' }
+                          }
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6} sx=
+                      {{ border: '1px solid #FFF', borderRadius: '10px', textAlign: 'center', flex: 1 }}>
+                      <TextField
+                        color="primary"
+                        variant="standard"
+                        // label="Location"
+                        fullWidth
+                        // value={jobStartUpDetails.location}
+                        value={
+                          jobStartUpDetails.stage ? jobStartUpDetails.stage : "Early Stage"
+                        }
+                        InputProps={{
+                          disableUnderline: true,
+                          readOnly: true,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <IconButton disabled>
+                                <RocketIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                        sx={
+                          {
+                            '& input': { cursor: 'pointer', color: '#FFF', textAlign: 'center' },
+                            '& label': { textAlign: 'center' },
+                            'root': { textAlign: 'center' }
+                          }
+                        }
+                      />
+                    </Grid>
+                  </Box>
+                  <Box sx={{ display: 'flex', padding: 1, gap: 1, flexDirection: ['row', 'column', 'row'] }}>
+                    <Grid item xs={12} md={6} sx={{ border: '1px solid #FFF', borderRadius: '10px', textAlign: 'center', flex: 1 }}>
+                      <TextField
+                        color="primary"
+                        variant="standard"
+                        // label="No of Employees"
+                        // fullWidth
+                        value={
+                          jobStartUpDetails.noOfEmployees ? jobStartUpDetails.noOfEmployees + " People" : "1 Person"
+                        }
+                        InputProps={{
+                          disableUnderline: true,
+                          readOnly: true,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <IconButton disabled>
+                                <PeopleIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                        sx={
+                          {
+                            '& input': { cursor: 'pointer', color: '#FFF', textAlign: 'center' },
+                            '& label': { textAlign: 'center' },
+                            'root': { textAlign: 'center', }
+                          }
+                        }
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6} sx={{ border: '1px solid #FFF', borderRadius: '10px', textAlign: 'center', flex: 1 }}>
+                      <TextField
+                        variant="standard"
+                        // label="Company Vision"
+                        fullWidth
+                        value={
+                          jobStartUpDetails.location ? jobStartUpDetails.location : "India"
+                        }
+                        InputProps={{
+                          disableUnderline: true,
+                          readOnly: true,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <IconButton disabled>
+                                <LocationOnIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                        sx={
+                          {
+                            '& input': { cursor: 'pointer', color: '#FFF', textAlign: 'center' },
+                            '& label': { textAlign: 'center' },
+                            'root': { textAlign: 'center' }
+                          }
+                        }
+                      />
+                    </Grid>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{ // Right one
+                    alignContent: 'center',
+                    alignItems: 'center',
+                    border: '1px solid #FFF', borderRadius: '10px', textAlign: 'center',
+                    padding: 2,
+                    flex: [0,1],
+                    width: ['100%']
+                    
+                  }}
+                >
                   <TextField
                     variant="standard"
-                    label="Email"
                     fullWidth
-                    value={jobStartUpDetails.email}
+                    value={"Socials"}
                     InputProps={{ disableUnderline: true, readOnly: true }}
+                    sx={{
+                      '& input': {
+                        fontSize: '16px', // Set the desired font size
+                        color: '#00ffd1', // Set the desired text color
+                        cursor: 'pointer',
+                      },
+                    }}
                   />
-                </Grid>
-              )}
-              {isadmin && jobStartUpDetails.linkedIn !== '' && jobStartUpDetails.linkedIn !== undefined ? (
-                <Grid item xs={12} md={6}>
-                  <div
-                    onClick={() => {
-                      openLink(jobStartUpDetails.linkedIn);
-                    }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      textDecorationColor: '#1976d2',
-                      textUnderlineOffset: 2,
-                    }}
-                  >
-                    <TextField
-                      color="primary"
-                      variant="standard"
-                      label="LinkedIn"
-                      fullWidth
-                      value={jobStartUpDetails.linkedIn}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                      sx={{ input: { cursor: 'pointer', color: '#1976d2' } }}
-                    />
-                  </div>
-                </Grid>
-              ) : (
-                <></>
-              )}
-              {isadmin && jobStartUpDetails.website !== '' && jobStartUpDetails.website !== undefined ? (
-                <Grid item xs={12} md={6}>
-                  <div
-                    onClick={() => {
-                      openLink(jobStartUpDetails.website);
-                    }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      textDecorationColor: '#1976d2',
-                      textUnderlineOffset: 2,
-                    }}
-                  >
-                    <TextField
-                      color="primary"
-                      variant="standard"
-                      label="Website"
-                      fullWidth
-                      value={jobStartUpDetails.website}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                      sx={{ input: { cursor: 'pointer', color: '#1976d2' } }}
-                    />
-                  </div>
-                </Grid>
-              ) : (
-                <></>
-              )}
-              {isadmin && jobStartUpDetails.tracxn !== '' && jobStartUpDetails.tracxn !== undefined ? (
-                <Grid item xs={12} md={6}>
-                  <div
-                    onClick={() => {
-                      openLink(jobStartUpDetails.tracxn);
-                    }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      textDecorationColor: '#1976d2',
-                      textUnderlineOffset: 2,
-                    }}
-                  >
-                    <TextField
-                      color="primary"
-                      variant="standard"
-                      label="Tracxn"
-                      fullWidth
-                      value={jobStartUpDetails.tracxn}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                      sx={{ input: { cursor: 'pointer', color: '#1976d2' } }}
-                    />
-                  </div>
-                </Grid>
-              ) : (
-                <></>
-              )}
-              {isadmin && jobStartUpDetails.social !== '' && jobStartUpDetails.social !== undefined ? (
-                <Grid item xs={12} md={6}>
-                  <div
-                    onClick={() => {
-                      openLink(jobStartUpDetails.social);
-                    }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      textDecorationColor: '#1976d2',
-                      textUnderlineOffset: 2,
-                    }}
-                  >
-                    <TextField
-                      color="primary"
-                      variant="standard"
-                      label="Social"
-                      fullWidth
-                      value={jobStartUpDetails.social}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                      sx={{ input: { cursor: 'pointer', color: '#1976d2' } }}
-                    />
-                  </div>
-                </Grid>
-              ) : (
-                <></>
-              )}
-              {isadmin && jobStartUpDetails.cruchbase !== '' && jobStartUpDetails.cruchbase !== undefined ? (
-                <Grid item xs={12} md={6}>
-                  <div
-                    onClick={() => {
-                      openLink(jobStartUpDetails.cruchbase);
-                    }}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      textDecorationColor: '#1976d2',
-                      textUnderlineOffset: 2,
-                    }}
-                  >
-                    <TextField
-                      color="primary"
-                      variant="standard"
-                      label="Crunchbase"
-                      fullWidth
-                      value={jobStartUpDetails.cruchbase}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                      sx={{ input: { cursor: 'pointer', color: '#1976d2' } }}
-                    />
-                  </div>
-                </Grid>
-              ) : (
-                <></>
-              )}
-              <Grid item xs={12} md={6}>
+                  {!isadmin && (
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        label="Email"
+                        fullWidth
+                        value={jobStartUpDetails.email}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>
+                  )}
+                  {(!isadmin && jobStartUpDetails.linkedIn && jobStartUpDetails.linkedIn !== '' && jobStartUpDetails.linkedIn !== undefined) ? (
+                    <Grid item xs={12} md={6}>
+                      <div
+                        onClick={() => {
+                          openLink(jobStartUpDetails.linkedIn);
+                        }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          textDecorationColor: '#1976d2',
+                          textUnderlineOffset: 2,
+                        }}
+                      >
+                        <TextField
+                          color="primary"
+                          variant="standard"
+                          label="LinkedIn"
+                          fullWidth
+                          value={jobStartUpDetails.linkedIn}
+                          InputProps={{ disableUnderline: true, readOnly: true }}
+                          sx={{ input: { cursor: 'pointer', color: '#1976d2' } }}
+                        />
+                      </div>
+                    </Grid>
+                  ) : (
+                    <></>
+                  )}
+                  {(!isadmin && jobStartUpDetails.socials && jobStartUpDetails.socials !== '' && jobStartUpDetails.socials !== undefined) ? (
+                    <Grid item xs={12} md={6}>
+                      <div
+                        onClick={() => {
+                          openLink(jobStartUpDetails.socials);
+                        }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          textDecorationColor: '#1976d2',
+                          textUnderlineOffset: 2,
+                        }}
+                      >
+                        <TextField
+                          color="primary"
+                          variant="standard"
+                          label="Socials"
+                          fullWidth
+                          value={jobStartUpDetails.socials}
+                          InputProps={{ disableUnderline: true, readOnly: true }}
+                          sx={{ input: { cursor: 'pointer', color: '#1976d2' } }}
+                        />
+                      </div>
+                    </Grid>
+                  ) : (
+                    <></>
+                  )}
+                </Box>
+              </Box>
+            </Box>
+
+          )}
+          <Divider variant="middle" sx={{ mt: 2, mb: 2 }} />
+          {loading || loading2 ? (
+            <Box
+              sx={{
+                height: 300,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            jobStartUpDetails.companyVision &&
+            <Box>
+              <Typography variant="h5" sx={{ mb: 2, fontSize: '24px', color: '#00ffd1', cursor: 'pointer', textDecoration: 'underline' }}>
+                Company Vision
+              </Typography>
+              <Grid item xs={12}>
                 <TextField
                   variant="standard"
-                  label="Sector"
-                  fullWidth
-                  value={jobStartUpDetails.sector}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
-              </Grid>
-              {/* <Grid item xs={12} md={6}>
-                                    <TextField variant="standard" label="Company Location" fullWidth value={jobStartUpDetails.location} InputProps={{ disableUnderline: true, readOnly: true }} />
-                                </Grid> */}
-              <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="No Of Employees"
-                  fullWidth
-                  value={jobStartUpDetails.noOfEmployees}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Company Vision"
                   multiline
                   fullWidth
                   value={jobStartUpDetails.companyVision}
                   InputProps={{ disableUnderline: true, readOnly: true }}
                 />
               </Grid>
-            </Grid>
+            </Box>
           )}
-        </CardContent>
-      </Card>
-      <Card sx={{ my: 2 }}>
-        <CardContent>
-          <Typography variant="h5" sx={{ mb: 2 }}>
-            Founders
-          </Typography>
+          <Divider variant="middle" sx={{ mt: 2, mb: 2 }} />
           {loading || loading2 ? (
             <Box
               sx={{
@@ -326,64 +435,138 @@ export default function Details({ BASE_URL, startUpDetails }) {
                 return (
                   value.name !== '' &&
                   value.name !== undefined && (
-                    <Card variant="outlined" sx={{ mt: 2 }} key={key}>
-                      <CardContent sx={{ display: { xs: 'block', md: 'flex' }, gap: 2 }}>
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} md={6}>
-                            <TextField
-                              variant="standard"
-                              label="Founder Name"
-                              sx={{ mb: { xs: 2, md: 0 } }}
-                              fullWidth
-                              value={value.name}
-                              InputProps={{
-                                disableUnderline: true,
-                                readOnly: true,
+                    <Box>
+                      <Typography variant="h5" sx={{ mb: 2, fontSize: '24px', color: '#00ffd1', cursor: 'pointer', textDecoration: 'underline' }}>
+                        Founders
+                      </Typography>
+                      <Card variant="outlined" sx={{ mt: 2 }} key={key}>
+                        <CardContent sx={{ display: { xs: 'block', md: 'flex' }, gap: 2 }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              flex: 1
+                            }}
+                          >
+                            <Box //Left Photo Box.
+                              sx={{
+                                width: 100,
+                                display: { xs: 'none', sm: 'block' }
                               }}
-                            />
-                          </Grid>
-                          <Grid item xs={12} md={6}>
-                            <TextField
-                              variant="standard"
-                              label="Founder LinkedIn"
-                              sx={{ mb: { xs: 2, md: 0 } }}
-                              fullWidth
-                              multiline
-                              value={value.linkedIn || '-'}
-                              InputProps={{
-                                disableUnderline: true,
-                                readOnly: true,
+                            >
+                              <img
+                                src={
+                                  jobStartUpDetails.founderImage ? jobStartUpDetails.founderImage : cofounderImage
+                                }
+                                alt="Company Photo"
+                                style={{ width: '100%', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
+                              />
+                            </Box>
+                            <Box //Right Content Box. ( a column )
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'left',
+                                alignItems: 'left',
+                                width: "100%",
+                                flex: 1,
+                                padding: '2px 1px 1px 20px'
                               }}
-                            />
-                          </Grid>
-                          <Grid item xs={12}>
-                            <TextField
-                              variant="standard"
-                              label="Founder Bio"
-                              sx={{ mb: { xs: 2, md: 0 } }}
-                              fullWidth
-                              multiline
-                              value={value.bio}
-                              InputProps={{
-                                disableUnderline: true,
-                                readOnly: true,
-                              }}
-                            />
-                          </Grid>
-                        </Grid>
-                      </CardContent>
-                    </Card>
+                            >
+                              <Box //Top row
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  justifyContent: 'left',
+                                  alignItems: 'left',
+                                  flex: 1,
+                                  width: "100%"
+                                }}
+                              >
+                                <Grid item xs={12} md={6} sx=
+                                  {{ textAlign: 'left', minWidth: 0, width: 'auto' }}
+                                >
+                                  <TextField
+                                    variant="standard"
+                                    label=""
+                                    sx={{
+                                      mb: { xs: 2, md: 0 },
+                                      '& input': {
+                                        fontSize: '24px', // Set the desired font size
+                                        color: '#fff', // Set the desired text color
+                                        cursor: 'pointer',
+                                      },
+                                    }}
+                                    value={value.name}
+                                    InputProps={{
+                                      disableUnderline: true,
+                                      readOnly: true,
+                                    }}
+                                  />
+                                </Grid>
+                                {(!isadmin && jobStartUpDetails.socials && jobStartUpDetails.socials !== '' && jobStartUpDetails.socials !== undefined) ? (
+                                  <Grid sx={{ textAlign: 'left', minWidth: 0, width: '100%', }}>
+                                    <IconButton
+                                      onClick={() => window.open(value.linkedIn, '_blank')}
+                                      sx={{
+                                        '&:hover': {
+                                          backgroundColor: 'transparent', // Set the desired hover background color
+                                        },
+                                      }}
+                                    >
+                                      <LinkedInIcon
+                                        sx={{
+                                          fontSize: '30px', // Set the desired icon size
+                                          color: '#0A66C2', // Set the desired icon color
+                                        }}
+                                      />
+                                    </IconButton>
+                                  </Grid>
+                                ) : (<></>)}
+                              </Box>
+                              <Box   //Bottom row
+                                sx={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  flex: 1,
+                                  width: "100%",
+                                  padding: '0px 4px 4px 4px'
+                                }}>
+                                <Grid item xs={12} md={6} sx=
+                                  {{ display: 'flex', textAlign: 'center', flex: 1 }}
+                                >
+                                  <TextField
+                                    variant="standard"
+                                    sx={{ mb: { xs: 2, md: 0 } }}
+                                    fullWidth
+                                    multiline
+                                    value={
+                                      value.bio ? value.bio : "Due to technical or logistical constraints, the startup's founder encountered challenges in providing a biography. Despite the obstacles, efforts are ongoing to overcome these issues and share the founder's story, ensuring a comprehensive and engaging representation of their journey within the startup ecosystem. "
+                                    }
+                                    InputProps={{
+                                      disableUnderline: true,
+                                      readOnly: true,
+                                    }}
+                                  />
+                                </Grid>
+                              </Box>
+                            </Box>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Box>
                   )
                 );
               })}
             </Box>
           )}
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent>
-          <Typography variant="h5" sx={{ mb: 2 }}>
-            Project Details
+          <Divider variant="middle" sx={{ mt: 2, mb: 2 }} />
+          <Typography variant="h5" sx={{ mb: 2, fontSize: '24px', color: '#00ffd1', cursor: 'pointer', textDecoration: 'underline' }}>
+            About The Role
           </Typography>
           {loading || loading2 ? (
             <Box
@@ -397,137 +580,253 @@ export default function Details({ BASE_URL, startUpDetails }) {
               <CircularProgress />
             </Box>
           ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Designation"
-                  fullWidth
-                  value={jobDetails.designation}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
-              </Grid>
-              {jobDetails.type === 'Internship' ? (
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    variant="standard"
-                    label="Internship Duration"
-                    fullWidth
-                    value={jobDetails.duration}
-                    InputProps={{ disableUnderline: true, readOnly: true }}
-                  />
-                </Grid>
-              ) : (
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    variant="standard"
-                    label="Type"
-                    fullWidth
-                    value={jobDetails.type}
-                    InputProps={{ disableUnderline: true, readOnly: true }}
-                  />
-                </Grid>
-              )}
-              {jobDetails.type !== 'Cofounder' && jobDetails.type !== 'Project' && (
-                <>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      variant="standard"
-                      label="Stipend"
-                      fullWidth
-                      value={jobDetails.stipend}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      variant="standard"
-                      label="No of Offers"
-                      fullWidth
-                      value={jobDetails.noOfOffers}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      variant="standard"
-                      label="Skills Required"
-                      multiline
-                      fullWidth
-                      value={jobDetails.skillsRequired}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      variant="standard"
-                      label="Job Location"
-                      multiline
-                      fullWidth
-                      value={jobDetails.jobLocation}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                    />
-                  </Grid>
-                </>
-              )}
-              {jobDetails.type !== 'Project' && (
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    variant="standard"
-                    label="Responsibilities"
-                    multiline
-                    fullWidth
-                    value={jobDetails.responsibilities}
-                    InputProps={{ disableUnderline: true, readOnly: true }}
-                  />
-                </Grid>
-              )}
-              {jobDetails.type === 'Internship' && (
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    variant="standard"
-                    label="Part/FullTime"
-                    multiline
-                    fullWidth
-                    value={jobDetails.hoursType || 'PartTime'}
-                    InputProps={{ disableUnderline: true, readOnly: true }}
-                  />
-                </Grid>
-              )}
-              {jobDetails.type === 'Project' && (
-                <>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      variant="standard"
-                      label="Skills Required"
-                      multiline
-                      fullWidth
-                      value={jobDetails.skillsRequired}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      variant="standard"
-                      label="Project Description"
-                      multiline
-                      fullWidth
-                      value={jobDetails.responsibilities}
-                      InputProps={{ disableUnderline: true, readOnly: true }}
-                    />
-                  </Grid>
-                </>
-              )}
+            <Grid container spacing={0}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1
+                }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'left',
+                    alignItems: 'left',
+                    width: "100%",
+                    flex: 1,
+                    padding: '2px 1px 1px 20px'
+                  }}>
+                  {jobDetails.designation &&
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        fullWidth
+                        value={jobDetails.designation}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                        sx={
+                          {
+                            '& input': { cursor: 'pointer', color: '#FFF', fontSize: 20 },
+                          }
+                        }
+                      />
+                    </Grid>}
+                  {jobDetails.type !== 'Project' && jobDetails.responsibilities && (
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        multiline
+                        fullWidth
+                        value={jobDetails.responsibilities}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>
+                  )}
+                  {jobDetails.type === 'Internship' && jobDetails.hoursType && (
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        multiline
+                        fullWidth
+                        value={jobDetails.hoursType || '( PartTime )'}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                        padding='4px 0px 0px 0px'
+                      />
+                    </Grid>
+                  )}
+                  {jobDetails.type === 'Project' && (
+                    <>
+                      {jobDetails.skillsRequired &&
+                        <Grid item xs={12} md={6}>
+                          <TextField
+                            variant="standard"
+                            label="Skills Required"
+                            multiline
+                            fullWidth
+                            value={jobDetails.skillsRequired}
+                            InputProps={{ disableUnderline: true, readOnly: true }}
+                          />
+                        </Grid>}
+                      {jobDetails.responsibilities &&
+                        <Grid item xs={12}>
+                          <TextField
+                            variant="standard"
+                            label="Project Description"
+                            multiline
+                            fullWidth
+                            value={jobDetails.responsibilities}
+                            InputProps={{ disableUnderline: true, readOnly: true }}
+                          />
+                        </Grid>}
+                    </>
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'left',
+                    alignItems: 'left',
+                    width: "100%",
+                    flex: 1,
+                    padding: '2px 1px 1px 20px'
+                  }}>
+                  {jobDetails.skillsRequired &&
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        label="Skills Required"
+                        multiline
+                        fullWidth
+                        value={jobDetails.skillsRequired}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>}
+                </Box>
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'left',
+                    alignItems: 'left',
+                    width: "100%",
+                    flex: 1,
+                    padding: '2px 1px 1px 20px'
+                  }}>
+                  {jobDetails.type === 'Internship' ? (
+                    jobDetails.duration &&
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        label="Internship Duration"
+                        fullWidth
+                        value={jobDetails.duration}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>
+                  ) : (
+                    jobDetails.type &&
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        label="Type"
+                        fullWidth
+                        value={jobDetails.type}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>
+                  )}
+                  {jobDetails.type !== 'Cofounder' && jobDetails.type !== 'Project' && (
+                    <>
+                      {jobDetails.stipend &&
+                        <Grid item xs={12} md={6}>
+                          <TextField
+                            variant="standard"
+                            label="Stipend"
+                            fullWidth
+                            value={jobDetails.stipend}
+                            InputProps={{ disableUnderline: true, readOnly: true }}
+                          />
+                        </Grid>}
+                      {jobDetails.noOfOffers &&
+                        <Grid item xs={12} md={6}>
+                          <TextField
+                            variant="standard"
+                            label="No of Offers"
+                            fullWidth
+                            value={jobDetails.noOfOffers}
+                            InputProps={{ disableUnderline: true, readOnly: true }}
+                          />
+                        </Grid>}
+                      {jobDetails.jobLocation &&
+                        <Grid item xs={12} md={6}>
+                          <TextField
+                            variant="standard"
+                            label="Job Location"
+                            multiline
+                            fullWidth
+                            value={jobDetails.jobLocation}
+                            InputProps={{ disableUnderline: true, readOnly: true }}
+                          />
+                        </Grid>}
+                    </>
+                  )}
+                </Box>
+              </Box>
             </Grid>
           )}
         </CardContent>
       </Card>
-      {jobDetails.type !== 'Cofounder' && (
-        <Card sx={{ mt: 2 }}>
+      {jobStartUpDetails && jobDetails && jobDetails.type !== 'Cofounder' &&
+        ((jobDetails.assignment && jobDetails.assignment !== undefined && jobDetails.assignment !== '') ||
+          (jobDetails.deadline && jobDetails.deadline !== undefined && jobDetails.deadline !== '') ||
+          (jobDetails.selectionProcess && jobDetails.selectionProcess !== undefined && jobDetails.selectionProcess !== '')) &&
+        (
+          <Card sx={{ mt: 2 }}>
+            <CardContent>
+              <Typography variant="h5" sx={{ mb: 2, fontSize: '20px', color: '#00ffd1', cursor: 'pointer', textDecoration: 'underline' }}>
+                Deadline and Selection Process
+              </Typography>
+              {loading || loading2 ? (
+                <Box
+                  sx={{
+                    height: 300,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <Box>
+                  {
+                    (jobDetails.assignment && jobDetails.assignment !== '' && jobDetails.assignment !== undefined) && (
+                      <TextField
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                        label="Assignment"
+                        fullWidth
+                        value={jobDetails.assignment}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    )
+                  }
+                  {
+                    (jobDetails.deadline && jobDetails.deadline !== undefined && jobDetails.deadline !== '') &&
+                    <TextField
+                      variant="standard"
+                      sx={{ mb: 2 }}
+                      label="Application Deadline"
+                      fullWidth
+                      value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')}
+                      InputProps={{ disableUnderline: true, readOnly: true }}
+                    />
+                  }
+                  {
+                    (jobDetails.selectionProcess && jobDetails.selectionProcess !== undefined && jobDetails.selectionProcess !== '') &&
+                    <TextField
+                      variant="standard"
+                      label="Selection Process"
+                      multiline
+                      fullWidth
+                      value={jobDetails.selectionProcess}
+                      InputProps={{ disableUnderline: true, readOnly: true }}
+                    />
+                  }
+                </Box>
+              )}
+            </CardContent>
+          </Card>
+        )}
+      {jobStartUpDetails &&
+        ((jobStartUpDetails.hrName && jobStartUpDetails.hrName !== undefined && jobStartUpDetails.hrName !== '') ||
+          (jobStartUpDetails.hrEmail && jobStartUpDetails.hrEmail !== undefined && jobStartUpDetails.hrEmail !== '')) &&
+        <Card sx={{ my: 2 }}>
           <CardContent>
-            <Typography variant="h5" sx={{ mb: 2 }}>
-              Deadline and Selection Process
-            </Typography>
             {loading || loading2 ? (
               <Box
                 sx={{
@@ -541,86 +840,53 @@ export default function Details({ BASE_URL, startUpDetails }) {
               </Box>
             ) : (
               <Box>
-                {jobDetails.assignment !== '' && jobDetails.assignment !== undefined && (
-                  <TextField
-                    variant="standard"
-                    sx={{ mb: 2 }}
-                    label="Assignment"
-                    fullWidth
-                    value={jobDetails.assignment}
-                    InputProps={{ disableUnderline: true, readOnly: true }}
-                  />
-                )}
-                <TextField
-                  variant="standard"
-                  sx={{ mb: 2 }}
-                  label="Application Deadline"
-                  fullWidth
-                  value={moment(jobDetails.deadline).format('MMMM Do YYYY, h:mm:ss a')}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
-                <TextField
-                  variant="standard"
-                  label="Selection Process"
-                  multiline
-                  fullWidth
-                  value={jobDetails.selectionProcess}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
+                <Typography variant="h5" sx={{ mb: 2, fontSize: '20px', color: '#00ffd1', cursor: 'pointer', textDecoration: 'underline' }}>
+                  HR/POC Details
+                </Typography>
+                <Grid container spacing={2}>
+                  {
+                    (jobStartUpDetails.hrName && jobStartUpDetails.hrName !== undefined && jobStartUpDetails.hrName !== '') &&
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        label="Name"
+                        fullWidth
+                        value={jobStartUpDetails.hrName}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>
+                  }
+                  {
+                    (jobStartUpDetails.hrEmail && jobStartUpDetails.hrEmail !== undefined && jobStartUpDetails.hrEmail !== '') &&
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        label="Personal Email"
+                        fullWidth
+                        value={jobStartUpDetails.hrEmail}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>
+                  }
+                  {
+                    (jobStartUpDetails.hrDesignation && jobStartUpDetails.hrDesignation !== undefined && jobStartUpDetails.hrDesignation !== '') &&
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        variant="standard"
+                        label="Designation"
+                        fullWidth
+                        value={jobStartUpDetails.hrDesignation}
+                        InputProps={{ disableUnderline: true, readOnly: true }}
+                      />
+                    </Grid>
+                  }
+                </Grid>
               </Box>
-            )}
+            )
+            }
           </CardContent>
         </Card>
-      )}
-      <Card sx={{ my: 2 }}>
-        <CardContent>
-          <Typography variant="h5" sx={{ mb: 2 }}>
-            HR/POC Details
-          </Typography>
-          {loading || loading2 ? (
-            <Box
-              sx={{
-                height: 300,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <CircularProgress />
-            </Box>
-          ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Name"
-                  fullWidth
-                  value={jobStartUpDetails.hrName}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Personal Email"
-                  fullWidth
-                  value={jobStartUpDetails.hrEmail}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Designation"
-                  fullWidth
-                  value={jobStartUpDetails.hrDesignation}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
-              </Grid>
-            </Grid>
-          )}
-        </CardContent>
-      </Card>
+      }
     </Container>
   );
 }
