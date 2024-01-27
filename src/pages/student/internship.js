@@ -9,7 +9,7 @@ import ProjectImage from '../../assets/projectImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PopOver from '../../components/student/popOver';
 import moment from 'moment';
-import JobListing from '../../components/JobListing';
+import JobListing from '../../components/student/JobListing';
 import logo from "./logo.png"
 
 export default function Internship({ BASE_URL, studentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
