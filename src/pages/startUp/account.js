@@ -237,7 +237,7 @@ export default function Account({
                   fullWidth
                   required
                   select
-                  label="Is IITD Startup?"
+                  label="Are you an IITD Startup?"
                   value={isIITD}
                   onChange={(e) => {
                     setIsIITD(e.target.value);
