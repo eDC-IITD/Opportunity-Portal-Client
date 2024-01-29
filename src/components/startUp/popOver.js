@@ -111,7 +111,7 @@ export default function BasicPopover({
         onClick={handleClick}
         color={statusButtonColor(statu)}
       >
-        {statu} <ArrowDropDownRoundedIcon />
+        {status} <ArrowDropDownRoundedIcon />
       </Button>
       <Popover
         id={id}
