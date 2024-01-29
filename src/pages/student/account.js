@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Account({ BASE_URL, studentDetails, setStudentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [resumeFile, setResumeFile] = useState(null);
   const name = studentDetails.name;
   const email = studentDetails.email;
   const [course, setCourse] = useState(studentDetails.course);
@@ -14,25 +15,28 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
   const [resumeLink, setResumeLink] = useState(studentDetails.resumeLink);
   const [linkedIn, setLinkedIn] = useState(studentDetails.linkedIn);
   const updateOrSave = studentDetails.resumeLink === '' || studentDetails.resumeLink === undefined ? 'Save' : 'Update';
-
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    setResumeFile(file);
+};
   const updateStudentAccount = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const formData = {
-      course: course,
-      department: department,
-      year: year,
-      cgpa: cgpa,
-      resumeLink: resumeLink,
-      linkedIn: linkedIn,
-    };
+    const formData = new FormData();
+
+    formData.append('course', course);
+    formData.append('department', department);
+    formData.append('year', year);
+    formData.append('cgpa', cgpa);
+    formData.append('resumeLink', resumeLink);
+    formData.append('linkedIn', linkedIn);
+    formData.append('resume', resumeFile); 
     const requestOptions = {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
         Authorization: localStorage.localStorageStudentToken,
       },
-      body: JSON.stringify(formData),
+      body: formData,
     };
     const url = `${BASE_URL}/api/student/register/${studentDetails.id}`;
     try {
@@ -58,7 +62,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
   return (
     <Container sx={{ py: 2, mt: 9 }}>
       <Typography variant="h5">Account Details</Typography>
-      <form onSubmit={updateStudentAccount}>
+      <form onSubmit={updateStudentAccount} encType="multipart/form-data">
         <Card sx={{ my: 2 }}>
           <CardContent>
             <Typography variant="h5" sx={{ mb: 2 }}>
@@ -190,18 +194,16 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  variant="standard"
-                  label="Link to resume"
-                  placeholder="Provide public access to link"
-                  fullWidth
-                  value={resumeLink}
-                  onChange={(e) => {
-                    setResumeLink(e.target.value);
-                  }}
-                  required
+                <input
+                    type="file"
+                    accept=".pdf"
+                    onChange={(e) => handleFileUpload(e)}
+                    required
+                    name='resume'
                 />
-                <Typography variant="caption">Please make sure that the link to your resume is set to public</Typography>
+                <Typography variant="caption">
+                    Please upload your resume in PDF format.
+                </Typography>
               </Grid>
             </Grid>
           </CardContent>

@@ -95,8 +95,15 @@ export default function BasicPopover({ BASE_URL, status, studentId, jobId, setSh
 
   return (
     <div>
-      <Button aria-describedby={id} sx={{ width: 160, pl: 3 }} variant="outlined" size="small" onClick={handleClick} color={statusButtonColor(statu)}>
-        {statu} <ArrowDropDownRoundedIcon />
+      <Button
+        aria-describedby={id}
+        sx={{ width: 160, pl: 3 }}
+        variant="outlined"
+        size="small"
+        onClick={handleClick}
+        color={statusButtonColor(statu)}
+      >
+        {status} <ArrowDropDownRoundedIcon />
       </Button>
       <Popover
         id={id}

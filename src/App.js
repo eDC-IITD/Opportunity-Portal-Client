@@ -26,9 +26,12 @@ import AdminSignInRedirect from './pages/admin/AdminSignInRedirect';
 import AdminDashboard from './pages/admin/dashboard';
 import AdminIndex from './pages/admin/index';
 
+
+
+
 const BASE_URL = process.env.REACT_APP_BACKEND_URL_PRODUCTION || process.env.REACT_APP_BACKEND_URL;
-// const BASE_URL = 'https://edc-opportunity-portal-backend.onrender.com';
-// const BASE_URL = 'https://opportunity-portal.edciitd.com';
+
+
 
 const timer = 3000;
 
@@ -144,7 +147,15 @@ export default function App() {
               {/* TODO IF i WRITE http://localhost:3000/signIn or http://localhost:3000/signUp, etc than teh site crashes, we need to add a redirect in such cases*/}
               <Route
                 path="/"
-                element={<JobPortalIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} studentDetails={studentDetails} />}
+                element={
+                  <JobPortalIndex
+                    mode={mode}
+                    setMode={setMode}
+                    startUpDetails={startUpDetails}
+                    studentDetails={studentDetails}
+                  />
+                  
+                }
               >
                 <Route path="/" element={<StudentOrStartUp BASE_URL={BASE_URL} {...setAlertProps} />} />
                 <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />{' '}
@@ -158,6 +169,7 @@ export default function App() {
                   }
                 />
               </Route>
+              
 
               <Route
                 path="student"

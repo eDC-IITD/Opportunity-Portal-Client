@@ -16,6 +16,21 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [coverLetter, setCoverLetter] = useState('coverLetter');
+  const [resumeOpen, setResumeOpen] = useState(false);
+  const [resumeLink, setResumeLink] = useState('');
+  const [resumeLinkId, setResumeLinkId] = useState('');
+
+
+
+  const openLink = (value) => {
+    setResumeLink(value);
+    setResumeOpen(true);
+  };
+
+  const closeResumeModal = () => {
+    setResumeOpen(false);
+    setResumeLink('');
+  };
 
   const getStudentsAppliedList = async () => {
     setLoading(true);
@@ -53,9 +68,10 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
         year: oneJsonData.year,
         cgpa: oneJsonData.cgpa,
         whyShouldWeHireYou: x.whyShouldWeHireYou,
-        resumeLink: oneJsonData.resumeLink,
+        resumeId: oneJsonData.resumeId,
         linkedIn: oneJsonData.linkedIn,
         statusUpdate: { status: x.status, studentId: x.studentId },
+        resumeLinkId: `https://drive.google.com/file/d/${oneJsonData.resumeId}/preview`,
       };
       jsonDataArray.push(convertedJsonData);
     }
@@ -112,15 +128,17 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
       },
     },
     {
-      field: 'resumeLink',
+      field: 'resumeLinkId',
       headerName: 'Resume',
       flex: 1,
       renderCell: ({ value }) => {
         return (
-          <Button size="small" onClick={() => openLink(value)} rel="noopener noreferrer">
+          <Button size="small" onClick={()=>openLink(value)} rel="noopener noreferrer">
             <LibraryBooksRoundedIcon />
           </Button>
+          
         );
+        console.log(value);
       },
     },
     {
@@ -210,6 +228,31 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
           </CardActions>
         </Card>
       </Modal>
+      <Modal open={resumeOpen} onClose={closeResumeModal}>
+        <Card
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: { xs: '90%', md: 600 },
+          }}
+        >
+          <CardContent>
+            <Typography variant="h5" sx={{ mb: 2 }} color="primary">
+              Resume
+            </Typography>
+            {/* Embed the resume using an iframe */}
+            
+            <iframe src={resumeLink} width="100%" height="480" title="Resume" allow="autoplay"></iframe>
+          </CardContent>
+          <CardActions sx={{ display: 'flex', justifyContent: 'end' }}>
+            <Button onClick={closeResumeModal}>Close</Button>
+          </CardActions>
+        </Card>
+      </Modal>
     </>
   );
 }
+
+//href={`https://drive.google.com/file/d/${value}/preview`}
