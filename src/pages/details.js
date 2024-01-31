@@ -1,3 +1,4 @@
+
 import { Card, CardContent, Container, Grid, Typography, TextField, Box, CircularProgress, Divider, InputAdornment, IconButton, Button } from '@mui/material';
 import { People as PeopleIcon, LocationOn as LocationOnIcon, Business as BusinessIcon, Rocket as RocketIcon, LinkedIn as LinkedInIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
@@ -8,6 +9,7 @@ import internshipImage from '../assets/internshipImage.svg';
 import cofounderImage from '../assets/cofounderImage.svg';
 import { useNavigate } from 'react-router-dom';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+
 
 // Things to set : 
 // jobStartUpDetails.stage, jobStartUpDetails.companyPhoto, jobStartUpDetails.socials
@@ -556,7 +558,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                       onClick={() => window.open(value.linkedIn, '_blank')}
                                       sx={{
                                         '&:hover': {
-                                          backgroundColor: 'transparent',
+                                          backgroundColor: 'transparent', // Set the desired hover background color
                                         },
                                       }}
                                     >

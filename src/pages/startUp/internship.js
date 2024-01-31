@@ -11,6 +11,7 @@ import ProjectImgage from '../../assets/projectImage.svg';
 import JobImage from '../../assets/jobImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import moment from 'moment';
+import StudentListing from "../../components/startUp/StudentListing"
 
 export default function Internship({ BASE_URL, startUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { type } = useLocation().state;
@@ -274,7 +275,26 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
                 <CircularProgress />
               </Box>
             ) : (
-              <InternshipTable column={internshipTableColumn} row={internshipTableRow} />
+              <>
+              {internshipTableRow.map((internship) => (
+                <Grid item xs={12} key={internship.id}>
+                  <StudentListing
+                    role={internship.designation}
+                    salary={internship.stipend}
+                    deadline={internship.deadline}
+                    type={type}
+                    status={internship.status}
+                    designation = {internship.designation}
+                    studentsApplied = {internship.studentsApplied}
+                    approval = {internship.approval}
+                    detailsButtonClick={() => {
+                      navigate('../details', { state: { jobId: internship.details } });
+                    }}
+                  />
+                </Grid>))}
+
+                </>
+  
             )}
           </CardContent>
         </Card>
