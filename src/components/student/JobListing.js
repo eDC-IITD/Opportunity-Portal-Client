@@ -29,7 +29,7 @@ function JobListing({ logo, companyName, mission, role, salary, deadline, type, 
                 <Typography variant="body1" component="div">Deadline:{deadline}</Typography>
               </Grid>
               <Grid item xs={12} maxWidth="100%">
-                <Typography variant="body1" component="div" sx={{ fontFamily: "Poppins, sans-serif", alignSelf: "start" }}>Full Time | Remote {type}</Typography>
+                <Typography variant="body1" component="div" sx={{ fontFamily: "Poppins, sans-serif", alignSelf: "start" }}>{type}</Typography>
               </Grid>
             </Grid>
           </CardContent>
@@ -37,7 +37,7 @@ function JobListing({ logo, companyName, mission, role, salary, deadline, type, 
         <Grid item sx={{margin:"auto"}}>
           <Grid container flexDirection="column" gap={1} alignItems="center" sx={{"@media (max-width: 768px)":{flexDirection:"row"}}}>
             <Grid item sx={{margin:"auto"}}>
-              <Button onClick={applyButtonClick}   sx={{  borderRadius: "6px", backgroundColor:"#00FFD1;",padding: "1vh 2vw", color:"black",  "@media (max-width: 768px)":{paddingBlock :"1.5vh"} }}>
+              <Button onClick={applyButtonClick}   sx={{  borderRadius: "6px", backgroundColor:"#00FFD1;",padding: "1vh 2.2vw", color:"black",  "@media (max-width: 768px)":{paddingBlock :"1.1vh"} }}>
                 Apply Now
               </Button>
             </Grid>

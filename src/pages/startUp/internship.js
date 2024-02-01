@@ -285,7 +285,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
                     type={type}
                     status={internship.status}
                     designation = {internship.designation}
-                    studentsApplied = {internship.studentsApplied}
+                    studentsAppliedClick = {() => { navigate('../studentsApplied', { state: { jobId: internship.studentsApplied } }); }}
                     approval = {internship.approval}
                     detailsButtonClick={() => {
                       navigate('../details', { state: { jobId: internship.details } });
