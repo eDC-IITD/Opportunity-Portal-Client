@@ -18,7 +18,6 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
   const [coverLetter, setCoverLetter] = useState('coverLetter');
   const [resumeOpen, setResumeOpen] = useState(false);
   const [resumeLink, setResumeLink] = useState('');
-  const [resumeLinkId, setResumeLinkId] = useState('');
 
 
 

@@ -1,16 +1,15 @@
 import { Container, Typography, Grid, CardContent, Card, Box, Button, CircularProgress } from '@mui/material';
 // import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+// import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
+// import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 // import PendingIcon from '@mui/icons-material/Pending';
 import React, { useState, useEffect } from 'react';
-import InternshipTable from '../../components/table';
 import InternshipImage from '../../assets/internshipImage.svg';
 import CofounderImage from '../../assets/cofounderImage.svg';
 import ProjectImgage from '../../assets/projectImage.svg';
 import JobImage from '../../assets/jobImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
-import moment from 'moment';
+// import moment from 'moment';
 import StudentListing from "../../components/startUp/StudentListing"
 
 export default function Internship({ BASE_URL, startUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
@@ -42,17 +41,6 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
     setInternshipTableRow(jsonDataArray);
   };
 
-  const approvalStatusTypoColor = (approvalStatus) => {
-    if (approvalStatus === 'approved') {
-      return '#2e7d32';
-    } else if (approvalStatus === 'disapproved') {
-      return '#d32f2f';
-    } else if (approvalStatus === 'pending') {
-      return 'primary';
-    } else {
-      return 'none';
-    }
-  };
 
   const getInternship = async () => {
     setLoading(true);
@@ -93,68 +81,68 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
     }
   };
 
-  const internshipTableColumn = [
-    {
-      field: 'designation',
-      headerName: 'Designation',
-      flex: 1,
-    },
-    {
-      field: 'stipend',
-      headerName: 'Stipend',
-      flex: 1,
-    },
-    {
-      field: 'deadline',
-      headerName: 'Deadline',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return value < moment().format('YYYY-MM-DDThh:mm') ? 'Deadline passed' : moment(value).format('MMMM Do, h:mm a');
-      },
-    },
-    {
-      field: 'approval',
-      headerName: 'Approval Status',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return <Typography color={approvalStatusTypoColor(value)}>{value}</Typography>;
-      },
-    },
-    {
-      field: 'details',
-      headerName: 'Details',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return (
-          <Button
-            size="small"
-            onClick={() => {
-              navigate('../details', { state: { jobId: value } });
-            }}
-          >
-            <VisibilityRoundedIcon />
-          </Button>
-        );
-      },
-    },
-    {
-      field: 'studentsApplied',
-      headerName: 'Students Applied',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return (
-          <Button
-            size="small"
-            onClick={() => {
-              navigate('../studentsApplied', { state: { jobId: value } });
-            }}
-          >
-            <PeopleAltRoundedIcon />
-          </Button>
-        );
-      },
-    },
-  ];
+  // const internshipTableColumn = [
+  //   {
+  //     field: 'designation',
+  //     headerName: 'Designation',
+  //     flex: 1,
+  //   },
+  //   {
+  //     field: 'stipend',
+  //     headerName: 'Stipend',
+  //     flex: 1,
+  //   },
+  //   {
+  //     field: 'deadline',
+  //     headerName: 'Deadline',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return value < moment().format('YYYY-MM-DDThh:mm') ? 'Deadline passed' : moment(value).format('MMMM Do, h:mm a');
+  //     },
+  //   },
+  //   {
+  //     field: 'approval',
+  //     headerName: 'Approval Status',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return <Typography color={approvalStatusTypoColor(value)}>{value}</Typography>;
+  //     },
+  //   },
+  //   {
+  //     field: 'details',
+  //     headerName: 'Details',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return (
+  //         <Button
+  //           size="small"
+  //           onClick={() => {
+  //             navigate('../details', { state: { jobId: value } });
+  //           }}
+  //         >
+  //           <VisibilityRoundedIcon />
+  //         </Button>
+  //       );
+  //     },
+  //   },
+  //   {
+  //     field: 'studentsApplied',
+  //     headerName: 'Students Applied',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return (
+  //         <Button
+  //           size="small"
+  //           onClick={() => {
+  //             navigate('../studentsApplied', { state: { jobId: value } });
+  //           }}
+  //         >
+  //           <PeopleAltRoundedIcon />
+  //         </Button>
+  //       );
+  //     },
+  //   },
+  // ];
 
   const addNew = () => {
     if (startUpDetails.sector === undefined) {
