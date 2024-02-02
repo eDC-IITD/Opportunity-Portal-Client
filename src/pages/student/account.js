@@ -8,9 +8,12 @@ import {
   Button,
   CircularProgress,
   MenuItem,
+  Input, 
+  InputLabel
 } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 export default function Account({
   BASE_URL,
@@ -225,17 +228,37 @@ export default function Account({
                 />
               </Grid>
               <Grid item xs={12}>
-                <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={(e) => handleFileUpload(e)}
-                    required
-                    name='resume'
+              <InputLabel htmlFor="resume" shrink>Resume</InputLabel>
+                <Input
+                  sx={{
+                    '& .MuiInputBase-input[type="file"]::file-selector-button': {
+                      border: '1px solid #00ffd1',
+                      fontSize: '15px',
+                      color: '#000',
+                      '&:hover': {
+                        backgroundColor: '#00997d',
+                        color: '#000000'
+                      },
+                      height: '20px',
+                      borderRadius: '5px',
+                      backgroundColor: 'bbb',
+                      paddingBottom: '20px',
+                    },
+                  }}
+                  type="file"
+                  inputProps={{
+                    accept: '.pdf',
+                  }}
+                  onChange={(e) => handleFileUpload(e)}
+                  required
+                  name="resume"
+                  label="Resume"
+                  outlined
                 />
-                <Typography variant="caption">
-                    Please upload your resume in PDF format.
-                </Typography>
-              </Grid>
+              <Typography variant="caption">
+                Please upload your resume in PDF format(limit: 10MB).
+              </Typography>
+            </Grid>
             </Grid>
           </CardContent>
         </Card>
