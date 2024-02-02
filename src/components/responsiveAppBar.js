@@ -37,7 +37,7 @@ export default function ResponsiveAppBar({ mode, setMode }) {
               src={eDCLogo}
               alt="eDCLogo"
               loading="lazy"
-              width={60}
+              width={140}
               height={60}
               style={{ cursor: 'pointer' }}
               onClick={() => {
