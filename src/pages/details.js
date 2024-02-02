@@ -7,7 +7,6 @@ import moment from 'moment';
 import { openLink } from '../utils.js';
 import internshipImage from '../assets/internshipImage.svg';
 import cofounderImage from '../assets/cofounderImage.svg';
-import { useNavigate } from 'react-router-dom';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 
@@ -177,7 +176,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                     src={
                       jobStartUpDetails.companyPhoto ? jobStartUpDetails.companyPhoto : internshipImage
                     }
-                    alt="Company Photo"
+                    alt="Company"
                     style={{ width: '100%', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                   />
                 </Box>
@@ -506,7 +505,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                 src={
                                   jobStartUpDetails.founderImage ? jobStartUpDetails.founderImage : cofounderImage
                                 }
-                                alt="Company Photo"
+                                alt="Company"
                                 style={{ width: '100%', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                               />
                             </Box>

@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { Container, Box, Button } from '@mui/material';
 import eDCLogo from '../assets/eDCWhiteLogo.svg';
+import edcAndDevclub from '../assets/edcAndDevclub.svg';
 import { useNavigate } from 'react-router-dom';
 import Brightness2Icon from '@mui/icons-material/Brightness2';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
@@ -34,10 +35,10 @@ export default function ResponsiveAppBar({ mode, setMode }) {
             }}
           >
             <img
-              src={eDCLogo}
+              src={edcAndDevclub}
               alt="eDCLogo"
               loading="lazy"
-              width={60}
+              width={120}
               height={60}
               style={{ cursor: 'pointer' }}
               onClick={() => {

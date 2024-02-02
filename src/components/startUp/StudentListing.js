@@ -1,9 +1,22 @@
 import React from "react";
-import { useMediaQuery,Box, Typography, Button, Grid, Card, CardContent, CardMedia, Container } from "@mui/material";
+import { Typography, Button, Grid, Card, CardContent, Container } from "@mui/material";
+// import InternshipTable from '../../components/table';
+
+
+const approvalStatusColor = (approvalStatus) => {
+  if (approvalStatus === 'approved') {
+    return '#00ffd1';
+  } else if (approvalStatus === 'disapproved') {
+    return '#d32f2f';
+  } else if (approvalStatus === 'pending') {
+    return 'primary';
+  } else {
+    return 'none';
+  }
+};
 
 
 function JobListing({ salary, deadline, type, detailsButtonClick , designation,studentsAppliedClick , approval}) {
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
   
   return (
     <Card sx={{ borderRadius: "20px", boxShadow: "0px 3px 20px 0px rgba(0, 0, 0, 0.25)" }}>
