@@ -25,9 +25,10 @@ import AlertSnackbar from '../src/components/snackbar';
 import AdminSignInRedirect from './pages/admin/AdminSignInRedirect';
 import AdminDashboard from './pages/admin/dashboard';
 import AdminIndex from './pages/admin/index';
+import ReactGA from 'react-ga';
 
-
-
+const trackingId = 'G-1D3RFBNRQV';
+ReactGA.initialize(trackingId);
 
 const BASE_URL = process.env.REACT_APP_BACKEND_URL_PRODUCTION || process.env.REACT_APP_BACKEND_URL;
 

@@ -6,8 +6,14 @@ import '@fontsource/roboto/700.css';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import ReactGA from 'react-ga';
+import { useEffect } from 'react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
+
+useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+}, []);
 
 serviceWorkerRegistration.register();
