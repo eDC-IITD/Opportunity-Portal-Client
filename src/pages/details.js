@@ -124,6 +124,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                 alignItems: 'left',
               }}
             >
+              {startUpDetails!=null && (
               <Button
                 sx={{
                   padding: '1px 20px 1px 20px',
@@ -157,6 +158,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                 <BorderColorRoundedIcon />
                 EDIT
               </Button>
+              )}
               <Box
                 sx={{
                   display: 'flex',
