@@ -240,11 +240,21 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
                   deadline={internship.deadline}
                   type={type}
                   status={internship.status}
+                  hasApplied={internship.status === 'Applied'}
                   detailsButtonClick={() => {
                     navigate('../details', { state: { jobId: internship.details } });
                   }}
                   applyButtonClick={() => {
                     // Handle the apply button click
+                    if (internship.status === 'Applied' || internship.status === 'Shortlisted' || internship.status === 'Selected' || internship.status === 'Not Shortlisted' || internship.status === 'Not Selected') {
+                      setShowAlert(true);
+                      setAlertMessage('You have already applied for this job');
+                      setAlertSeverity('warning');
+                      navigate('../internship', { state: { type: type } });
+                    }
+                    else {
+                      navigate('../apply', { state: { jobId: internship.details, type: type } });
+                    }
                   }}
                 />
               </Grid>))}

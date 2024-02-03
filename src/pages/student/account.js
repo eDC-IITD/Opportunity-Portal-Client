@@ -131,7 +131,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
                   fullWidth
                   required
                   select
-                  label="Deparment"
+                  label="Department"
                   value={department}
                   onChange={(e) => {
                     setDepartment(e.target.value);
