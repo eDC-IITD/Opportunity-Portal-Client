@@ -103,13 +103,7 @@ export default function ConfirmApprovalDialogBox({
           >
             <FormControl sx={{ mt: 2, minWidth: 120 }}>
               <InputLabel htmlFor="approval">Approval</InputLabel>
-              <Select
-                autoFocus
-                value={approval}
-                onChange={handleApprovalChange}
-                label="approval"
-                inputProps={{ name: 'approval', id: 'approval' }}
-              >
+              <Select autoFocus value={approval} onChange={handleApprovalChange} label="approval" inputProps={{ name: 'approval', id: 'approval' }}>
                 <MenuItem value="pending">Pending</MenuItem>
                 <MenuItem value="approved">Approved</MenuItem>
                 <MenuItem value="disapproved">Disapproved</MenuItem>

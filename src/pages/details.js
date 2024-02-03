@@ -2,12 +2,11 @@
 import { Card, CardContent, Container, Grid, Typography, TextField, Box, CircularProgress, Divider, InputAdornment, IconButton, Button } from '@mui/material';
 import { People as PeopleIcon, LocationOn as LocationOnIcon, Business as BusinessIcon, Rocket as RocketIcon, LinkedIn as LinkedInIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { openLink } from '../utils.js';
 import internshipImage from '../assets/internshipImage.svg';
 import cofounderImage from '../assets/cofounderImage.svg';
-import { useNavigate } from 'react-router-dom';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
 
@@ -126,6 +125,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                 alignItems: 'left',
               }}
             >
+              {startUpDetails!=null && (
               <Button
                 sx={{
                   padding: '1px 20px 1px 20px',
@@ -159,6 +159,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                 <BorderColorRoundedIcon />
                 EDIT
               </Button>
+              )}
               <Box
                 sx={{
                   display: 'flex',
@@ -177,7 +178,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                     src={
                       jobStartUpDetails.companyPhoto ? jobStartUpDetails.companyPhoto : internshipImage
                     }
-                    alt="Company Photo"
+                    alt="Company"
                     style={{ width: '100%', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                   />
                 </Box>
@@ -506,7 +507,7 @@ export default function Details({ BASE_URL, startUpDetails }) {
                                 src={
                                   jobStartUpDetails.founderImage ? jobStartUpDetails.founderImage : cofounderImage
                                 }
-                                alt="Company Photo"
+                                alt="Company"
                                 style={{ width: '100%', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                               />
                             </Box>

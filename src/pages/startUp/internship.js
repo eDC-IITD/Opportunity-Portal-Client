@@ -1,16 +1,15 @@
 import { Container, Typography, Grid, CardContent, Card, Box, Button, CircularProgress } from '@mui/material';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+// import AddRoundedIcon from '@mui/icons-material/AddRounded';
+// import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
+// import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+// import PendingIcon from '@mui/icons-material/Pending';
 import React, { useState, useEffect } from 'react';
-import InternshipTable from '../../components/table';
 import InternshipImage from '../../assets/internshipImage.svg';
 import CofounderImage from '../../assets/cofounderImage.svg';
 import ProjectImgage from '../../assets/projectImage.svg';
 import JobImage from '../../assets/jobImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
-import moment from 'moment';
+// import moment from 'moment';
 import StudentListing from "../../components/startUp/StudentListing"
 
 export default function Internship({ BASE_URL, startUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
@@ -42,25 +41,12 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
     setInternshipTableRow(jsonDataArray);
   };
 
-  const approvalStatusTypoColor = (approvalStatus) => {
-    if (approvalStatus === 'approved') {
-      return '#2e7d32';
-    } else if (approvalStatus === 'disapproved') {
-      return '#d32f2f';
-    } else if (approvalStatus === 'pending') {
-      return 'primary';
-    } else {
-      return 'none';
-    }
-  };
 
   const getInternship = async () => {
     setLoading(true);
     if (type === 'Internship') {
       setTypeImage(InternshipImage);
-      setTypeDescription(
-        'Need intern who can witness a 0-1 jouney of a startup and get first hand experience of working in a startup.',
-      );
+      setTypeDescription('Need intern who can witness a 0-1 jouney of a startup and get first hand experience of working in a startup.');
     } else if (type === 'Job') {
       setTypeImage(JobImage);
       setTypeDescription('Need employee to work in a fast paced environment for your startup.');
@@ -95,104 +81,68 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
     }
   };
 
-  const internshipTableColumn = [
-    {
-      field: 'company',
-      headerName: 'Company',
-      flex: 1,
-    },
-    {
-      field: 'designation',
-      headerName: 'Designation',
-      flex: 1,
-    },
-    {
-      field: 'type',
-      headerName: 'Type',
-      flex: 1,
-    },
-    {
-      field: 'stipend',
-      headerName: 'Stipend',
-      flex: 1,
-    },
-    {
-      field: 'deadline',
-      headerName: 'Deadline',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return value < moment().format('YYYY-MM-DDThh:mm')
-          ? 'Deadline passed'
-          : moment(value).format('MMMM Do, h:mm a');
-      },
-    },
-    {
-      field: 'approval',
-      headerName: 'Approval Status',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return <Typography color={approvalStatusTypoColor(value)}>{value}</Typography>;
-      },
-    },
-    {
-      field: 'details',
-      headerName: 'Details',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return (
-          <Button
-            size="small"
-            onClick={() => {
-              navigate('../details', { state: { jobId: value } });
-            }}
-          >
-            <VisibilityRoundedIcon />
-          </Button>
-        );
-      },
-    },
-    {
-      field: 'studentsApplied',
-      headerName: 'Students Applied',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return (
-          <Button
-            size="small"
-            onClick={() => {
-              navigate('../studentsApplied', { state: { jobId: value } });
-            }}
-          >
-            <PeopleAltRoundedIcon />
-          </Button>
-        );
-      },
-    },
-    {
-      field: 'update',
-      headerName: 'Update',
-      flex: 1,
-      renderCell: ({ value }) => {
-        return (
-          <Button
-            size="small"
-            onClick={() => {
-              navigate('../addNew', {
-                state: {
-                  type: type,
-                  companyName: startUpDetails.companyName,
-                  startUpId: startUpDetails.id,
-                  jobId: value,
-                },
-              });
-            }}
-          >
-            <BorderColorRoundedIcon />
-          </Button>
-        );
-      },
-    },
-  ];
+  // const internshipTableColumn = [
+  //   {
+  //     field: 'designation',
+  //     headerName: 'Designation',
+  //     flex: 1,
+  //   },
+  //   {
+  //     field: 'stipend',
+  //     headerName: 'Stipend',
+  //     flex: 1,
+  //   },
+  //   {
+  //     field: 'deadline',
+  //     headerName: 'Deadline',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return value < moment().format('YYYY-MM-DDThh:mm') ? 'Deadline passed' : moment(value).format('MMMM Do, h:mm a');
+  //     },
+  //   },
+  //   {
+  //     field: 'approval',
+  //     headerName: 'Approval Status',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return <Typography color={approvalStatusTypoColor(value)}>{value}</Typography>;
+  //     },
+  //   },
+  //   {
+  //     field: 'details',
+  //     headerName: 'Details',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return (
+  //         <Button
+  //           size="small"
+  //           onClick={() => {
+  //             navigate('../details', { state: { jobId: value } });
+  //           }}
+  //         >
+  //           <VisibilityRoundedIcon />
+  //         </Button>
+  //       );
+  //     },
+  //   },
+  //   {
+  //     field: 'studentsApplied',
+  //     headerName: 'Students Applied',
+  //     flex: 1,
+  //     renderCell: ({ value }) => {
+  //       return (
+  //         <Button
+  //           size="small"
+  //           onClick={() => {
+  //             navigate('../studentsApplied', { state: { jobId: value } });
+  //           }}
+  //         >
+  //           <PeopleAltRoundedIcon />
+  //         </Button>
+  //       );
+  //     },
+  //   },
+  // ];
 
   const addNew = () => {
     if (startUpDetails.sector === undefined) {
@@ -217,19 +167,33 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
   return (
     <div>
       <Container sx={{ py: 2, mt: 9 }}>
-        <Card sx={{ mb: 2 }}>
+        <Card sx={{ mb: 1 }}>
           <CardContent>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    justifyContent: 'end',
+                    alignItems: 'center',}}>
               <Grid item xs={12} sm={7} md={9}>
                 <Box
                   sx={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
+                    margin : 2
                   }}
                 >
                   <Typography variant="h5">{typeDescription}</Typography>
+                </Box>
+                <Box
+                  sx={{
+                    margin : 2,
+                    display: { xs: 'block', md: 'flex' },
+                  }}
+                >
+                  <Button variant="contained" sx={{ mt: { xs: 2, md: 0 } }} onClick={addNew}>
+                    {/* <AddRoundedIcon /> */}
+
+                    <Typography variant="body1"> Add another {type} </Typography>
+
+                  </Button>
                 </Box>
               </Grid>
               <Grid item xs={0} sm={5} md={3} display={{ xs: 'none', sm: 'grid' }}>
@@ -248,21 +212,8 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
             </Grid>
           </CardContent>
         </Card>
-        <Card>
+        <Card sx={{ mb: 1 }}>
           <CardContent>
-            <Box
-              sx={{
-                mb: 2,
-                display: { xs: 'block', md: 'flex' },
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Typography variant="h5">Post {type} Opportunities</Typography>
-              <Button variant="contained" sx={{ width: 120, height: 40, mt: { xs: 2, md: 0 } }} onClick={addNew}>
-                <AddRoundedIcon />
-              </Button>
-            </Box>
             {loading ? (
               <Box
                 sx={{
@@ -279,13 +230,13 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
               {internshipTableRow.map((internship) => (
                 <Grid item xs={12} key={internship.id}>
                   <StudentListing
-                    role={internship.designation}
+                    role={internship.designation1}
                     salary={internship.stipend}
                     deadline={internship.deadline}
                     type={type}
                     status={internship.status}
                     designation = {internship.designation}
-                    studentsApplied = {internship.studentsApplied}
+                    studentsAppliedClick = {() => { navigate('../studentsApplied', { state: { jobId: internship.studentsApplied } }); }}
                     approval = {internship.approval}
                     detailsButtonClick={() => {
                       navigate('../details', { state: { jobId: internship.details } });
@@ -298,6 +249,28 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
             )}
           </CardContent>
         </Card>
+
+        {/* <Card sx={{ mb: 1 }}>
+          <CardContent>
+            {loading ? (
+              <Box
+                sx={{
+                  height: 370.5,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
+              <InternshipTable column={internshipTableColumn} row={internshipTableRow} />
+            )}
+          </CardContent>
+        </Card> */}
+
+
+
       </Container>
     </div>
   );

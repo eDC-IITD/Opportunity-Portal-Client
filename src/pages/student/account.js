@@ -15,14 +15,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 
-export default function Account({
-  BASE_URL,
-  studentDetails,
-  setStudentDetails,
-  setShowAlert,
-  setAlertMessage,
-  setAlertSeverity,
-}) {
+export default function Account({ BASE_URL, studentDetails, setStudentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
@@ -90,22 +83,10 @@ export default function Account({
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Name"
-                  fullWidth
-                  value={name}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
+                <TextField variant="standard" label="Name" fullWidth value={name} InputProps={{ disableUnderline: true, readOnly: true }} />
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField
-                  variant="standard"
-                  label="Email"
-                  fullWidth
-                  value={email}
-                  InputProps={{ disableUnderline: true, readOnly: true }}
-                />
+                <TextField variant="standard" label="Email" fullWidth value={email} InputProps={{ disableUnderline: true, readOnly: true }} />
               </Grid>
             </Grid>
           </CardContent>
@@ -163,16 +144,14 @@ export default function Account({
                   fullWidth
                   required
                   select
-                  label="Deparment"
+                  label="Department"
                   value={department}
                   onChange={(e) => {
                     setDepartment(e.target.value);
                   }}
                 >
                   <MenuItem value={'Applied Mechanics'}>Applied Mechanics</MenuItem>
-                  <MenuItem value={'Biochemical Engineering and Biotechnology'}>
-                    Biochemical Engineering and Biotechnology
-                  </MenuItem>
+                  <MenuItem value={'Biochemical Engineering and Biotechnology'}>Biochemical Engineering and Biotechnology</MenuItem>
                   <MenuItem value={'Chemical Engineering'}>Chemical Engineering</MenuItem>
                   <MenuItem value={'Chemistry'}>Chemistry</MenuItem>
                   <MenuItem value={'Civil Engineering'}>Civil Engineering</MenuItem>
@@ -268,11 +247,7 @@ export default function Account({
               {updateOrSave} Account
             </Typography>
             <Button variant="contained" type="submit" sx={{ width: 120, height: 40 }}>
-              {loading ? (
-                <CircularProgress sx={{ color: 'white' }} size={25} />
-              ) : (
-                <Typography>{updateOrSave}</Typography>
-              )}
+              {loading ? <CircularProgress sx={{ color: 'white' }} size={25} /> : <Typography>{updateOrSave}</Typography>}
             </Button>
           </CardContent>
         </Card>

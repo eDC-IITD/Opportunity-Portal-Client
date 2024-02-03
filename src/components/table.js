@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function DataGridDemo({ column, row }) {
   const columns = useMemo(() => column, []);
   const rows = useMemo(() => row, []);
-  const [pageSize, setPageSize] = React.useState(10);
+  const [pageSize, setPageSize] = useState(10);
 
   return (
     <Box sx={{ overflowX: 'auto' }}>

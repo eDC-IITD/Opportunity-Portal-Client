@@ -65,9 +65,7 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
       setTypeDescription('Wanted to be a cofounder meet the right people and kickstart your startup journey.');
     } else {
       setTypeImage(ProjectImage);
-      setTypeDescription(
-        'Learn your way up the ladder by appling to the right projects and finding right people on the way.',
-      );
+      setTypeDescription('Learn your way up the ladder by appling to the right projects and finding right people on the way.');
     }
 
     const requestOptions = {
@@ -126,9 +124,7 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
       headerName: 'Deadline',
       flex: 1,
       renderCell: ({ value }) => {
-        return value < moment().format('YYYY-MM-DDThh:mm')
-          ? 'Deadline passed'
-          : moment(value).format('MMMM Do, h:mm a');
+        return value < moment().format('YYYY-MM-DDThh:mm') ? 'Deadline passed' : moment(value).format('MMMM Do, h:mm a');
       },
     },
     {
@@ -234,7 +230,7 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
             <>
             
             {internshipTableRow.map((internship) => (
-              <Grid item xs={12} key={internship.id}>
+              <Grid  item xs={12} key={internship.id}>
                 <JobListing
                   logo={logo}
                   companyName={internship.company}
@@ -244,11 +240,21 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
                   deadline={internship.deadline}
                   type={type}
                   status={internship.status}
+                  hasApplied={internship.status === 'Applied'}
                   detailsButtonClick={() => {
                     navigate('../details', { state: { jobId: internship.details } });
                   }}
                   applyButtonClick={() => {
                     // Handle the apply button click
+                    if (internship.status === 'Applied' || internship.status === 'Shortlisted' || internship.status === 'Selected' || internship.status === 'Not Shortlisted' || internship.status === 'Not Selected') {
+                      setShowAlert(true);
+                      setAlertMessage('You have already applied for this job');
+                      setAlertSeverity('warning');
+                      navigate('../internship', { state: { type: type } });
+                    }
+                    else {
+                      navigate('../apply', { state: { jobId: internship.details, type: type } });
+                    }
                   }}
                 />
               </Grid>))}

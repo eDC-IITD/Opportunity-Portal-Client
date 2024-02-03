@@ -27,15 +27,7 @@ const statusArray = [
   },
 ];
 
-export default function BasicPopover({
-  BASE_URL,
-  status,
-  studentId,
-  jobId,
-  setShowAlert,
-  setAlertMessage,
-  setAlertSeverity,
-}) {
+export default function BasicPopover({ BASE_URL, status, studentId, jobId, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const [loading, setLoading] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [statusStudent, setStatusStudent] = useState(status);

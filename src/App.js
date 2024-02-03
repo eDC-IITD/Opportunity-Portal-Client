@@ -166,12 +166,7 @@ export default function App() {
                 <Route
                   path="otpVerify"
                   element={
-                    <OTPVerify
-                      BASE_URL={BASE_URL}
-                      setStartUpDetails={setStartUpDetails}
-                      setStudentDetails={setStudentDetails}
-                      {...setAlertProps}
-                    />
+                    <OTPVerify BASE_URL={BASE_URL} setStartUpDetails={setStartUpDetails} setStudentDetails={setStudentDetails} {...setAlertProps} />
                   }
                 />
               </Route>
@@ -179,70 +174,34 @@ export default function App() {
 
               <Route
                 path="student"
-                element={
-                  <StudentIndex
-                    mode={mode}
-                    setMode={setMode}
-                    studentDetails={studentDetails}
-                    setStudentDetails={setStudentDetails}
-                  />
-                }
+                element={<StudentIndex mode={mode} setMode={setMode} studentDetails={studentDetails} setStudentDetails={setStudentDetails} />}
               >
-                <Route
-                  path="internship"
-                  element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails} {...setAlertProps} />}
-                />
+                <Route path="internship" element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails} {...setAlertProps} />} />
                 <Route
                   path="account"
                   element={
-                    <StudentAccount
-                      BASE_URL={BASE_URL}
-                      studentDetails={studentDetails}
-                      setStudentDetails={setStudentDetails}
-                      {...setAlertProps}
-                    />
+                    <StudentAccount BASE_URL={BASE_URL} studentDetails={studentDetails} setStudentDetails={setStudentDetails} {...setAlertProps} />
                   }
                 />
                 <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />{' '}
                 {/* TODO check if  shouldn't there be an alert property here also? */}
-                <Route
-                  path="apply"
-                  element={<StudentApply BASE_URL={BASE_URL} studentDetails={studentDetails} {...setAlertProps} />}
-                />
+                <Route path="apply" element={<StudentApply BASE_URL={BASE_URL} studentDetails={studentDetails} {...setAlertProps} />} />
               </Route>
 
               <Route
                 path="startUp"
-                element={
-                  <StartUpIndex
-                    mode={mode}
-                    setMode={setMode}
-                    startUpDetails={startUpDetails}
-                    setStartUpDetails={setStartUpDetails}
-                  />
-                }
+                element={<StartUpIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} />}
               >
-                <Route
-                  path="internship"
-                  element={<StartUpInternship BASE_URL={BASE_URL} startUpDetails={startUpDetails} {...setAlertProps} />}
-                />
+                <Route path="internship" element={<StartUpInternship BASE_URL={BASE_URL} startUpDetails={startUpDetails} {...setAlertProps} />} />
                 <Route
                   path="account"
                   element={
-                    <StartUpAccount
-                      BASE_URL={BASE_URL}
-                      startUpDetails={startUpDetails}
-                      setStartUpDetails={setStartUpDetails}
-                      {...setAlertProps}
-                    />
+                    <StartUpAccount BASE_URL={BASE_URL} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} {...setAlertProps} />
                   }
                 />
                 <Route path="addNew" element={<StartUpAddNew BASE_URL={BASE_URL} {...setAlertProps} />} />
                 <Route path="studentsApplied" element={<StudentsApplied BASE_URL={BASE_URL} {...setAlertProps} />} />
-                <Route
-                  path="details"
-                  element={<JobDetails BASE_URL={BASE_URL} startUpDetails={startUpDetails} />}
-                />{' '}
+                <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={startUpDetails} />} />{' '}
                 {/* TODO check if  shouldn't there be an alert property here also? */}
               </Route>
               <Route path="admin" element={<AdminIndex mode={mode} setMode={setMode} />}>
@@ -254,11 +213,7 @@ export default function App() {
               <Route path="*" element={<Error404 />} />
             </Routes>
           </BrowserRouter>
-          {showAlert ? (
-            <AlertSnackbar message={alertMessage} severity={alertSeverity} timer={timer} setShowAlert={setShowAlert} />
-          ) : (
-            <></>
-          )}
+          {showAlert ? <AlertSnackbar message={alertMessage} severity={alertSeverity} timer={timer} setShowAlert={setShowAlert} /> : <></>}
         </>
       )}
     </ThemeProvider>

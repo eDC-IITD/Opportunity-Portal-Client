@@ -1,14 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Container,
-  Grid,
-  Typography,
-  TextField,
-  Box,
-  CircularProgress,
-  Button,
-} from '@mui/material';
+import { Card, CardContent, Container, Grid, Typography, TextField, Box, CircularProgress, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
@@ -233,9 +223,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
           )}
         </CardContent>
       </Card>
-      {(jobStartUpDetails.hrName !== undefined ||
-        jobStartUpDetails.hrEmail !== undefined ||
-        jobStartUpDetails.hrDesignation !== undefined) && (
+      {(jobStartUpDetails.hrName !== undefined || jobStartUpDetails.hrEmail !== undefined || jobStartUpDetails.hrDesignation !== undefined) && (
         <Card sx={{ my: 2 }}>
           <CardContent>
             <Typography variant="h5" sx={{ mb: 2 }}>
