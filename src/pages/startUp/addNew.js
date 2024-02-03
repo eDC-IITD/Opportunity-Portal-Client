@@ -14,6 +14,11 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
+// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 
 export default function AddNew({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
@@ -407,18 +412,28 @@ export default function AddNew({ BASE_URL, setShowAlert, setAlertMessage, setAle
                       }}
                     />
                   </Grid>
+                  {/* <TextField
+                    type="datetime-local"
+                    variant="standard"
+                    label="Application Deadline"
+                    fullWidth
+                    value={deadline}
+                    onChange={(e) => {
+                      setDeadline(e.target.value);
+                    }}
+                    required
+                  /> */}
                   <Grid item xs={12} md={6} sx={{ mb: 2 }}>
-                    <TextField
-                      type="datetime-local"
-                      variant="standard"
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker 
                       label="Application Deadline"
                       fullWidth
-                      value={deadline}
+                      value={dayjs(deadline)}
                       onChange={(e) => {
                         setDeadline(e.target.value);
                       }}
-                      required
-                    />
+                      />
+                    </LocalizationProvider>
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
