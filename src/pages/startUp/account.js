@@ -16,7 +16,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
   const [social, setSocial] = useState(startUpDetails.social);
   const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
   const [sector, setSector] = useState(startUpDetails.sector);
-  const [isIITD, setIsIITD] = useState(startUpDetails.isIITDstartup);
+  const [isiitdStartup, setIsiitdStartup] = useState(startUpDetails.isIITDstartup);
   const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
   const companyName = startUpDetails.companyName;
   const companyEmail = startUpDetails.email;
@@ -43,6 +43,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
       hrDesignation: hrDesignation,
       social: social,
       cruchbase: cruchbase,
+      iitdStartup: isiitdStartup,
     };
     const requestOptions = {
       method: 'PUT',
@@ -219,9 +220,9 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                   required
                   select
                   label="Are you an IITD Startup?"
-                  value={isIITD}
+                  value={isiitdStartup}
                   onChange={(e) => {
-                    setIsIITD(e.target.value);
+                    setIsiitdStartup(e.target.value);
                   }}
                 >
                   {isIITDstartup.map((item) => (
