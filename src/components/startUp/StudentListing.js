@@ -17,6 +17,8 @@ const approvalStatusColor = (approvalStatus) => {
 
 
 function JobListing({ salary, deadline, type, detailsButtonClick , designation,studentsAppliedClick , approval}) {
+  const isDisapproved = approval === 'disapproved';
+  const isPending = approval === 'pending';
   
   return (
     <Card sx={{ borderRadius: "20px", boxShadow: "0px 3px 20px 0px rgba(0, 0, 0, 0.25)" }}>
@@ -55,12 +57,13 @@ function JobListing({ salary, deadline, type, detailsButtonClick , designation,s
           
           <Grid container flexDirection="column" gap={1} alignItems="center" sx={{"@media (max-width: 768px)":{flexDirection:"row"}}}>
             <Grid item sx={{width:"100%" , "@media (max-width: 425px)":{width:"auto"}}}>
-              <Button onClick={detailsButtonClick}   sx={{  borderRadius: "6px", width:"100%", backgroundColor:"#00FFD1;",padding: "1vh 2vw", color:"black",  "@media (max-width: 768px)":{paddingBlock :"1.2vh" } , "@media (max-width: 425px)":{width:"auto"} }}>
+            <Button onClick={detailsButtonClick} sx={{ borderRadius: "6px", width: "100%", backgroundColor: isDisapproved ? '#d32f2f' : '#00ffd1', padding: "1vh 2vw", color: "black", cursor: isDisapproved ? 'not-allowed' : 'pointer', "@media (max-width: 768px)": { paddingBlock: "1.2vh" }, "@media (max-width: 425px)": { width: "auto" } }}>
                 Details
               </Button>
             </Grid>
             <Grid item sx={{"@media (max-width: 468px)":{  margin:"auto"} }}>
-              <Button onClick={studentsAppliedClick} sx={{ border: "1px solid #00FFD1", color:"#00FFD1", padding: "1vh 3vw", fontSize:"100%", "@media (max-width: 768px)":{paddingBlock :"1.5 vh" , width:"max-content"} , "@media (max-width: 1024px)":{ width:"max-content"}, "@media (max-width: 468px)":{ fontSize:"100%"} }}>
+              <Button onClick={studentsAppliedClick} disabled={isPending || isDisapproved} sx={{ border: "1px solid", borderColor: isPending ? 'primary' : '#00FFD1', color: isPending ? 'primary' : '#00FFD1', padding: "1vh 3vw", fontSize: "100%", "@media (max-width: 768px)": { paddingBlock: "1.5 vh", width: "max-content" }, "@media (max-width: 1024px)": { width: "max-content" }, "@media (max-width: 468px)": { fontSize: "100%" } }}>
+
                 Student Applied
               </Button>
             </Grid>
