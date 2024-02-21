@@ -19,8 +19,6 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
   const [resumeOpen, setResumeOpen] = useState(false);
   const [resumeLink, setResumeLink] = useState('');
 
-
-
   const openLink = (value) => {
     setResumeLink(value);
     setResumeOpen(true);
@@ -132,10 +130,9 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
       flex: 1,
       renderCell: ({ value }) => {
         return (
-          <Button size="small" onClick={()=>openLink(value)} rel="noopener noreferrer">
+          <Button size="small" onClick={() => openLink(value)} rel="noopener noreferrer">
             <LibraryBooksRoundedIcon />
           </Button>
-          
         );
         console.log(value);
       },
@@ -242,7 +239,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
               Resume
             </Typography>
             {/* Embed the resume using an iframe */}
-            
+
             <iframe src={resumeLink} width="100%" height="480" title="Resume" allow="autoplay"></iframe>
           </CardContent>
           <CardActions sx={{ display: 'flex', justifyContent: 'end' }}>

@@ -16,7 +16,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
   const [social, setSocial] = useState(startUpDetails.social);
   const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
   const [sector, setSector] = useState(startUpDetails.sector);
-  const [isiitdStartup, setIsiitdStartup] = useState(startUpDetails.isIITDstartup);
+  const [isiitdStartup, setIsiitdStartup] = useState(startUpDetails.isIITDstartup || '');
   const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
   const companyName = startUpDetails.companyName;
   const companyEmail = startUpDetails.email;
@@ -25,6 +25,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
   const [hrName, setHrName] = useState(startUpDetails.hrName);
   const [hrEmail, setHrEmail] = useState(startUpDetails.hrEmail);
   const [hrDesignation, setHrDesignation] = useState(startUpDetails.hrDesignation);
+  const [iitdAssociate, setIitdAssociate] = useState(startUpDetails.iitdAssociate);
   const updateOrSave = startUpDetails.location === '' || startUpDetails.location === undefined ? 'Save' : 'Update';
 
   const updateAccountDetails = async (e) => {
@@ -41,6 +42,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
       hrName: hrName,
       hrEmail: hrEmail,
       hrDesignation: hrDesignation,
+      iitdAssociate: iitdAssociate,
       social: social,
       cruchbase: cruchbase,
       iitdStartup: isiitdStartup,
@@ -381,6 +383,19 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                   }}
                 />
               </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  variant="standard"
+                  label="Associate in IITD"
+                  placeholder=""
+                  fullWidth
+                  value={iitdAssociate}
+                  onChange={(e) => {
+                    setIitdAssociate(e.target.value);
+                  }}
+                />
+              </Grid>
+              
             </Grid>
           </CardContent>
         </Card>
