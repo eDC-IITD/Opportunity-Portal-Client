@@ -228,7 +228,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert, set
             ) : (
               <>
               {internshipTableRow.map((internship) => (
-                <Grid item xs={12} key={internship.id}>
+                <Grid  item xs={12} key={internship.id} style={{ marginBottom: "16px" }} >
                   <StudentListing
                     role={internship.designation1}
                     salary={internship.stipend}

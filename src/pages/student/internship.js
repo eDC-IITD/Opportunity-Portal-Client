@@ -230,7 +230,7 @@ export default function Internship({ BASE_URL, studentDetails, setShowAlert, set
             <>
             
             {internshipTableRow.map((internship) => (
-              <Grid  item xs={12} key={internship.id}>
+              <Grid   item xs={12} key={internship.id} style={{ marginBottom: "16px" }}>
                 <JobListing
                   logo={logo}
                   companyName={internship.company}

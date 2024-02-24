@@ -16,8 +16,8 @@
   @media (max-width: 468px) {
     display: flex;
     flex-direction: column;
-    margin-left: 20%;
-    margin-top: 10%;
+    margin-left: 18%;
+    margin-top: 20%;
   }
 }
 
@@ -37,6 +37,11 @@
 .startup {
   width: 70%;
   height: auto;
+  @media  (max-width: 468px) {
+    width: 80%;
+    height: 20vh;
+    
+  }
 }
 img:hover {
   cursor: pointer;
@@ -54,15 +59,17 @@ img:hover {
   font-size: 1.5rem;
   @media (max-width: 468px) {
     font-size: medium;
+    margin-inline-start: 27% ;
   }
 }
 
 .or {
   color: 'white';
-  margin-inline-start: 30%;
+  margin-inline-start: 28%;
   font-size: 1.5rem;
   @media (max-width: 468px) {
     font-size: medium;
+    margin-inline-start: 35%;
   }
 }
 .startuptext {
