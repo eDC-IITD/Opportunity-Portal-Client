@@ -5,7 +5,7 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useNavigate } from 'react-router-dom';
 
 const sectorItems = ['SAAS', 'Fin-Tech', 'Ed-Tech', 'Health-Tech', 'E-Commerce', 'Logistics', 'Other'];
-const isIITDstartup = ['Yes', 'No'];
+const iitdStartupItems = ['Yes', 'No'];
 
 export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
   const [social, setSocial] = useState(startUpDetails.social);
   const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
   const [sector, setSector] = useState(startUpDetails.sector);
-  const [isiitdStartup, setIsiitdStartup] = useState(startUpDetails.isIITDstartup);
+  const [iitdStartup, setIsiitdStartup] = useState(startUpDetails.iitdStartup);
   const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
   const companyName = startUpDetails.companyName;
   const companyEmail = startUpDetails.email;
@@ -43,7 +43,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
       hrDesignation: hrDesignation,
       social: social,
       cruchbase: cruchbase,
-      iitdStartup: isiitdStartup,
+      iitdStartup: iitdStartup
     };
     const requestOptions = {
       method: 'PUT',
@@ -74,8 +74,11 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
     }
   };
 
+
+
+
   const addFounder = () => {
-    setFounder((current) => [...current, { id: current.length + 1, name: '', bio: '' }]);
+    setFounder((current) => [...current, { id: current.length + 1, name: '  ', bio: '' }]);
   };
 
   const removeFounder = () => {
@@ -220,17 +223,20 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                   required
                   select
                   label="Are you an IITD Startup?"
-                  value={isiitdStartup}
+                  value={iitdStartup ? "Yes" : "No"} // Adjusted value field
                   onChange={(e) => {
-                    setIsiitdStartup(e.target.value);
+                    console.log("Selected value:", e.target.value);
+                    setIsiitdStartup(e.target.value === "Yes");
                   }}
                 >
-                  {isIITDstartup.map((item) => (
-                    <MenuItem value={item}>{item}</MenuItem>
+                  {iitdStartupItems.map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
                   ))}
                 </TextField>
               </Grid>
-              
+
               <Grid item xs={12} md={6}>
                 <TextField
                   variant="standard"
@@ -242,7 +248,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                     setNoOfEmployees(e.target.value);
                   }}
                   required
-                  
+
                 />
               </Grid>
               <Grid item xs={12}>
