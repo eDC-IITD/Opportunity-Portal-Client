@@ -1,5 +1,5 @@
 import React from "react";
-import { useMediaQuery,Box, Typography, Button, Grid, Card, CardContent, CardMedia } from "@mui/material";
+import { useMediaQuery, Typography, Button, Grid, Card, CardContent, CardMedia } from "@mui/material";
 
 
 function JobListing({ logo, companyName, mission, role, salary, deadline, type, detailsButtonClick, applyButtonClick, status }) {

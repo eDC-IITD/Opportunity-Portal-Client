@@ -3,7 +3,7 @@ import StartUpImage from '../assets/startup.png';
 import StudentImage from '../assets/student.png';
 import { useNavigate } from 'react-router-dom';
 import '../pages/StudentORStartup.css';
-import background from '../assets/background.jpg';
+// import background from '../assets/background.jpg';
 
 export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
