@@ -46,18 +46,19 @@ export default function ResponsiveAppBar({ mode, setMode }) {
               }}
             />
           </Box>
-          <Box color="inherit" onClick={() => changeMode()}>
+          {/* <Box color="inherit" onClick={() => changeMode()}>
             {mode === 'dark' ? (
               <Button sx={{ color: 'white' }}>
                 <WbSunnyIcon sx={{ mr: 1 }} /> {'Light'}
               </Button>
-            ) : (
+            ) : 
+            (
               <Button sx={{ color: 'white' }}>
                 <Brightness2Icon sx={{ mr: 1 }} />
                 {'Dark'}
               </Button>
             )}
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>

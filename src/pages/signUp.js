@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, Container, Typography, TextField, CardActions, Button, CircularProgress } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function SignUp({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
@@ -120,7 +120,7 @@ export default function SignUp({ BASE_URL, setShowAlert, setAlertMessage, setAle
             />
             <TextField
               type="email"
-              label={user === 'Student' ? 'IITD Email' : 'Email'}
+              label={'Email'}
               variant="outlined"
               fullWidth
               value={email}

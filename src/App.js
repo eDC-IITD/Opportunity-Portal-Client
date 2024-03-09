@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import StudentOrStartUp from './pages/studentOrStartUp';
+// import StudentOrStartUp from './pages/studentOrStartUp';
 import Error404 from './pages/error404';
 import SignIn from './pages/signIn';
 import OTPVerify from './pages/otpVerify';
@@ -20,12 +20,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import darkScrollbar from '@mui/material/darkScrollbar';
 import { useEffect, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+// import useMediaQuery from '@mui/material/useMediaQuery';
 import AlertSnackbar from '../src/components/snackbar';
 import AdminSignInRedirect from './pages/admin/AdminSignInRedirect';
 import AdminDashboard from './pages/admin/dashboard';
 import AdminIndex from './pages/admin/index';
 import ReactGA from 'react-ga';
+import Landing from './pages/landing';
 
 const trackingId = 'G-1D3RFBNRQV';
 ReactGA.initialize(trackingId);
@@ -38,7 +39,7 @@ const timer = 3000;
 
 export default function App() {
   // localStorage.clear()
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [mode, setMode] = useState('light');
   const [startUpDetails, setStartUpDetails] = useState(null);
   const [studentDetails, setStudentDetails] = useState(null);
@@ -117,12 +118,12 @@ export default function App() {
     else setLoading(false);
   }, []);
 
-  useEffect(() => {
-    const colorMode = localStorage.getItem('colorMode');
-    if (colorMode === 'dark') setMode('dark');
-    else if (colorMode === 'light') setMode('light');
-    else setMode(prefersDarkMode ? 'dark' : 'light');
-  }, []);
+  // useEffect(() => {
+  //   const colorMode = localStorage.getItem('colorMode');
+  //   if (colorMode === 'dark') setMode('dark');
+  //   else if (colorMode === 'light') setMode('light');
+  //   else setMode(prefersDarkMode ? 'dark' : 'light');
+  // }, []);
 
   const setAlertProps = { setShowAlert, setAlertMessage, setAlertSeverity };
 
@@ -158,7 +159,8 @@ export default function App() {
                   
                 }
               >
-                <Route path="/" element={<StudentOrStartUp BASE_URL={BASE_URL} {...setAlertProps} />} />
+                {/* <Route path="/" element={<StudentOrStartUp BASE_URL={BASE_URL} {...setAlertProps} />} /> */}
+                <Route path="/" element={<Landing BASE_URL={BASE_URL} {...setAlertProps} />} />
                 <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />{' '}
                 {/* TODO check if  shouldn't there be an alert property here also? */}
                 <Route path="signIn" element={<SignIn BASE_URL={BASE_URL} {...setAlertProps} />} />
