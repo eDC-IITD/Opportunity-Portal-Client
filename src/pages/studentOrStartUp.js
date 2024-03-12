@@ -1,68 +1,90 @@
 import React from 'react';
-import StartUpImage from '../assets/startup.png';
-import StudentImage from '../assets/student.png';
+import { Card, CardContent, Container, Grid, Typography, Box } from '@mui/material';
+import StartUpImage from '../assets/startUpImage.svg';
+import StudentImage from '../assets/studentImage.svg';
 import { useNavigate } from 'react-router-dom';
-import '../pages/StudentORStartup.css';
-import background from '../assets/background.jpg';
 
 export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className="conatiner">
-        <div className="heading">.
-          <span className="oppor">OPPORTUNITY</span>
-          <span className="portal">PORTAL</span>
-          <div className="welcome">
-            <div>
-              <p>Welcome to the </p>
-            </div>
-            <div>
-              <p className="job">Job/Internship Portal </p>
-            </div>
-            <div>
-              <p>of eDC IITD</p>
-            </div>
-          </div>
-        </div>
-        <div className="Container1">
-          <div className="apply">
-            <span>Apply to Top </span>
-            <span className="startuptext">Startups </span>
-            <span>with a single profile</span>
-          </div>
-          <div className="startuporstudent">
-            <div className="you">
-              <p>YOU ARE A</p>
-            </div>
-            <div>
-              <img
-                onClick={() => {
-                  navigate('signUp', { state: { user: 'Student' } });
+    <Container sx={{ py: 2, mt: 9 }}>
+      <Typography variant="h5" sx={{ mb: 2 }}>
+        Welcome to the{' '}
+        <Typography display="inline" variant="h5" color="primary">
+          Opportunity Portal
+        </Typography>{' '}
+        of eDC IITD
+      </Typography>
+      <Card>
+        <CardContent>
+          <Typography sx={{ mb: 2 }} variant="h5">
+            Select user type
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Card
+                variant="outlined"
+                sx={{
+                  height: '100%',
+                  cursor: 'pointer',
+                  '&:hover': { border: 1, borderColor: 'primary.main' },
                 }}
-                src={StudentImage}
-                alt="Student"
-                className="student"
-              />
-            </div>
-            <div className="or">
-              <p>OR</p>
-            </div>
-            <div>
-              <img
                 onClick={() => {
                   navigate('signUp', { state: { user: 'Startup' } });
                 }}
-                src={StartUpImage}
-                alt="StartUp"
-                className="startup"
-              />
-            </div>
-          </div>
-          <div></div>
-        </div>
-      </div>
-    </>
+              >
+                <CardContent align="center">
+                  <Typography variant="h5">Start Up</Typography>
+                  <Box
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      my: 2,
+                    }}
+                  >
+                    <img src={StartUpImage} alt="StartUp" loading="lazy" width={120} height={120} />
+                  </Box>
+                  <Typography>Are you a founder or a HR looking for Interns, Employees or a Co-founder for your startup.</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={6}>
+              <Card
+                variant="outlined"
+                sx={{
+                  height: '100%',
+                  cursor: 'pointer',
+                  '&:hover': { border: 1, borderColor: 'primary.main' },
+                }}
+                onClick={() => {
+                  navigate('signUp', { state: { user: 'Student' } });
+                }}
+              >
+                <CardContent align="center">
+                  <Typography variant="h5">Student</Typography>
+                  <Box
+                    sx={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      my: 2,
+                    }}
+                  >
+                    <img src={StudentImage} alt="Student" loading="lazy" width={120} height={120} />
+                  </Box>
+                  <Typography>Are you a Student who wants to work in an early stage startup.</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
