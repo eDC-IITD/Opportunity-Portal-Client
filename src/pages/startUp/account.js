@@ -5,6 +5,7 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useNavigate } from 'react-router-dom';
 
 const sectorItems = ['SAAS', 'Fin-Tech', 'Ed-Tech', 'Health-Tech', 'E-Commerce', 'Logistics', 'Other'];
+const isIITDstartup = ['Yes', 'No'];
 
 export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
   const [social, setSocial] = useState(startUpDetails.social);
   const [cruchbase, setCruchbase] = useState(startUpDetails.cruchbase);
   const [sector, setSector] = useState(startUpDetails.sector);
+  const [isiitdStartup, setIsiitdStartup] = useState(startUpDetails.isIITDstartup);
   const [noOfEmployees, setNoOfEmployees] = useState(startUpDetails.noOfEmployees);
   const companyName = startUpDetails.companyName;
   const companyEmail = startUpDetails.email;
@@ -41,6 +43,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
       hrDesignation: hrDesignation,
       social: social,
       cruchbase: cruchbase,
+      iitdStartup: (isiitdStartup === "Yes")? true : false,
     };
     const requestOptions = {
       method: 'PUT',
@@ -206,6 +209,23 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
                   }}
                 >
                   {sectorItems.map((item) => (
+                    <MenuItem value={item}>{item}</MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  variant="standard"
+                  fullWidth
+                  required
+                  select
+                  label="Are you an IITD Startup?"
+                  value={isiitdStartup}
+                  onChange={(e) => {
+                    setIsiitdStartup(e.target.value);
+                  }}
+                >
+                  {isIITDstartup.map((item) => (
                     <MenuItem value={item}>{item}</MenuItem>
                   ))}
                 </TextField>

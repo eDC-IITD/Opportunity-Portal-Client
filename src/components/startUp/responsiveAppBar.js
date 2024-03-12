@@ -218,7 +218,7 @@ function ResponsiveAppBar({ companyName, mode, setMode, setStartUpDetails }) {
                   <LogoutIcon sx={{ mr: 1 }} /> {'Logout'}
                 </Box>
               </MenuItem>
-              {/* <MenuItem onClick={changeMode}>
+              <MenuItem onClick={changeMode}>
                 {mode === 'dark' ? (
                   <Box
                     sx={{
@@ -241,7 +241,7 @@ function ResponsiveAppBar({ companyName, mode, setMode, setStartUpDetails }) {
                     {'Dark'}
                   </Box>
                 )}
-              </MenuItem> */}
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

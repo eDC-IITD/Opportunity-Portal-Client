@@ -317,7 +317,7 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
           <CardContent>
             <TextField
               type="email"
-              label={'Email'}
+              label={user === 'Student' ? 'IITD Email' : 'Email'}
               variant="outlined"
               value={email}
               fullWidth
