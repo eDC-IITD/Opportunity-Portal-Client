@@ -43,7 +43,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, s
       hrDesignation: hrDesignation,
       social: social,
       cruchbase: cruchbase,
-      iitdStartup: (isiitdStartup === "Yes")? true : false,
+      iitdStartup: isiitdStartup,
     };
     const requestOptions = {
       method: 'PUT',

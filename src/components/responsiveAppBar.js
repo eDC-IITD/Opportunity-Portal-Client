@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { Container, Box, Button } from '@mui/material';
-// import eDCLogo from '../assets/eDCWhiteLogo.svg';
+import eDCLogo from '../assets/eDCWhiteLogo.svg';
 import edcAndDevclub from '../assets/edcAndDevclub.svg';
 import { useNavigate } from 'react-router-dom';
 import Brightness2Icon from '@mui/icons-material/Brightness2';
